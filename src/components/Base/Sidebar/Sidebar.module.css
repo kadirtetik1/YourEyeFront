@@ -1,0 +1,188 @@
+.sidebar {
+  background-color: #181818;
+  color: white;
+  height: 100%; 
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.open {
+  width: 240px;
+}
+
+.closed {
+  width: 50px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  /* height: 40px; */
+  /* background-color: #ff7b00; */
+  margin-bottom: 1rem;
+  height: 100px;
+
+}
+
+/* Üstteki sabit alan (logo + alt metin) */
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  margin-left: 1rem;
+}
+
+.closed .logoContainer {
+  opacity: 0;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.subtext {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 4px;
+  text-align: left;
+}
+
+/* Menü butonu kısmı */
+
+.toggleBtn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Navigation alanı */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.nav a:hover {
+  background-color: #2c2c2c;
+  /* color: #ff7b00; */
+}
+
+.icon {
+  font-size: 18px;
+  color: #ff7b00;
+}
+
+/* Menü metni animasyonu */
+.linkText {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  transition: width 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+
+.show {
+  width: auto;
+  opacity: 1;
+  margin-left: 8px;
+}
+
+.hide {
+  width: 0;
+  opacity: 0;
+  margin-left: 0;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dropdownToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.dropdownToggle:hover {
+  background-color: #2c2c2c;
+  /* color: #ff7b00; */
+}
+
+.dropdownMenu {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  gap: 6px;
+  margin-top: 4px;
+  animation: fadeIn 0.2s ease;
+  
+}
+
+.dropdownMenu a {
+  font-size: 0.9rem;
+  color: #bbb;
+  text-decoration: none;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.dropdownMenu a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.chevron {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.tooltip {
+  position: absolute;
+  left: 60px;
+  background-color: #333;
+  color: white;
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 999;
+  transform: translateY(-50%);
+  top: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.iconWrapper {
+  position: relative;
+}
+
+.iconWrapper:hover .tooltip {
+  opacity: 1;
+}
+

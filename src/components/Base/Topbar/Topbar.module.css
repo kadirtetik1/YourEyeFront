@@ -1,0 +1,119 @@
+.topbar {
+  background-color: #1e1e1e;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #333;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.left h2 {
+  font-size: 20px;
+}
+
+.time {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.weather {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.weather .icon {
+  font-size: 20px;
+  color: #ffb347;
+}
+
+.temp {
+  font-weight: bold;
+}
+
+.city {
+  font-size: 12px;
+  color: #bbb;
+}
+
+.notification {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification .icon {
+  font-size: 20px;
+}
+
+/* Yeni: Sayı gösteren bildirim balonu */
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.dot {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  background-color: #ff4d4d;
+  border-radius: 50%;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.firmaLogo {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #555;
+}
+
+.username {
+  font-size: 1rem;
+  color: #eee;
+}
+
+.logoutBtn {
+  background-color: #ff7b00;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(1); 
+  filter: brightness(1);
+}
+
+.logoutBtn:hover {
+  background-color: #e66e00;
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}

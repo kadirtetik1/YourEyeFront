@@ -1,0 +1,67 @@
+.userBar {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+  }
+  
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #555;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .details {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 4px;
+  }
+  
+  .details span {
+    margin-right: 8px;
+  }
+  
+  /* ✅ Yeni: Kullanıcı İşlemleri Butonu */
+  .userActions {
+    background-color: #ff7b00;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+
+
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1); 
+    filter: brightness(1);
+  }
+  
+  .userActions:hover {
+    background-color: #e66d00;
+
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+  

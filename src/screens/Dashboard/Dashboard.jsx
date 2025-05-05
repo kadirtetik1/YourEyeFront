@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-
 import Topbar from '../../components/Base/Topbar/Topbar';
 import Sidebar from '../../components/Base/Sidebar/Sidebar';
 import WidgetCard from '../../components/Base/Widgets/WidgetCard';
 import UserInfoBar from '../../components/Base/UserInfoBar/UserInfoBar';
 
 import { FaUser, FaChartLine } from 'react-icons/fa';
-import styles from './UserDashBoard.module.css';
+import styles from './Dashboard.module.css';
 
 const userData = {
   name: 'Kadir Tetik',
@@ -16,10 +14,9 @@ const userData = {
   branch: 'Ankara - Çayyolu',
 };
 
-export default class UserDashBoard extends Component {
-  render() {
-    return (
-      <div className={styles.container}>
+const Dashboard = () => {
+  return (
+    <div className={styles.container}>
       <Sidebar />
       <div className={styles.main}>
         <Topbar />
@@ -41,6 +38,7 @@ export default class UserDashBoard extends Component {
         </div>
       </div>
     </div>
-    )
-  }
-}
+  );
+};
+
+export default Dashboard;

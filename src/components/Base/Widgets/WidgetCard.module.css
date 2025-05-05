@@ -1,0 +1,46 @@
+.card {
+  background: linear-gradient(145deg, #1c1c1c, #141414);
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+  max-width: 280px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: 
+    transform 0.2s ease, 
+    box-shadow 0.2s ease, 
+    background 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card:hover {
+  background: linear-gradient(145deg, #2a2a2a, #1e1e1e); /* daha parlak */
+  /* box-shadow: 0 8px 24px rgba(255, 123, 0, 0.2); */
+  /* border: 1px solid rgba(255, 123, 0, 0.2); */
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  font-size: 20px;
+  color: #ff7b00;
+}
+
+.value {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #bbb;
+  margin-top: 4px;
+}
