@@ -20,9 +20,10 @@ export default class UserDashBoard extends Component {
   render() {
     return (
       <div className={styles.container}>
-      <Sidebar />
+      <Sidebar panelName="Kullanıcı Paneli" />
       <div className={styles.main}>
         <Topbar />
+        
         <UserInfoBar user={userData} />
 
         <div className={styles.grid}>

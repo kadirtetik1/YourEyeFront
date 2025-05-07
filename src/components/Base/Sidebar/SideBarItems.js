@@ -1,6 +1,9 @@
 // src/config/sidebarItems.js
 
-// Keyleri swaggerla aynı isimlendir
+// Keyleri swaggerla aynı isimlendir.
+// Roller, Firma yetkilisinin ekstra eklediği rollerden nasıl arttırılabilir düşün. 
+
+// ** Rol-yetki oluşturma yetkisi olan kullanıcı kendi rollerinden inherit edebilir. Yani kendisine tanımlı olmayan yetkilerden atama yapamaz.
 
 const sidebarItems = [
     {
@@ -8,28 +11,34 @@ const sidebarItems = [
       label: 'Anasayfa',
       icon: 'FaHome',
       path: '/dashboard',
-      roles: ['admin', 'subeMuduru', 'user'],
+      roles: ['firmaAdmin', 'youreyeAdmin', 'subeMuduru', 'personel'],
     },
     {
       key: 'firma',
       label: 'Firma İşlemleri',
       icon: 'FaBuilding',
-      roles: ['admin', 'firmaYetkilisi'], 
+      roles: ['firmaAdmin', 'youreyeAdmin'],
       children: [
-        { key: 'subeListele', label: 'Bağlı Şubeleri Listele', path: '/subeler', roles: ['admin'] },
-        { key: 'subeEkle', label: 'Yeni Şube Ekle', path: '/sube-ekle', roles: ['admin'] },
-        { key: 'subeGuncelle', label: 'Şube Bilgileri Güncelle', path: '/sube-guncelle', roles: ['admin', 'firmaYetkilisi'] },
+        { key: 'getBranches', label: 'Bağlı Şubeleri Listele', path: '/subeler', roles: ['firmaAdmin', 'youreyeAdmin'] },
+        { key: 'postBranches', label: 'Yeni Şube Ekle', path: '/sube-ekle', roles: ['youreyeAdmin'] },
+        { key: 'putBranches', label: 'Şube Bilgileri Güncelle', path: '/sube-guncelle', roles: ['firmaAdmin', 'youreyeAdmin'] },
       ]
     },
     {
       key: 'kullanici',
       label: 'Kullanıcı İşlemleri',
       icon: 'FaUser',
-      roles: ['admin', 'firmaYetkilisi'],
+      roles: ['firmaAdmin', 'youreyeAdmin'],
       children: [
-        { key: 'kullaniciEkle', label: 'Yeni Kullanıcı Ekle', path: '/kullanici-ekle', roles: ['admin'] },
-        { key: 'rolOlustur', label: 'Yeni Rol ve Yetkilendirme Oluştur', path: '/rol-ekle', roles: ['admin'] },
-        { key: 'rolAta', label: 'Kullanıcıya Rol Ata', path: '/rol-ata', roles: ['admin', 'firmaYetkilisi'] },
+        { key: 'getCompanyUsers', label: 'Firmaya Bağlı Kullanıcıları Getir', path: '/firma-kullanicilari', roles: ['firmaAdmin', 'youreyeAdmin'] },
+        { key: 'getBranchUsers', label: 'Şubeye Bağlı Kullanıcıları Getir', path: '/sube-kullanicilari', roles: ['firmaAdmin', 'youreyeAdmin'] },
+        { key: 'getPermissions', label: 'Roller Bağlı Yetkileri Getir', path: '/rol-yetkileri', roles: ['firmaAdmin','youreyeAdmin'] },
+        { key: 'postUser', label: 'Yeni Kullanıcı Ekle', path: '/kullanici-ekle', roles: ['firmaAdmin', 'youreyeAdmin'] },
+        { key: 'postRole', label: 'Yeni Rol ve Yetkilendirme Oluştur', path: '/rol-ekle', roles: ['firmaAdmin','youreyeAdmin'] },
+        { key: 'assignRoleToUser', label: 'Kullanıcıya Rol Ata', path: '/rol-ata', roles: ['youreyeAdmin', 'firmaAdmin'] },
+        { key: 'assignBranchToUser', label: 'Kullanıcıya Şube Ata', path: '/sube-ata', roles: ['youreyeAdmin', 'firmaAdmin'] },
+        { key: 'updateUser', label: 'Kullanıcı Bilgilerini Düzenle', path: '/kullanici-duzenle', roles: ['firmaAdmin', 'youreyeAdmin'] },
+        
       ]
     },
     {
@@ -37,29 +46,29 @@ const sidebarItems = [
       label: 'Modüller',
       icon: 'FaCogs',
       path: '/moduller',
-      roles: ['admin', 'user']
+      roles: ['firmaAdmin', 'youreyeAdmin']
     },
     {
       key: 'analizler',
       label: 'Analizler',
       icon: 'FaChartPie',
       path: '/analizler',
-      roles: ['admin', 'user']
+      roles: ['firmaAdmin', 'youreyeAdmin']
     },
     {
       key: 'kameralar',
       label: 'Kameralar',
       icon: 'FaCamera',
       path: '/kameralar',
-      roles: ['admin', 'user']
+      roles: ['firmaAdmin', 'youreyeAdmin']
     },
     {
       key: 'ayarlar',
       label: 'Ayarlar',
       icon: 'FaTools',
       path: '/ayarlar',
-      roles: ['admin']
-    },
+      roles: ['firmaAdmin', 'youreyeAdmin']
+    }
   ];
   
   export default sidebarItems;

@@ -5,13 +5,13 @@ import {
   FaCamera, FaBuilding, FaTools, FaChevronDown, FaChevronUp
 } from 'react-icons/fa';
 
-const Sidebar = () => {
+const Sidebar = ({ panelName }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [firmaOpen, setFirmaOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
-  const panelName = 'Kullanıcı Paneli';
+  
 
   return (
     <div className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}>
