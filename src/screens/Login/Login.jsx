@@ -1,9 +1,12 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Login.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { jwtDecode } from 'jwt-decode';
+
 
 
 import robotwoman from '../../assets/ai-robot-woman.png';
@@ -13,20 +16,17 @@ import youreyelogo from '../../assets/youreye-logo.png';
 const Login = () => {
 
 
-  // JWT eklenince decode işleminden elde edilenler alttaki gibi localStorageda tutulacak. 
-
-  // localStorage.setItem("Token", res.data.accessToken);
-  // const decode = jwt(res.data.accessToken);
-  // localStorage.setItem("Id", decode.id); 
-  // localStorage.setItem("username", decode.username); 
-  // localStorage.setItem("fullname", decode.fullname); 
-  // localStorage.setItem("role", decode.role); 
+  
 
 
 
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.clear(); // login sayfasına gelen kullanıcı sıfırlanır
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -41,59 +41,57 @@ const Login = () => {
     showToastMessage();
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
 
-    try {
-      const response = await axios.post('http://localhost:5059/api/login', form);
-      const { message, isAdmin } = response.data;
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
 
-      if (isAdmin === true) {
-       
+  try {
+    const response = await axios.post('http://localhost:5059/api/login', form);
+    const { accessToken, message, isAdmin } = response.data;
 
-         const showToastMessage = () => {
-           toast.success(message, {
-               position: toast.POSITION.BOTTOM_RIGHT
-           });
-         };
-         showToastMessage();
-         setTimeout(() => navigate("/admin"), 3000);
-      
-        
+    if (accessToken) {
+      // JWT'yi decode et
+      const decoded = jwtDecode(accessToken);
 
-      } else if (isAdmin === false) {
+      console.log("Decoded JWT:", decoded);
 
-        const showToastMessage = () => {
-          toast.success(message, {
-              position: toast.POSITION.BOTTOM_RIGHT
-          });
-        };
-        showToastMessage();
-        setTimeout(() => navigate("/user"), 3000);
-        
-      } else {
-        const showToastMessage = () => {
-          toast.error(message, {
-              position: toast.POSITION.BOTTOM_RIGHT
-          });
-        };
-        showToastMessage();
-        // setError('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
-        setError(message);
-      }
-    } catch (err) {
-      setError((err.response?.data || err.message));
-
-      const showToastMessage = () => {
-        toast.error(err.response?.data || err.message, {
-            position: toast.POSITION.BOTTOM_RIGHT
-        });
-      };
-      showToastMessage();
-      
+      // localStorage'a kaydet
+      localStorage.setItem('yourEyeToken', accessToken);
+      localStorage.setItem('yourEyeUser', JSON.stringify(decoded));
     }
-  };
+
+    const showToastMessage = () => {
+      toast.success(message, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    };
+    showToastMessage();
+
+    // Yönlendirme
+    if (isAdmin === true) {
+      setTimeout(() => navigate("/admin"), 3000);
+    } 
+    else if (isAdmin === false) {
+      setTimeout(() => navigate("/user"), 3000);
+    } 
+    else {
+      toast.error(message || 'Giriş başarısız.', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+      setError(message || 'Giriş başarısız.');
+    }
+  } catch (err) {
+    const errorMessage = err.response?.data || err.message;
+
+    toast.error(errorMessage, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+
+    setError(errorMessage);
+  }
+};
+
 
   return (
     <div className={styles.outerContainer}>
