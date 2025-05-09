@@ -3,17 +3,37 @@ import Topbar from '../../components/Base/Topbar/Topbar';
 import Sidebar from '../../components/Base/Sidebar/Sidebar';
 import WidgetCard from '../../components/Base/Widgets/WidgetCard';
 import UserInfoBar from '../../components/Base/UserInfoBar/UserInfoBar';
-import { FaUser, FaChartLine } from 'react-icons/fa';
 import styles from './AdminDash.module.css';
 
+import { FaHome, FaBuilding, FaUser, FaTools, FaChartLine } from 'react-icons/fa';
+import { FaComputer } from "react-icons/fa6";
+import { PiPresentationChart, PiSecurityCameraFill  } from "react-icons/pi";
+
+
+const sideBarMenu = [
+  { title: "Anasayfa", subItems: [] },
+  { title: "Firma İşlemleri", subItems: ["Şubeleri Listele", "Yeni Şube Ekle"] },
+  { title: "Kullanıcı İşlemleri", subItems: ["Kullanıcıları Listele", "Yeni Kullanıcı Ekle"] },
+  { title: "Modüller", subItems: ["Modülleri Listele", "Yeni Modül Ekle"] },
+  { title: "Analizler", subItems: ["Genel Analizler", "Anlık Analizler", "Gün Sonu Raporları"] },
+  { title: "Kamera Yönetimi", subItems: ["Kameraları Listele", "Yeni Kamera Ekle", "Kamera Bilgilerini Güncelle"] },
+  { title: "Sistem Ayarları", subItems: ["Genel Ayarlar","Kullanıcı Ayarları"] }
+];
 
 export default class AdminDashBoard extends Component {
+
+  
   render() {
     return (
       <div className={styles.container}>
-      <Sidebar panelName="Admin Paneli" />
+
+
+      <Sidebar panelName="Admin Paneli" menuItems={sideBarMenu} />
+
+
+
       <div className={styles.main}>
-        
+
       <Topbar isAdmin={true} notificationCount={5} />
 
         <UserInfoBar />

@@ -1,20 +1,34 @@
 import React, { Component } from 'react'
-
 import Topbar from '../../components/Base/Topbar/Topbar';
 import Sidebar from '../../components/Base/Sidebar/Sidebar';
 import WidgetCard from '../../components/Base/Widgets/WidgetCard';
 import UserInfoBar from '../../components/Base/UserInfoBar/UserInfoBar';
-
-import { FaUser, FaChartLine } from 'react-icons/fa';
 import styles from './UserDashBoard.module.css';
 
+import { FaHome, FaBuilding, FaUser, FaTools, FaChartLine } from 'react-icons/fa';
+import { FaComputer } from "react-icons/fa6";
+import { PiPresentationChart, PiSecurityCameraFill  } from "react-icons/pi";
 
+
+const sideBarMenu = [
+  { title: "Anasayfa", subItems: [] },
+  { title: "Firma İşlemleri", subItems: ["Şubeleri Listele", "Yeni Şube Ekle"] },
+  { title: "Kullanıcı İşlemleri", subItems: ["Kullanıcıları Listele", "Yeni Kullanıcı Ekle"] },
+  { title: "Modüller", subItems: ["Modülleri Listele", "Yeni Modül Ekle"] },
+  { title: "Analizler", subItems: ["Genel Analizler", "Anlık Analizler", "Gün Sonu Raporları"] },
+  { title: "Kamera Yönetimi", subItems: ["Kameraları Listele", "Yeni Kamera Ekle", "Kamera Bilgilerini Güncelle"] },
+  { title: "Sistem Ayarları", subItems: ["Genel Ayarlar","Kullanıcı Ayarları"] }
+];
 
 export default class UserDashBoard extends Component {
   render() {
     return (
       <div className={styles.container}>
-      <Sidebar panelName="Kullanıcı Paneli" />
+
+        
+     <Sidebar panelName="Kullanıcı Paneli" menuItems={sideBarMenu} />
+
+
       <div className={styles.main}>
       <Topbar isAdmin={false} notificationCount={3} />
 
@@ -33,7 +47,7 @@ export default class UserDashBoard extends Component {
           <WidgetCard title="Geçen Haftaya Göre" value="57%" subtitle="Yükseliş" icon={<FaChartLine />} />
           <WidgetCard title="Geçen Haftaya Göre" value="57%" subtitle="Yükseliş" icon={<FaChartLine />} />
           <WidgetCard title="Geçen Haftaya Göre" value="57%" subtitle="Yükseliş" icon={<FaChartLine />} />
-          <WidgetCard title="Geçen Haftaya Göre" value="57%" subtitle="Yükseliş" icon={<FaChartLine />} />
+          
         </div>
       </div>
     </div>
