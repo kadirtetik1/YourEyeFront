@@ -6,13 +6,6 @@ import UserInfoBar from '../../components/Base/UserInfoBar/UserInfoBar';
 import { FaUser, FaChartLine } from 'react-icons/fa';
 import styles from './AdminDash.module.css';
 
-const userData = {
-  name: 'Kadir Tetik',
-  avatar: '/images/avatar.png',
-  role: 'Şube Müdürü',
-  company: 'Arabica',
-  branch: 'Ankara - Çayyolu',
-};
 
 export default class AdminDashBoard extends Component {
   render() {
@@ -20,8 +13,10 @@ export default class AdminDashBoard extends Component {
       <div className={styles.container}>
       <Sidebar panelName="Admin Paneli" />
       <div className={styles.main}>
-        <Topbar />
-        <UserInfoBar user={userData} />
+        
+      <Topbar isAdmin={true} notificationCount={5} />
+
+        <UserInfoBar />
 
         <div className={styles.grid}>
           <WidgetCard title="Toplam Müşteri" value="254" subtitle="Son 12 Saatte" icon={<FaUser />} />

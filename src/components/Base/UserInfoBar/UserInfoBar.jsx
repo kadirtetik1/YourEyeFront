@@ -14,33 +14,43 @@ const UserInfoBar = () => {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem('yourEyeToken');
-    const decoded = token ? jwtDecode(token) : null;
+  const token = localStorage.getItem('yourEyeToken');
+  const decoded = token ? jwtDecode(token) : null;
 
-    if (!decoded) return;
+  if (!decoded) return;
 
-    const isAdmin = decoded.isAdmin === true || decoded.isAdmin === 'True';
+  const isAdmin = decoded.isAdmin === true || decoded.isAdmin === 'True';
+  const userId = decoded.userId;
 
-    // Admin ise: sadece isim-soyisim göster, API'ye gerek yok
-    if (isAdmin) {
-      const fullName = `${decoded.name || ''} ${decoded.lastName || ''}`.trim();
-      setUser({
-        fullName,
-        role: 'YourEye Teknik Birim',
-        company: '',
-        branches: [],
-        isAdmin: true,
-      });
-      return;
-    }
+  if (isAdmin) { // admin için
+    const fetchAdminDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5059/api/AdminUser/${userId}`);
+        const data = response.data;
+        localStorage.setItem('companyName', "Youreye");
 
-    // Normal kullanıcı ise API'den detay çek
-    const userId = decoded.userId;
 
+        setUser({
+          fullName: data.name,  // Admin DTO'da lastName yoksa sadece name kullanılabilir
+          role: "YourEye Teknik Birim",
+          company: '',
+          branches: '',
+          isAdmin: true,
+        });
+      } catch (err) {
+        console.error('Admin bilgileri alınamadı:', err);
+      }
+    };
+
+    fetchAdminDetails();
+  } 
+   else { // normal kullanıcılar için
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:5059/api/Users/${userId}`);
         const data = response.data;
+        localStorage.setItem('companyName', data.companyName || '');
+
 
         setUser({
           fullName: `${data.name} ${data.lastName}`,
@@ -55,7 +65,8 @@ const UserInfoBar = () => {
     };
 
     fetchUserDetails();
-  }, []);
+  }
+}, []);
 
   return (
     <div className={styles.userBar}>
@@ -68,8 +79,8 @@ const UserInfoBar = () => {
             <span>Rol: {user.role}</span>
             {!user.isAdmin && (
               <>
-                {' '}| <span>Firma: {user.company}</span> | 
-                <span>Şube(ler): {user.branches.join(', ')}</span>
+                {' '}| <span>Firma: {user.company}</span>| 
+                <span> Şube(ler): {user.branches.join(', ')}</span>
               </>
             )}
           </div>
