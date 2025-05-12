@@ -1,17 +1,25 @@
 import { useState } from 'react';
 import styles from './Sidebar.module.css';
-import { FaBars, FaChevronDown, FaChevronUp, FaHome, FaBuilding, FaUser, FaTools } from 'react-icons/fa';
+import { FaBars, FaChevronDown, FaChevronUp, FaHome, FaBuilding, FaUsers, FaTools, FaUserShield  } from 'react-icons/fa';
 import { FaComputer } from "react-icons/fa6";
 import { PiPresentationChart, PiSecurityCameraFill } from "react-icons/pi";
+import { AiOutlineApartment } from "react-icons/ai";
+import { TbReportSearch } from "react-icons/tb";
+import { FaChalkboardUser } from "react-icons/fa6";
+
 
 // İkon Eşleştirme Tablosu
 const iconMap = {
   "Anasayfa": FaHome,
+  "Admin İşlemleri": FaUserShield ,
+  "Rol/Yetki İşlemleri": FaChalkboardUser ,
   "Firma İşlemleri": FaBuilding,
-  "Kullanıcı İşlemleri": FaUser,
+  "Şube İşlemleri": AiOutlineApartment,
+  "Kullanıcı İşlemleri": FaUsers ,
   "Modüller": FaComputer,
   "Analizler": PiPresentationChart,
   "Kamera Yönetimi": PiSecurityCameraFill,
+  "Log Raporları":TbReportSearch,
   "Sistem Ayarları": FaTools
 };
 
