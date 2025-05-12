@@ -95,7 +95,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #555;
+  border: 2px solid #939393;
   background-color: transparent;
   overflow: hidden;
 }
@@ -144,3 +144,25 @@
   transform: scale(1.05);
   filter: brightness(1.2);
 }
+
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #f7f7f7;
+  padding: 0.35rem 1.5rem;
+  border: 2px solid #939393;
+  border-radius: 9999px; /* Tam yuvarlak */
+  background-color: rgba(0, 0, 0, 0.544);
+  box-shadow: 0px 0px 50px rgb(223, 223, 223);
+ 
+}
+
+
+

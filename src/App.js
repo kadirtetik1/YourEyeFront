@@ -38,16 +38,14 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
 
-      <Route
-        path="/admin/*"
+      <Route path="/admin/*"
         element={
           <RequireAuth>
             <AdminDashBoard />
           </RequireAuth>
         } />
 
-      <Route
-        path="/user/*"
+      <Route path="/user/*"
         element={
           <RequireAuth>
             <UserDashBoard />

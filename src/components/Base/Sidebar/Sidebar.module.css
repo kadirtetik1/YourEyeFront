@@ -22,8 +22,8 @@
   align-items: center;
   /* height: 40px; */
   /* background-color: #ff7b00; */
-  margin-bottom: 1rem;
-  height: 100px;
+  margin-bottom: 1rem; 
+  height: 50px;
 
 }
 
@@ -78,7 +78,7 @@
   text-decoration: none;
   color: white;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   transition: background 0.2s;
 }
 
@@ -124,7 +124,7 @@
   gap: 8px;
   cursor: pointer;
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   transition: background 0.2s;
 }
 
@@ -148,13 +148,15 @@
   color: #bbb;
   text-decoration: none;
   padding: 4px;
-  border-radius: 4px;
+  border-radius: 0.5rem;
   transition: background 0.2s;
+  padding-left: 10px;
 }
 
 .dropdownMenu a:hover {
   background-color: #333;
   color: #fff;
+  cursor: pointer;
 }
 
 .chevron {
@@ -169,7 +171,7 @@
   color: white;
   padding: 4px 8px;
   font-size: 13px;
-  border-radius: 4px;
+  border-radius: 1rem;
   white-space: nowrap;
   z-index: 999;
   transform: translateY(-50%);
@@ -186,4 +188,17 @@
 .iconWrapper:hover .tooltip {
   opacity: 1;
 }
+
+
+
+.activeMenu {
+  /* background-color: #494949; */
+  border-radius: 1rem;
+}
+
+.activeSubMenu {
+  /* background-color: #ff7b00; */
+  color: white;
+}
+
 
