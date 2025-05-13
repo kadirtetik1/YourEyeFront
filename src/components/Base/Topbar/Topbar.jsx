@@ -4,8 +4,10 @@ import { FaBell } from 'react-icons/fa';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import styles from './Topbar.module.css';
-
 import { routeMap } from '../../../routes/routeMap';
+
+
+import ConfirmLogoutModal from './ConfirmLogout';
 
 const Topbar = ({ notificationCount = 0, isAdmin = false }) => {
   const navigate = useNavigate();
@@ -13,14 +15,16 @@ const Topbar = ({ notificationCount = 0, isAdmin = false }) => {
 
   const [currentTime, setCurrentTime] = useState(new Date());
   const [logoPath, setLogoPath] = useState('');
-
   const [frameShape, setFrameShape] = useState('square');
   const logoRef = useRef(null);
 
-  // Dinamik Sayfa Başlığı Hesaplama
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+
+  // Dinamik Sayfa Başlığı
   const path = location.pathname.replace(/^\/admin\//, '');
   const pageTitle = Object.keys(routeMap).find(key => routeMap[key] === path) || 'Anasayfa';
 
+  // Firma Logosu Getirme
   useEffect(() => {
     const token = localStorage.getItem('yourEyeToken');
     const decoded = token ? jwtDecode(token) : null;
@@ -49,24 +53,26 @@ const Topbar = ({ notificationCount = 0, isAdmin = false }) => {
     fetchCompanyName();
   }, [isAdmin]);
 
+  // Zaman Güncelleme
   useEffect(() => {
     const interval = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
 
-  const handleLogout = () => {
+  // Logout Süreci
+  const handleLogout = () => setShowLogoutConfirm(true);
+  const confirmLogout = () => {
     localStorage.clear();
     navigate('/');
   };
+  const cancelLogout = () => setShowLogoutConfirm(false);
 
+  // Logo Ölçüsüne Göre Şekil Belirleme
   const handleImageLoad = () => {
     const img = logoRef.current;
     if (!img) return;
-
     const { naturalWidth, naturalHeight } = img;
-    const ratio = naturalWidth / naturalHeight;
-
-    setFrameShape(ratio > 1.3 ? 'rectangle' : 'square');
+    setFrameShape(naturalWidth / naturalHeight > 1.3 ? 'rectangle' : 'square');
   };
 
   return (
@@ -107,6 +113,10 @@ const Topbar = ({ notificationCount = 0, isAdmin = false }) => {
           Çıkış Yap
         </button>
       </div>
+
+      {showLogoutConfirm && (
+        <ConfirmLogoutModal onConfirm={confirmLogout} onCancel={cancelLogout} />
+      )}
     </div>
   );
 };

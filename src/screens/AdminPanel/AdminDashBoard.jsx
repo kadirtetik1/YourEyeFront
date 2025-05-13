@@ -7,14 +7,80 @@ import styles from './AdminDash.module.css';
 
 
 import { Routes, Route } from 'react-router-dom';
-import AdminHome from '../Components/AdminHome';
-import ListUsers from '../Components/ListUsers';
-import CreateFirms from '../Components/CreateFirms';
+import AdminHome from './AdminHome';
 
-import CreateAdmin from '../Components/AdminManagement/CreateAdmin'
-import ListAdmins from '../Components/AdminManagement/ListAdmins'
-import UpdateAdmin from '../Components/AdminManagement/UpdateAdmin'
-import DeleteAdmin from '../Components/AdminManagement/DeleteAdmin'
+
+import CreateAdmin from '../Components/AdminOperations/CreateAdmin'
+import ListAdmins from '../Components/AdminOperations/ListAdmins'
+import UpdateAdmin from '../Components/AdminOperations/UpdateAdmin'
+import DeleteAdmin from '../Components/AdminOperations/DeleteAdmin'
+
+
+import CreateUser from '../Components/UserOperations/CreateUser';
+import ListUser from '../Components/UserOperations/ListUser';
+import UpdateUser from '../Components/UserOperations/UpdateUser';
+import AssignBranch from '../Components/UserOperations/AssignBranch';
+import AssignRole from '../Components/UserOperations/AssignRole';
+import UpdateUserRole from '../Components/UserOperations/UpdateUserRole';
+import UpdateUserBranch from '../Components/UserOperations/UpdateUserBranch';
+
+
+// Rol ve Yetki İşlemleri
+import CreateRole from '../Components/RoleAndPermissions/CreateRole';
+import CreatePermission from '../Components/RoleAndPermissions/CreatePermission';
+import AssignPermission from '../Components/RoleAndPermissions/AssignPermission';
+import ListRolePermissions from '../Components/RoleAndPermissions/ListRolePermissions';
+import UpdateRole from '../Components/RoleAndPermissions/UpdateRole';
+import UpdatePermission from '../Components/RoleAndPermissions/UpdatePermission';
+
+// Firma İşlemleri
+
+import CreateFirm from '../Components/FirmOperations/CreateFirm';
+import ListFirms from '../Components/FirmOperations/ListFirms';
+import UpdateFirm from '../Components/FirmOperations/UpdateFirm';
+import ListFirmUsers from '../Components/FirmOperations/ListFirmUsers';
+import CreateSector from '../Components/FirmOperations/CreateSector';
+import ListSectors from '../Components/FirmOperations/ListSectors';
+import UpdateSector from '../Components/FirmOperations/UpdateSector';
+import ToggleFirmStatus from '../Components/FirmOperations/ToggleFirmStatus';
+import DeleteFirm from '../Components/FirmOperations/DeleteFirm';
+
+// Şube İşlemleri
+
+import ListAllBranches from '../Components/BranchOperations/ListAllBranches';
+import ListFirmBranches from '../Components/BranchOperations/ListFirmBranches';
+import CreateBranch from '../Components/BranchOperations/CreateBranch';
+import UpdateBranch from '../Components/BranchOperations/UpdateBranch';
+import ToggleBranchStatus from '../Components/BranchOperations/ToggleBranchStatus';
+import DeleteBranch from '../Components/BranchOperations/DeleteBranch';
+
+// Modüller
+
+// import ListModules from '../Components/ModuleOperations/ListModules';
+// import CreateModule from '../Components/ModuleOperations/CreateModule';
+
+// // Analizler
+
+// import GeneralAnalysis from '../Components/AnalysisOperations/GeneralAnalysis';
+// import RealtimeAnalysis from '../Components/AnalysisOperations/RealtimeAnalysis';
+// import EndOfDayReports from '../Components/AnalysisOperations/EndOfDayReports';
+
+// Kamera Yönetimi
+
+// import ListCameras from '../Components/CameraManagement/ListCameras';
+// import CreateCamera from '../Components/CameraManagement/CreateCamera';
+// import UpdateCamera from '../Components/CameraManagement/UpdateCamera';
+
+// Log Raporları
+
+// import FirmLogs from '../Components/LogReports/FirmLogs';
+// import BranchLogs from '../Components/LogReports/BranchLogs';
+// import UserLogs from '../Components/LogReports/UserLogs';
+
+// Sistem Ayarları
+
+// import GeneralSettings from '../Components/SystemSettings/GeneralSettings';
+// import UserSettings from '../Components/SystemSettings/UserSettings';
 
 
 
@@ -24,7 +90,7 @@ const sideBarMenu = [
   { title: "Admin İşlemleri", subItems: ["Yeni Admin Ekle","Adminleri Göster", "Admin Bilgileri Güncelle", "Admin Sil"] },
 
   { title: "Kullanıcı İşlemleri", subItems: ["Yeni Kullanıcı Oluştur","Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", 
-  "Kullanıcıya Şube Ata", "Kullanıcı-Şube Bilgilerini Güncelle", "Kullanıcıya Yeni Rol Ata", "Kullanıcı-Rol Bilgilerini Güncelle",] },
+  "Kullanıcıya Şube Ata", "Kullanıcı Şube Bilgilerini Güncelle", "Kullanıcıya Yeni Rol Ata", "Kullanıcı Rol Bilgilerini Güncelle",] },
 
   { title: "Rol Ve Yetki İşlemleri", subItems: ["Yeni Rol Oluştur","Yeni Yetki Oluştur", "Role Yetki Ata", "Role Ait Yetkileri Getir", "Rol Bilgilerini Güncelle", "Yetki Bilgilerini Güncelle"]},
 
@@ -62,13 +128,82 @@ export default class AdminDashBoard extends Component {
 
           <Routes>
             <Route path="" element={<AdminHome />} />
-            <Route path="admin-management/create" element={<CreateAdmin/>} />
-            <Route path="admin-management/list" element={<ListAdmins/>} />
-            <Route path="admin-management/update" element={<UpdateAdmin/>} />
-            <Route path="admin-management/delete" element={<DeleteAdmin/>} />
+            
+             {/* Admin İşlemleri */}
+             <Route path="admin-ops/create" element={<CreateAdmin />} />
+             <Route path="admin-ops/list" element={<ListAdmins />} />
+             <Route path="admin-ops/update" element={<UpdateAdmin />} />
+             <Route path="admin-ops/delete" element={<DeleteAdmin />} />
+           
+             {/* Kullanıcı İşlemleri */}
+             <Route path="user-ops/create" element={<CreateUser />} />
+             <Route path="user-ops/list" element={<ListUser />} />
+             <Route path="user-ops/update" element={<UpdateUser />} />
+             <Route path="user-ops/assign-role" element={<AssignRole />} />
+             <Route path="user-ops/assign-branch" element={<AssignBranch />} />
+             <Route path="user-ops/update-role" element={<UpdateUserRole />} />
+             <Route path="user-ops/update-branch" element={<UpdateUserBranch />} />
+           
+             {/* Rol ve Yetki İşlemleri */}
+             <Route path="role-permissions/create-role" element={<CreateRole />} />
+             <Route path="role-permissions/create-permission" element={<CreatePermission />} />
+             <Route path="role-permissions/assign-permission" element={<AssignPermission />} />
+             <Route path="role-permissions/list-role-permissions" element={<ListRolePermissions />} />
+             <Route path="role-permissions/update-role" element={<UpdateRole />} />
+             <Route path="role-permissions/update-permission" element={<UpdatePermission />} />
+           
+             {/* Firma İşlemleri */}
 
-            {/* Diğer Route'lar */}
-          </Routes>
+              <Route path="firm-ops/create" element={<CreateFirm />} />
+             <Route path="firm-ops/list" element={<ListFirms />} />
+             <Route path="firm-ops/update" element={<UpdateFirm />} />
+             <Route path="firm-ops/list-users" element={<ListFirmUsers />} />
+             <Route path="firm-ops/create-sector" element={<CreateSector />} />
+             <Route path="firm-ops/list-sectors" element={<ListSectors />} />
+             <Route path="firm-ops/update-sector" element={<UpdateSector />} />
+             <Route path="firm-ops/toggle-status" element={<ToggleFirmStatus />} />
+             <Route path="firm-ops/delete" element={<DeleteFirm />} /> 
+           
+             {/* Şube İşlemleri */}
+
+             <Route path="branch-ops/list-all" element={<ListAllBranches />} />
+             <Route path="branch-ops/list-by-firm" element={<ListFirmBranches />} />
+             <Route path="branch-ops/create" element={<CreateBranch />} />
+             <Route path="branch-ops/update" element={<UpdateBranch />} />
+             <Route path="branch-ops/toggle-status" element={<ToggleBranchStatus />} />
+             <Route path="branch-ops/delete" element={<DeleteBranch />} /> 
+           
+             {/* Modüller */}
+
+             {/* <Route path="modules/list" element={<ListModules />} />
+             <Route path="modules/create" element={<CreateModule />} /> */}
+           
+             {/* Analizler */}
+
+             {/* <Route path="analysis/general" element={<GeneralAnalysis />} />
+             <Route path="analysis/realtime" element={<RealtimeAnalysis />} />
+             <Route path="analysis/end-of-day" element={<EndOfDayReports />} /> */}
+           
+             {/* Kamera Yönetimi */}
+
+             {/* <Route path="camera-management/list" element={<ListCameras />} />
+             <Route path="camera-management/create" element={<CreateCamera />} />
+             <Route path="camera-management/update" element={<UpdateCamera />} /> */}
+           
+             {/* Log Raporları */}
+
+             {/* <Route path="log-reports/firm" element={<FirmLogs />} />
+             <Route path="log-reports/branch" element={<BranchLogs />} />
+             <Route path="log-reports/user" element={<UserLogs />} /> */}
+           
+             {/* Sistem Ayarları */}
+
+             {/* <Route path="system-settings/general" element={<GeneralSettings />} />
+             <Route path="system-settings/user" element={<UserSettings />} /> */}
+
+
+           </Routes>
+          
         </div>
       </div>
     );

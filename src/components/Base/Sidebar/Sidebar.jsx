@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Sidebar.module.css';
 import { FaBars, FaChevronDown, FaChevronUp, FaHome, FaBuilding, FaUsers, FaTools, FaUserShield } from 'react-icons/fa';
 import { FaComputer } from "react-icons/fa6";
@@ -27,7 +27,7 @@ const iconMap = {
 
 
 const Sidebar = ({ panelName, menuItems }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false); //default kapalı
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const navigate = useNavigate();
@@ -43,6 +43,21 @@ const Sidebar = ({ panelName, menuItems }) => {
       setOpenDropdown(openDropdown === title ? null : title);
     }
   };
+
+  useEffect(() => { //
+    const handleResize = () => {
+      if (window.innerWidth < 768) {  // 768px altı için sidebar açıksa kapat
+        setIsOpen(false);
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+  
+    // İlk yüklemede kontrol et
+    handleResize();
+  
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}>
@@ -78,6 +93,7 @@ const Sidebar = ({ panelName, menuItems }) => {
                 <span className={`${styles.linkText} ${isOpen ? styles.show : styles.hide}`}>
                   {menu.title}
                 </span>
+                
                 {isOpen && menu.subItems.length > 0 && (
                   openDropdown === menu.title
                     ? <FaChevronUp className={styles.chevron} />
