@@ -2,9 +2,8 @@
 .container{
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem;
-  color: white;
-
+  padding: 1rem;
+  
 }
   
 .dashBoard {

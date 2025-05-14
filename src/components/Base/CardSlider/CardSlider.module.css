@@ -1,5 +1,6 @@
 .sliderContainer {
     margin: 2rem 0;
+    padding-left: 1rem;
   }
   
   .sliderTitle {
@@ -13,6 +14,7 @@
   align-items: center;
   width: 100%;
   overflow: hidden;
+  
 }
 
 .cardRow {
@@ -24,7 +26,7 @@
   scrollbar-width: none;
   width: auto;
   /* boyutu yeni card tasarımı yaparsan değiştir. */   
-  height: 250px;
+  height: 270px;
   
 }
 

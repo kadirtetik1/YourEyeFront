@@ -2,8 +2,8 @@
   background: linear-gradient(145deg, #1c1c1c, #141414);
   border-radius: 16px;
   padding: 20px;
-  width: 180px;
-  height: 180px;
+  width: 250px;
+  height: 200px;
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -30,7 +30,7 @@
 }
 
 .value {
-  font-size: 32px;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-top: 8px;
 }
@@ -42,11 +42,21 @@
   color: #bbb;
 }
 
-.subtitle {
-  color: #bbb;
+.subtitle1 {
+  color: #1eff00;
+}
+
+.subtitle2 {
+  color: #ff0000;
 }
 
 .subvalue {
   color: #fff;
   font-weight: bold;
+}
+
+.lastUpdated {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #c4c4c4;
 }

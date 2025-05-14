@@ -13,7 +13,6 @@ export default function CardSlider({ title, items }) {
       const isOverflowing = sliderRef.current.scrollWidth > sliderRef.current.clientWidth;
       setShowNavButtons(isOverflowing);
 
-      // Kartlar ekrana sığıyorsa ortala
       if (!isOverflowing) {
         sliderRef.current.style.justifyContent = "space-between";
       } else {
@@ -34,6 +33,36 @@ export default function CardSlider({ title, items }) {
     sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
   };
 
+  // Mouse Drag Scroll State
+  let isDown = false;
+  let startX;
+  let scrollLeftPos;
+
+  const handleMouseDown = (e) => {
+    isDown = true;
+    sliderRef.current.classList.add(styles.active);
+    startX = e.pageX - sliderRef.current.offsetLeft;
+    scrollLeftPos = sliderRef.current.scrollLeft;
+  };
+
+  const handleMouseLeave = () => {
+    isDown = false;
+    sliderRef.current.classList.remove(styles.active);
+  };
+
+  const handleMouseUp = () => {
+    isDown = false;
+    sliderRef.current.classList.remove(styles.active);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - sliderRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    sliderRef.current.scrollLeft = scrollLeftPos - walk;
+  };
+
   return (
     <div className={styles.sliderContainer}>
       <h2 className={styles.sliderTitle}>{title}</h2>
@@ -46,6 +75,10 @@ export default function CardSlider({ title, items }) {
         <div
           ref={sliderRef}
           className={styles.cardRow}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
         >
           {items.map((item, index) => (
             <WidgetCard
@@ -56,6 +89,7 @@ export default function CardSlider({ title, items }) {
               subtitle1Value={item.subtitle1Value}
               subtitle2={item.subtitle2}
               subtitle2Value={item.subtitle2Value}
+              lastUpdated={item.lastUpdated}
               icon={item.icon}
             />
           ))}
