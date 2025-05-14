@@ -39,13 +39,10 @@ code {
   background-color: #e66e00;
 }
 
-/* Firefox */
-* {
+
+body, html {
   scrollbar-width: thick;
   scrollbar-color: #ff7b00 #1e1e1e;
 }
-/* 
-::-webkit-scrollbar-button {
-  display: none;
-} */
+
 

@@ -1,0 +1,92 @@
+.sliderContainer {
+    margin: 2rem 0;
+  }
+  
+  .sliderTitle {
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+
+ .wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cardRow {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  width: auto;
+  /* boyutu yeni card tasarımı yaparsan değiştir. */   
+  height: 250px;
+  
+}
+
+.cardRow > * {
+  flex: 0 0 auto; /* Shrink olmasın, genişliği sabit kalsın */
+}
+
+.cardRow::-webkit-scrollbar {
+  display: none;
+}
+
+/* Navigation Button Base Style */
+.navButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  /* Left and Right Specific Position */
+  .left {
+    left: 10px;
+  }
+  
+  .right {
+    right: 10px;
+  }
+  
+  /* Show on Hover */
+  .wrapper:hover .navButton {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+
+  
+  .cardRow.active {
+    cursor: grabbing;
+  }
+  
+  .navButton {
+    background: transparent;
+    border: none;
+    color: rgb(182, 182, 182);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .navButton:hover {
+    color: #ffffff;
+    
+  }
+  

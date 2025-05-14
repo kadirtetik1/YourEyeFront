@@ -123,8 +123,16 @@ export default class AdminDashBoard extends Component {
       <div className={styles.container}>
         <Sidebar panelName="Admin Paneli" menuItems={sideBarMenu} />
         <div className={styles.main}>
+
+          <div className={styles.TopContainer}>
+
           <Topbar isAdmin={true} notificationCount={5} />
-          <UserInfoBar />
+
+          </div>
+
+          <div className={styles.scrollableArea}>
+
+          <UserInfoBar/>
 
           <Routes>
             <Route path="" element={<AdminHome />} />
@@ -203,6 +211,8 @@ export default class AdminDashBoard extends Component {
 
 
            </Routes>
+
+           </div>
           
         </div>
       </div>

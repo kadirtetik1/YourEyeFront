@@ -1,9 +1,16 @@
 
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  color: white;
+
+}
   
-  .dashBoard {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    padding: 24px;
-    color: white;
-  }
+.dashBoard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  color: white;
+}
