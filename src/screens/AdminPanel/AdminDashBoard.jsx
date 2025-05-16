@@ -53,8 +53,19 @@ import CreateBranch from '../Components/BranchOperations/CreateBranch';
 import UpdateBranch from '../Components/BranchOperations/UpdateBranch';
 import ToggleBranchStatus from '../Components/BranchOperations/ToggleBranchStatus';
 import DeleteBranch from '../Components/BranchOperations/DeleteBranch';
+
+
 import AdminOpsHome from '../Components/AdminOperations/AdminOpsHome';
 import BranchOperationsHome from '../Components/BranchOperations/BranchOperationsHome';
+import UserOperationsHome from '../Components/UserOperations/UserOperationsHome';
+import RoleAndPermissionsHome from '../Components/RoleAndPermissions/RoleAndPermissionsHome';
+import FirmOperationsHome from '../Components/FirmOperations/FirmOperationsHome';
+import AnalysisHome from '../Components/Analysis/AnalysisHome';
+
+import ModulesHome from '../Components/Modules/ModulesHome';
+import CameraManagementHome from '../Components/CameraManagement/CameraManagementHome';
+import LogReportsHome from '../Components/LogReports/LogReportsHome';
+import SystemSettingsHome from '../Components/SystemSettings/SystemSettingsHome';
 
 // Modüller
 
@@ -147,6 +158,7 @@ export default class AdminDashBoard extends Component {
              <Route path="admin-ops/delete" element={<DeleteAdmin />} />
            
              {/* Kullanıcı İşlemleri */}
+             <Route path="user-ops/" element={<UserOperationsHome/>} />
              <Route path="user-ops/create" element={<CreateUser />} />
              <Route path="user-ops/list" element={<ListUser />} />
              <Route path="user-ops/update" element={<UpdateUser />} />
@@ -156,6 +168,7 @@ export default class AdminDashBoard extends Component {
              <Route path="user-ops/update-branch" element={<UpdateUserBranch />} />
            
              {/* Rol ve Yetki İşlemleri */}
+             <Route path="role-permissions/" element={<RoleAndPermissionsHome/>} />
              <Route path="role-permissions/create-role" element={<CreateRole />} />
              <Route path="role-permissions/create-permission" element={<CreatePermission />} />
              <Route path="role-permissions/assign-permission" element={<AssignPermission />} />
@@ -165,7 +178,8 @@ export default class AdminDashBoard extends Component {
            
              {/* Firma İşlemleri */}
 
-              <Route path="firm-ops/create" element={<CreateFirm />} />
+             <Route path="firm-ops/create" element={<CreateFirm />} />
+             <Route path="firm-ops/" element={<FirmOperationsHome />} />
              <Route path="firm-ops/list" element={<ListFirms />} />
              <Route path="firm-ops/update" element={<UpdateFirm />} />
              <Route path="firm-ops/list-users" element={<ListFirmUsers />} />
@@ -187,29 +201,34 @@ export default class AdminDashBoard extends Component {
            
              {/* Modüller */}
 
+             <Route path="modules/" element={<ModulesHome />} />
              {/* <Route path="modules/list" element={<ListModules />} />
              <Route path="modules/create" element={<CreateModule />} /> */}
            
              {/* Analizler */}
 
+             <Route path="analysis/" element={<AnalysisHome/>} />
              {/* <Route path="analysis/general" element={<GeneralAnalysis />} />
              <Route path="analysis/realtime" element={<RealtimeAnalysis />} />
              <Route path="analysis/end-of-day" element={<EndOfDayReports />} /> */}
            
              {/* Kamera Yönetimi */}
 
+             <Route path="camera-management/" element={<CameraManagementHome />} />
              {/* <Route path="camera-management/list" element={<ListCameras />} />
              <Route path="camera-management/create" element={<CreateCamera />} />
              <Route path="camera-management/update" element={<UpdateCamera />} /> */}
            
              {/* Log Raporları */}
 
+             <Route path="log-reports/" element={<LogReportsHome />} />
              {/* <Route path="log-reports/firm" element={<FirmLogs />} />
              <Route path="log-reports/branch" element={<BranchLogs />} />
              <Route path="log-reports/user" element={<UserLogs />} /> */}
            
              {/* Sistem Ayarları */}
 
+             <Route path="system-settings/" element={<SystemSettingsHome />} />
              {/* <Route path="system-settings/general" element={<GeneralSettings />} />
              <Route path="system-settings/user" element={<UserSettings />} /> */}
 

@@ -8,7 +8,7 @@ import { iconMap } from '../../../components/Base/Sidebar/Sidebar';
 import { motion } from 'framer-motion';
 
 
-export default function BranchOperationsHome() {
+export default function AnalysisHome() {
   const location = useLocation();
   const navigate = useNavigate();
   const subItems = location.state?.subItems || [];

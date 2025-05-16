@@ -81,13 +81,6 @@ const Sidebar = ({ panelName, menuItems }) => {
             <div key={idx} className={`${styles.dropdown} ${isActive ? styles.activeMenu : ''}`}>
               <div
 
-                // onClick={() => {
-                //   navigate(path);  // Önce ana başlık path'ine yönlendir
-                //   if (menu.subItems.length > 0) {
-                //     handleDropdownToggle(menu.title);  // Sonra dropdown'u aç
-                //   }
-                // }}
-
                 onClick={() => {
                   if (menu.subItems.length === 0) {
                     navigate(path);
