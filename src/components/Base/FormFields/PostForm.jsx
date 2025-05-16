@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import InputMask from 'react-input-mask';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import styles from './PostForm.module.css';
 
 export default class PostForm extends Component {
@@ -14,16 +15,12 @@ export default class PostForm extends Component {
 
   handleChange = (e) => {
     const { name, value } = e.target;
-    const fieldConfig = this.props.initialState[name];
+    this.setState({ [name]: value });
+  };
 
-    let newValue = value;
-
-    if (fieldConfig.type === 'tel') {
-      // Maskeyi gösterirken normal formatlı gösterir
-      newValue = value.replace(/\D/g, ''); // Sadece rakamları tutar
-    }
-
-    this.setState({ [name]: newValue });
+  handlePhoneChange = (phone, country, e, name) => {
+    const numericPhone = phone.replace(/\D/g, '');
+    this.setState({ [name]: numericPhone });
   };
 
   handleSubmit = (e) => {
@@ -37,45 +34,50 @@ export default class PostForm extends Component {
         <form onSubmit={this.handleSubmit} className={styles.form}>
           {Object.entries(this.props.initialState).map(([key, config]) => (
             <div key={key} className={styles.formGroup}>
-              <label className={styles.label}>{config.label}</label>
-              
               {config.type === 'tel' ? (
-                <InputMask
-                  mask="0 (999) - 999 - 9999"
-                  maskChar=""
-                  value={this.formatPhoneDisplay(this.state[key])}
-                  onChange={this.handleChange}
-                  name={key}
-                  className={styles.input}
-                />
+
+
+                  <div className={styles.phoneWrapper}>
+                  <PhoneInput
+                    country={'tr'}
+                    value={this.state[key]}
+                    onFocus={() => this.setState({ [`${key}Focused`]: true })}
+                    onBlur={() => this.setState({ [`${key}Focused`]: false })}
+                    onChange={(phone) => this.handlePhoneChange(phone, null, null, key)}
+                    inputClass={styles.phoneInput}
+                    buttonClass={styles.flagButton}
+                    containerClass={styles.phoneContainer}
+                    dropdownClass={styles.phoneDropdown}
+                    countryCodeEditable={false}
+                    placeholder=""
+                  />
+                  <label className={`${styles.labelPhone} ${(this.state[`${key}Focused`] || this.state[key]) ? styles.labelActive : ''}`}>
+                    {config.label}
+                  </label>
+                  </div>
+
+
+
               ) : (
-                <input
-                  type={config.type || 'text'}
-                  name={key}
-                  value={this.state[key]}
-                  onChange={this.handleChange}
-                  className={styles.input}
-                />
+                <div className={styles.inputWrapper}>
+                  <input
+                    type={config.type || 'text'}
+                    name={key}
+                    value={this.state[key]}
+                    onChange={this.handleChange}
+                    className={styles.input}
+                    placeholder=" "
+                  />
+                  <label className={styles.label}>{config.label}</label>
+                </div>
               )}
             </div>
           ))}
           <div className={styles.buttonContainer}>
-            <button type="submit" className={styles.button}>
-              Kaydet
-            </button>
+            <button type="submit" className={styles.button}>Kaydet</button>
           </div>
         </form>
       </div>
     );
   }
-
-  // Telefon numarasını gösterirken maskeye uygun hale getir
-  formatPhoneDisplay = (value) => {
-    if (!value) return '';
-    let formatted = value;
-    if (value.length > 1) {
-      formatted = `0 (${value.slice(1, 4)}) - ${value.slice(4, 7)} - ${value.slice(7, 11)}`;
-    }
-    return formatted;
-  };
 }
