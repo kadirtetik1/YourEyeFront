@@ -1,11 +1,12 @@
 .sliderContainer {
-    margin: 2rem 0;
+    /* margin: 2rem 0; */
     padding-left: 1rem;
+    /* margin-left: 1rem; */
   }
   
   .sliderTitle {
     color: #ffffff;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
   }
 
  .wrapper {
