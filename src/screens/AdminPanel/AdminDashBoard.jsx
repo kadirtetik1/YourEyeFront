@@ -7,9 +7,9 @@ import styles from './AdminDash.module.css';
 
 
 import { Routes, Route } from 'react-router-dom';
+
+
 import AdminHome from './AdminHome';
-
-
 import CreateAdmin from '../Components/AdminOperations/CreateAdmin'
 import ListAdmins from '../Components/AdminOperations/ListAdmins'
 import UpdateAdmin from '../Components/AdminOperations/UpdateAdmin'
@@ -53,6 +53,8 @@ import CreateBranch from '../Components/BranchOperations/CreateBranch';
 import UpdateBranch from '../Components/BranchOperations/UpdateBranch';
 import ToggleBranchStatus from '../Components/BranchOperations/ToggleBranchStatus';
 import DeleteBranch from '../Components/BranchOperations/DeleteBranch';
+import AdminOpsHome from '../Components/AdminOperations/AdminOpsHome';
+import BranchOperationsHome from '../Components/BranchOperations/BranchOperationsHome';
 
 // Modüller
 
@@ -138,6 +140,7 @@ export default class AdminDashBoard extends Component {
             <Route path="" element={<AdminHome />} />
             
              {/* Admin İşlemleri */}
+             <Route path="admin-ops/" element={<AdminOpsHome />} />
              <Route path="admin-ops/create" element={<CreateAdmin />} />
              <Route path="admin-ops/list" element={<ListAdmins />} />
              <Route path="admin-ops/update" element={<UpdateAdmin />} />
@@ -174,6 +177,7 @@ export default class AdminDashBoard extends Component {
            
              {/* Şube İşlemleri */}
 
+             <Route path="branch-ops/" element={<BranchOperationsHome/>} />
              <Route path="branch-ops/list-all" element={<ListAllBranches />} />
              <Route path="branch-ops/list-by-firm" element={<ListFirmBranches />} />
              <Route path="branch-ops/create" element={<CreateBranch />} />

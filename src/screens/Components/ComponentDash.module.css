@@ -14,3 +14,13 @@
   padding: 24px;
   color: white;
 }
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  justify-content: center;
+  max-width: calc(4 * 220px + 3 * 24px); /* 4 kart + 3 boşluk */
+  margin: 0 auto;
+}

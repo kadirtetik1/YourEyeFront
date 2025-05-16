@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { routeMap } from '../../../routes/routeMap';
 
 // İkon Eşleştirme Tablosu
-const iconMap = {
+export const iconMap = {
   "Anasayfa": FaHome,
   "Admin İşlemleri": FaUserShield,
   "Rol Ve Yetki İşlemleri": FaChalkboardUser,
@@ -80,13 +80,26 @@ const Sidebar = ({ panelName, menuItems }) => {
           return (
             <div key={idx} className={`${styles.dropdown} ${isActive ? styles.activeMenu : ''}`}>
               <div
+
+                // onClick={() => {
+                //   navigate(path);  // Önce ana başlık path'ine yönlendir
+                //   if (menu.subItems.length > 0) {
+                //     handleDropdownToggle(menu.title);  // Sonra dropdown'u aç
+                //   }
+                // }}
+
                 onClick={() => {
                   if (menu.subItems.length === 0) {
                     navigate(path);
                   } else {
+                    // State olarak subItems bilgisini gönder
+                    navigate(path, { state: { subItems: menu.subItems, menuTitle: menu.title } });
                     handleDropdownToggle(menu.title);
                   }
                 }}
+
+
+                
                 className={styles.dropdownToggle}
               >
                 <IconComponent className={styles.icon} />
