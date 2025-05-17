@@ -112,7 +112,7 @@ const sideBarMenu = [
   
   { title: "Şube İşlemleri", subItems: ["Bütün Şubeleri Getir", "Firmaya Bağlı Şubeleri Getir", "Yeni Şube Oluştur", "Şube Bilgilerini Güncelle", "Şube Aktif/Pasif Durumunu Güncelle", "Şube Sil"] },
 
-  { title: "Modüller", subItems: ["Modülleri Listele", "Yeni Modül Ekle"] }, // EKSİK
+  { title: "Modüller", subItems: ["Modülleri Listele", "Yeni Modül Ekle", "Modül İçeriğini Güncelle", "Modülü Sil"] }, // EKSİK
 
   { title: "Analizler", subItems: ["Genel Analizler", "Anlık Analizler", "Gün Sonu Raporları"] }, //EKSİK
 

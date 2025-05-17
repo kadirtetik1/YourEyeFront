@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import styles from './PostForm.module.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class PostForm extends Component {
   constructor(props) {
@@ -25,6 +27,15 @@ export default class PostForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    // Zorunlu alan kontrolü
+    const emptyFields = Object.entries(this.state).filter(([key, value]) => !value.trim());
+    if (emptyFields.length > 0) {
+      toast.error("Lütfen tüm alanları doldurunuz.", { position: toast.POSITION.BOTTOM_RIGHT });
+ 
+      return;
+    }
+
     this.props.onSubmit(this.state);
   };
 
@@ -35,14 +46,10 @@ export default class PostForm extends Component {
           {Object.entries(this.props.initialState).map(([key, config]) => (
             <div key={key} className={styles.formGroup}>
               {config.type === 'tel' ? (
-
-
-                  <div className={styles.phoneWrapper}>
+                <div className={styles.phoneWrapper}>
                   <PhoneInput
                     country={'tr'}
                     value={this.state[key]}
-                    onFocus={() => this.setState({ [`${key}Focused`]: true })}
-                    onBlur={() => this.setState({ [`${key}Focused`]: false })}
                     onChange={(phone) => this.handlePhoneChange(phone, null, null, key)}
                     inputClass={styles.phoneInput}
                     buttonClass={styles.flagButton}
@@ -51,13 +58,10 @@ export default class PostForm extends Component {
                     countryCodeEditable={false}
                     placeholder=""
                   />
-                  <label className={`${styles.labelPhone} ${(this.state[`${key}Focused`] || this.state[key]) ? styles.labelActive : ''}`}>
+                  <label className={`${styles.labelPhone} ${this.state[key] ? styles.labelActive : ''}`}>
                     {config.label}
                   </label>
-                  </div>
-
-
-
+                </div>
               ) : (
                 <div className={styles.inputWrapper}>
                   <input
@@ -77,6 +81,7 @@ export default class PostForm extends Component {
             <button type="submit" className={styles.button}>Kaydet</button>
           </div>
         </form>
+        <ToastContainer />
       </div>
     );
   }

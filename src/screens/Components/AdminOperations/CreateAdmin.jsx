@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default class CreateAdmin extends Component {
-
   initialData = {
     name: { label: "İsim", value: "", type: "text" },
     username: { label: "Kullanıcı Adı", value: "", type: "text" },
@@ -24,26 +23,29 @@ export default class CreateAdmin extends Component {
       phoneNumber: data.phoneNumber,
       password: data.password
     };
-    
-
 
     fetch('http://localhost:5059/api/AdminUser', {
-  method: 'POST',
-  headers: { 'Accept': '*/*', 'Content-Type': 'application/json' },
-  body: JSON.stringify(payload)
-})
-.then(async response => {
-  const responseText = await response.text();
-  if (!response.ok) {
-    console.error('Sunucu Yanıtı:', responseText);  // Tam hata çıktısı
-    throw new Error(responseText);
-  }
-  console.log('Başarılı Yanıt:', responseText);
-  toast.success(responseText || "İşlem başarıyla tamamlandı.", { position: toast.POSITION.BOTTOM_RIGHT });
-})
-.catch(error => {
-  toast.error(`${error.message}`, { position: toast.POSITION.BOTTOM_RIGHT });
-});
+      method: 'POST',
+      headers: { 'Accept': '*/*', 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(async response => {
+        const responseText = await response.text();
+        if (!response.ok) {
+          console.error('Sunucu Yanıtı:', responseText);
+          throw new Error(responseText);
+        }
+        console.log('Başarılı Yanıt:', responseText);
+        toast.success(responseText || "İşlem başarıyla tamamlandı.", { position: toast.POSITION.BOTTOM_RIGHT });
+
+        // Başarılıysa kısa gecikmeyle yenile
+        setTimeout(() => {
+          window.location.reload();
+        }, 2500);
+      })
+      .catch(error => {
+        toast.error(`${error.message}`, { position: toast.POSITION.BOTTOM_RIGHT });
+      });
   };
 
   render() {

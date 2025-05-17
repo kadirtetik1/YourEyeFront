@@ -7,10 +7,8 @@ import { AiOutlineApartment } from "react-icons/ai";
 import { TbReportSearch } from "react-icons/tb";
 import { FaChalkboardUser } from "react-icons/fa6";
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import { routeMap } from '../../../routes/routeMap';
 
-// İkon Eşleştirme Tablosu
 export const iconMap = {
   "Anasayfa": FaHome,
   "Admin İşlemleri": FaUserShield,
@@ -25,37 +23,26 @@ export const iconMap = {
   "Sistem Ayarları": FaTools
 };
 
-
 const Sidebar = ({ panelName, menuItems }) => {
-  const [isOpen, setIsOpen] = useState(false); //default kapalı
-  const [openDropdown, setOpenDropdown] = useState(null);
-
+  const [isOpen, setIsOpen] = useState(false);
+  // const [openDropdown, setOpenDropdown] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
+  /*
   const handleDropdownToggle = (title) => {
-    if (!isOpen) {
-      setIsOpen(true);
-      setTimeout(() => setOpenDropdown(title), 300);
-    } else {
-      setOpenDropdown(openDropdown === title ? null : title);
-    }
+    setOpenDropdown(openDropdown === title ? null : title);
   };
+  */
 
-  useEffect(() => { //
+  useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {  // 768px altı için sidebar açıksa kapat
-        setIsOpen(false);
-      }
+      if (window.innerWidth < 768) setIsOpen(false);
     };
-  
     window.addEventListener('resize', handleResize);
-  
-    // İlk yüklemede kontrol et
     handleResize();
-  
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -80,33 +67,26 @@ const Sidebar = ({ panelName, menuItems }) => {
           return (
             <div key={idx} className={`${styles.dropdown} ${isActive ? styles.activeMenu : ''}`}>
               <div
-
                 onClick={() => {
-                  if (menu.subItems.length === 0) {
-                    navigate(path);
-                  } else {
-                    // State olarak subItems bilgisini gönder
-                    navigate(path, { state: { subItems: menu.subItems, menuTitle: menu.title } });
-                    handleDropdownToggle(menu.title);
-                  }
+                  navigate(path, { state: { subItems: menu.subItems, menuTitle: menu.title } });
                 }}
-
-
-                
                 className={styles.dropdownToggle}
               >
                 <IconComponent className={styles.icon} />
                 <span className={`${styles.linkText} ${isOpen ? styles.show : styles.hide}`}>
                   {menu.title}
                 </span>
-                
+
+                {/* Chevron'ları devre dışı bıraktım
                 {isOpen && menu.subItems.length > 0 && (
                   openDropdown === menu.title
                     ? <FaChevronUp className={styles.chevron} />
                     : <FaChevronDown className={styles.chevron} />
                 )}
+                */}
               </div>
 
+              {/* Dropdown Menüsü devre dışı bırakıldı
               {menu.subItems.length > 0 && openDropdown === menu.title && isOpen && (
                 <div className={styles.dropdownMenu}>
                   {menu.subItems.map((subItem, subIdx) => {
@@ -125,6 +105,7 @@ const Sidebar = ({ panelName, menuItems }) => {
                   })}
                 </div>
               )}
+              */}
             </div>
           );
         })}

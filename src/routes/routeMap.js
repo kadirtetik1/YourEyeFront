@@ -54,6 +54,9 @@ export const routeMap = {
   "Modüller": "modules",
   "Modülleri Listele": "modules/list",
   "Yeni Modül Ekle": "modules/create",
+  "Modül İçeriğini Güncelle": "modules/update",
+  "Modülü Sil": "modules/delete",
+  
 
   // Analizler
   "Analizler": "analysis",

@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import CardSlider from '../../components/Base/CardSlider/CardSlider';
-import WidgetCard from '../../components/Base/Widgets/WidgetCard';
 import styles from '../Components/ComponentDash.module.css'
 
-import { FaBuilding, FaUsers, FaTools, FaUserShield } from 'react-icons/fa';
+import { FaBuilding, FaUsers} from 'react-icons/fa';
 import { FaComputer } from "react-icons/fa6";
-import { PiPresentationChart, PiSecurityCameraFill } from "react-icons/pi";
+import { PiSecurityCameraFill } from "react-icons/pi";
 import { AiOutlineApartment } from "react-icons/ai";
-import { TbReportSearch } from "react-icons/tb";
-import { FaChalkboardUser } from "react-icons/fa6";
 
 const generalStats = [
   { title: "Toplam Firma", value: 245, subtitle1: "Aktif", subtitle1Value: 190, subtitle2: "Pasif", subtitle2Value: 55, lastUpdated:"5 dk önce", icon: <FaBuilding /> },
@@ -132,9 +129,9 @@ export default class AdminHome extends Component {
       <div className={styles.container}>
         <CardSlider title="Genel Durum" items={generalStats} /> 
         <CardSlider title="Yeni Kullanıcılar" items={recentUsersDetailed} /> 
+        <CardSlider title="Genel Durum" items={generalStats} /> 
         <CardSlider title="Yeni Kullanıcılar" items={recentUsersDetailed} /> 
-        <CardSlider title="Yeni Kullanıcılar" items={recentUsersDetailed} /> 
-        <CardSlider title="Yeni Kullanıcılar" items={recentUsersDetailed} /> 
+        <CardSlider title="Genel Durum" items={generalStats} /> 
         
         
       </div>
