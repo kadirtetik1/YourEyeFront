@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import RowListView from '../../../components/Base/ListComponents/RowListView';
-import DetailView from '../../../components/Base/ListComponents/DetailView';
+import RowDataView from '../../../components/Base/RowDataView/RowDataView';
+import DetailView from '../../../components/Base/DetailView/DetailView';
 import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import styles from '../ComponentDash.module.css';
 
@@ -8,61 +8,53 @@ export default class ListAdmins extends Component {
   apiBaseUrl = 'http://localhost:5059/api/AdminUser';
 
   state = {
-    admins: [],
-    selectedAdmin: null,
+    selectedItem: null,
     showModal: false,
   };
 
-  componentDidMount() {
-    fetch(this.apiBaseUrl)
-      .then(res => res.json())
-      .then(data => this.setState({ admins: data }))
-      .catch(err => console.error('Fetch error:', err));
-  }
+  
+  canShowActionButton = true; // detay, sil vs
 
-  handleDetail = (admin) => {
-    this.setState({ selectedAdmin: admin, showModal: true });
+  labelMap = {
+    id: "Id",
+    name: "Ad Soyad",
+    username: "Kullanıcı Adı",
+    email: "Email",
+    phoneNumber: "Telefon Numarası"
+  };
+
+  handleDetailClick = (item) => {
+    this.setState({ selectedItem: item, showModal: true });
   };
 
   closeModal = () => {
-    this.setState({ showModal: false, selectedAdmin: null });
+    this.setState({ showModal: false, selectedItem: null });
   };
 
   render() {
-    const { admins, selectedAdmin, showModal } = this.state;
-
-    const visibleKeys = ['name'];  // Listede gösterilecek alanlar
-    const hiddenKeys = ['isAdmin'];            // Detayda gizlenecek alanlar
-    const showDetailButton = true;             // Detayl butonu gösterilsin mi?
-
-    const labelMap = {
-      id: "Id",
-      name: "Ad Soyad",
-      username: "Kullanıcı Adı",
-      email: "Email Adresi",
-      phoneNumber: "Telefon Numarası",
-      isAdmin: "Yönetici Mi?"
-    };
+    const { selectedItem, showModal } = this.state;
 
     return (
-      <div className={styles.container}>
-        <RowListView
-          data={admins}
-          visibleKeys={visibleKeys}
-          labelMap={labelMap}
-          onDetail={this.handleDetail}
-          showDetailButton={showDetailButton}
+      <div className={styles.dashBoard}>
+        <RowDataView
+          apiBaseUrl={this.apiBaseUrl}
+          visibleKeys={['name']}
+          labelMap={this.labelMap}
+          onActionButtonClick={this.handleDetailClick}
+          actionButtonLabel="Detay"
+          showActionButton={this.canShowActionButton}  // değişken üzerinden kontrol
         />
-        <SlideUpModal isVisible={showModal} onClose={this.closeModal}>
-          {selectedAdmin && (
+
+        {selectedItem && (
+          <SlideUpModal isVisible={showModal} onClose={this.closeModal}>
             <DetailView
-              id={selectedAdmin.id}
+              id={selectedItem.id}
               apiBaseUrl={this.apiBaseUrl}
-              labelMap={labelMap}
-              hiddenKeys={hiddenKeys}
+              labelMap={this.labelMap}
+              visibleKeys={['id','name','username', 'email','phoneNumber']} // detayda gelenlerden gösterilecek satırlar
             />
-          )}
-        </SlideUpModal>
+          </SlideUpModal>
+        )}
       </div>
     );
   }

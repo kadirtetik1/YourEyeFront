@@ -1,0 +1,72 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.568);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #181818;
+    border: 1px solid #dfdfdf;
+    border-radius: 12px;
+    padding: 2rem;
+    min-width: 30vw;
+    max-width: 90vw;
+    min-height: 200px;
+    position: relative;
+    text-align: center;
+  }
+  
+  .title {
+    color: #ff7f27;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtitle {
+    color: #cccccc;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .cancelButton {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancelButton:hover {
+    background-color: #555;
+  }
+  
+  .confirmButton {
+    background-color: #ff7f27;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .confirmButton:hover {
+    background-color: #e5670f;
+  }
+  

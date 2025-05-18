@@ -22,7 +22,7 @@ export default class DetailView extends Component {
   }
 
   render() {
-    const { labelMap, hiddenKeys = [] } = this.props;
+    const { labelMap = {}, visibleKeys = [] } = this.props;
     const { details, loading, error } = this.state;
 
     if (loading) return <div>Yükleniyor...</div>;
@@ -31,13 +31,15 @@ export default class DetailView extends Component {
 
     return (
       <div className={styles.detailContainer}>
-        {Object.entries(details).map(([key, value], index) => (
-          hiddenKeys.includes(key) ? null : (
+        {Object.entries(details)
+          .filter(([key]) => visibleKeys.length === 0 || visibleKeys.includes(key))
+          .map(([key, value], index) => (
             <div key={index} className={styles.detailRow}>
-               <div className={styles.cellTitle}>{labelMap?.[key] || key}:</div><div className={styles.cellValue}>{value}</div>
+              <div className={styles.cellTitle}>{labelMap?.[key] || key}:</div>
+              <div className={styles.cellValue}>{value}</div>
             </div>
-          )
-        ))}
+          ))
+        }
       </div>
     );
   }
