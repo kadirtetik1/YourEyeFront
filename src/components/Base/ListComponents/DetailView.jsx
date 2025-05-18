@@ -1,0 +1,44 @@
+import React, { Component } from 'react';
+import styles from './DetailView.module.css';
+
+export default class DetailView extends Component {
+  state = {
+    details: null,
+    loading: true,
+    error: null
+  };
+
+  componentDidMount() {
+    const { id, apiBaseUrl } = this.props;
+    if (!id || !apiBaseUrl) {
+      this.setState({ error: "ID veya API URL eksik.", loading: false });
+      return;
+    }
+
+    fetch(`${apiBaseUrl}/${id}`, { headers: { 'Accept': '*/*' } })
+      .then(res => res.json())
+      .then(data => this.setState({ details: data, loading: false }))
+      .catch(err => this.setState({ error: err.message, loading: false }));
+  }
+
+  render() {
+    const { labelMap, hiddenKeys = [] } = this.props;
+    const { details, loading, error } = this.state;
+
+    if (loading) return <div>Yükleniyor...</div>;
+    if (error) return <div>Hata: {error}</div>;
+    if (!details) return <div>Veri bulunamadı</div>;
+
+    return (
+      <div className={styles.detailContainer}>
+        {Object.entries(details).map(([key, value], index) => (
+          hiddenKeys.includes(key) ? null : (
+            <div key={index} className={styles.detailRow}>
+              <strong>{labelMap?.[key] || key}:</strong> {value}
+            </div>
+          )
+        ))}
+      </div>
+    );
+  }
+}

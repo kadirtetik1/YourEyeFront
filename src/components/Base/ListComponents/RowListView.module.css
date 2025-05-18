@@ -1,0 +1,49 @@
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1rem;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px;
+    color: #fff;
+    transition: background 0.2s ease;
+  }
+  
+  .row:hover {
+    background: #2c2c2c;
+  }
+  
+  .cell {
+    margin-right: 16px;
+    font-size: 0.9rem;
+  }
+  
+  .detailButton {
+    margin-left: auto;
+    background: #ff7b00;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .detailButton:hover {
+    background: #ff9b34;
+  }
+  
+  .empty {
+    color: #bbb;
+    padding: 1rem;
+    text-align: center;
+  }
+  

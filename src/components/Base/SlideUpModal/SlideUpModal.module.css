@@ -15,10 +15,10 @@
 /* Modal Kutusu */
 .modal {
   background-color: #181818;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid #dfdfdf;
-  max-height: 90vh;
+  max-height: 75vh;
   max-width: 90vw;
   overflow-y: auto;
   position: relative;
@@ -27,14 +27,34 @@
   align-items: center;
 }
 
-/* Modal İçerik Alanı */
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 16px;
+  margin-top: 2rem; /* İçeriği aşağı kaydırır */
+  box-sizing: border-box;
 }
 
+/* Scrollbar */
+.content::-webkit-scrollbar {
+  width: 8px;
+  margin-top: 40px; /* Scroll butonun altından başlar */
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #ff7b00;
+  border-radius: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #2c2c2c;
+  border-radius: 8px;
+}
 @keyframes spinAndScale {
   0% {
     transform: scale(1) rotate(0deg);
@@ -72,5 +92,3 @@
 .closeButton:hover {
   animation: spinAndScale 0.6s ease forwards;
 }
-
-

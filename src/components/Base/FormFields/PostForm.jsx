@@ -78,7 +78,7 @@ export default class PostForm extends Component {
             </div>
           ))}
           <div className={styles.buttonContainer}>
-            <button type="submit" className={styles.button}>Kaydet</button>
+            <button type="submit" className={styles.button}>Gönder</button>
           </div>
         </form>
         <ToastContainer />
