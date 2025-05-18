@@ -14,12 +14,18 @@
 
 /* Modal Kutusu */
 .modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #181818;
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid #dfdfdf;
-  max-height: 75vh;
-  max-width: 90vw;
+  /* max-height: 75vh;
+  max-width: 90vw; */
+
+  min-width: 30vw;
+  height: 75vh;
   overflow-y: auto;
   position: relative;
   display: flex;
@@ -36,9 +42,10 @@
   max-height: 100%;
   overflow-y: auto;
   padding-right: 16px;
-  margin-top: 2rem; /* İçeriği aşağı kaydırır */
+  margin-top: 2rem;
   box-sizing: border-box;
 }
+
 
 /* Scrollbar */
 .content::-webkit-scrollbar {
@@ -91,4 +98,52 @@
 
 .closeButton:hover {
   animation: spinAndScale 0.6s ease forwards;
+}
+
+
+
+
+/* Tablet için responsive */
+@media (max-width: 1024px) {
+  .modal {
+    width: 70vw;  /* Tabletler için genişlik */
+    height: 70vh;  /* Tabletler için yükseklik */
+    padding: 1.2rem;  /* Padding artırıldı */
+  }
+  .content {
+    padding-right: 12px;  /* İçerikte biraz daha fazla padding */
+  }
+}
+
+/* Küçük Desktop (Laptop) için responsive */
+@media (max-width: 1280px) {
+  .modal {
+    width: 60vw;  /* Küçük desktoplar için genişlik */
+    height: 70vh;  /* Yükseklik biraz daha genişletildi */
+    padding: 1.5rem;  /* Varsayılan padding */
+  }
+  .content {
+    padding-right: 16px;  /* Padding biraz daha genişletildi */
+  }
+}
+
+/* Mobil için responsive (Zaten mevcut) */
+@media (max-width: 768px) {
+  .modal {
+    width: 80vw; /* Mobilde daha geniş olmalı */
+    height: 70vh; /* Yükseklik biraz küçülmeli */
+    padding: 1rem; /* Padding azalmış */
+  }
+  .content {
+    padding-right: 8px; /* İçerikteki padding küçültülecek */
+  }
+}
+
+/* Çok Küçük Ekranlar (telefonlar) için responsive */
+@media (max-width: 480px) {
+  .modal {
+    width: 90vw; /* Daha da geniş */
+    height: 60vh; /* Yükseklik küçük ekran için daha düşük */
+    padding: 0.75rem; /* Padding'i daha da küçültüyoruz */
+  }
 }

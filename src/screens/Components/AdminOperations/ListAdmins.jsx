@@ -31,11 +31,12 @@ export default class ListAdmins extends Component {
   render() {
     const { admins, selectedAdmin, showModal } = this.state;
 
-    const visibleKeys = ['name', 'username'];  // Satır listesinde gösterilecek alanlar
+    const visibleKeys = ['name'];  // Listede gösterilecek alanlar
     const hiddenKeys = ['isAdmin'];            // Detayda gizlenecek alanlar
+    const showDetailButton = true;             // Detayl butonu gösterilsin mi?
 
     const labelMap = {
-      id: "ID",
+      id: "Id",
       name: "Ad Soyad",
       username: "Kullanıcı Adı",
       email: "Email Adresi",
@@ -50,6 +51,7 @@ export default class ListAdmins extends Component {
           visibleKeys={visibleKeys}
           labelMap={labelMap}
           onDetail={this.handleDetail}
+          showDetailButton={showDetailButton}
         />
         <SlideUpModal isVisible={showModal} onClose={this.closeModal}>
           {selectedAdmin && (

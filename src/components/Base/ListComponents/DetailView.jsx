@@ -34,7 +34,7 @@ export default class DetailView extends Component {
         {Object.entries(details).map(([key, value], index) => (
           hiddenKeys.includes(key) ? null : (
             <div key={index} className={styles.detailRow}>
-              <strong>{labelMap?.[key] || key}:</strong> {value}
+               <div className={styles.cellTitle}>{labelMap?.[key] || key}:</div><div className={styles.cellValue}>{value}</div>
             </div>
           )
         ))}

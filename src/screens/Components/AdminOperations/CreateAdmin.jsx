@@ -5,8 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default class CreateAdmin extends Component {
-  apiBaseUrl = 'http://localhost:5059/api/AdminUser';  // ✅ Merkezi API adresi
-
+  
   initialData = {
     name: { label: "Ad Soyad", value: "", type: "text" },
     username: { label: "Kullanıcı Adı", value: "", type: "text" },
@@ -26,7 +25,7 @@ export default class CreateAdmin extends Component {
       password: data.password
     };
 
-    fetch(this.apiBaseUrl, {  // ✅ Tek noktadan çağrılıyor
+    fetch('http://localhost:5059/api/AdminUser', {
       method: 'POST',
       headers: { 'Accept': '*/*', 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -40,6 +39,7 @@ export default class CreateAdmin extends Component {
         console.log('Başarılı Yanıt:', responseText);
         toast.success(responseText || "İşlem başarıyla tamamlandı.", { position: toast.POSITION.BOTTOM_RIGHT });
 
+        // Başarılıysa kısa gecikmeyle yenile
         setTimeout(() => {
           window.location.reload();
         }, 2500);
