@@ -3,6 +3,9 @@ import RowDataView from '../../../components/Base/RowDataView/RowDataView';
 import DetailView from '../../../components/Base/DetailView/DetailView';
 import ConfirmModal from '../../../components/Base/ConfirmModal/ConfirmModal';
 import styles from '../ComponentDash.module.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export default class DeleteAdmin extends Component {
   apiBaseUrl = 'http://localhost:5059/api/AdminUser';
@@ -12,7 +15,6 @@ export default class DeleteAdmin extends Component {
     showModal: false,
   };
 
-  // Yetki kontrol değişkeni - Dinamik kontrol
   canShowActionButton = true; // detay, sil vs
 
   labelMap = {
@@ -31,6 +33,49 @@ export default class DeleteAdmin extends Component {
     this.setState({ showModal: false, selectedItem: null });
   };
 
+
+
+
+
+
+  fetchAdmins = () => { // delete admindeki fonksiyon için yazıldı, listelemede gerek yok.
+    fetch(this.apiBaseUrl)
+      .then(res => res.json())
+      .then(data => this.setState({ admins: data }))
+      .catch(err => console.error('Veri çekme hatası:', err));
+  };
+
+
+  handleConfirmDelete = () => { // delete admin
+    const { selectedItem } = this.state;
+
+  fetch(`${this.apiBaseUrl}/${selectedItem.id}`, { method: 'DELETE' })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Silme işlemi başarısız oldu.');
+      }
+      toast.success(`${selectedItem.name} adlı admin başarıyla silindi!`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+      this.setState({ showModal: false, selectedItem: null });
+      
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => {
+      console.error('Silme hatası:', error);
+      toast.error(`${selectedItem.name} adlı admin silinirken bir hata ile karşılaşıldı!`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+      this.setState({ showModal: false, selectedItem: null });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    });
+  }
+
   render() {
     const { selectedItem, showModal } = this.state;
 
@@ -42,7 +87,7 @@ export default class DeleteAdmin extends Component {
           labelMap={this.labelMap}
           onActionButtonClick={this.handleDetailClick}
           actionButtonLabel="Sil"
-          showActionButton={this.canShowActionButton}  // <-- Değişken üzerinden kontrol
+          showActionButton={this.canShowActionButton}  // görünüp görünmeyeceğinin kontrolü
         />
 
         {selectedItem && ( // Sadece içeriye gerekli componenti çağır
@@ -52,12 +97,13 @@ export default class DeleteAdmin extends Component {
           onClose={this.closeModal}
           title="Admini silmek istediğinize emin misiniz?"
           subtitle={`${selectedItem.name} adlı admin silinecek.`}
-          onConfirm={this.handleConfirmDelete}
           confirmLabel="Onayla"
           cancelLabel="Vazgeç"
+          onConfirm={this.handleConfirmDelete} // onayla butonunda yapılacak aktivite
         />
 
         )}
+        <ToastContainer />
       </div>
     );
   }

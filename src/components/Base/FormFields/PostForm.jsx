@@ -4,6 +4,7 @@ import 'react-phone-input-2/lib/style.css';
 import styles from './PostForm.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 export default class PostForm extends Component {
   constructor(props) {
@@ -12,7 +13,10 @@ export default class PostForm extends Component {
     Object.entries(props.initialState).forEach(([key, config]) => {
       flatState[key] = config.value;
     });
-    this.state = flatState;
+    this.state = {
+      ...flatState,
+      dropdownOpen: {}
+    };
   }
 
   handleChange = (e) => {
@@ -25,14 +29,27 @@ export default class PostForm extends Component {
     this.setState({ [name]: numericPhone });
   };
 
+  toggleDropdown = (key) => {
+    this.setState((prevState) => ({
+      dropdownOpen: {
+        ...prevState.dropdownOpen,
+        [key]: !prevState.dropdownOpen[key]
+      }
+    }));
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
 
-    // Zorunlu alan kontrolü
-    const emptyFields = Object.entries(this.state).filter(([key, value]) => !value.trim());
+    const emptyFields = Object.entries(this.state).filter(([key, value]) => {
+      if (typeof value === 'string') {
+        return !value.trim();
+      }
+      return !value;
+    });
+
     if (emptyFields.length > 0) {
       toast.error("Lütfen tüm alanları doldurunuz.", { position: toast.POSITION.BOTTOM_RIGHT });
- 
       return;
     }
 
@@ -61,6 +78,31 @@ export default class PostForm extends Component {
                   <label className={`${styles.labelPhone} ${this.state[key] ? styles.labelActive : ''}`}>
                     {config.label}
                   </label>
+                </div>
+              ) : config.type === 'dropdown' ? (
+                <div className={styles.inputWrapper}>
+                  <div className={styles.dropdownWrapper}>
+                    <select
+                      name={key}
+                      value={this.state[key]}
+                      onChange={this.handleChange}
+                      onClick={() => this.toggleDropdown(key)}
+                      className={styles.dropdown}
+                    >
+                      <option value="" disabled hidden></option>
+                      {config.options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                    <div className={styles.dropdownIcon}>
+                      {this.state.dropdownOpen[key] ? <FaChevronUp /> : <FaChevronDown />}
+                    </div>
+                    <label className={`${styles.label} ${this.state[key] ? styles.labelActive : ''}`}>
+                      {config.label}
+                    </label>
+                  </div>
                 </div>
               ) : (
                 <div className={styles.inputWrapper}>
