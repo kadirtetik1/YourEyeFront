@@ -1,0 +1,26 @@
+.container {
+    padding: 1rem;
+  }
+  
+  .title {
+    margin-bottom: 1rem;
+    color: white;
+    text-align: center;
+  }
+  
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .item {
+    display: flex;
+    justify-content: center;
+  }
+  .empty {
+    color: #bbb;
+    text-align: center;
+  }
+  

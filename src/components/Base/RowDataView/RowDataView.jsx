@@ -3,6 +3,7 @@ import styles from './RowDataView.module.css';
 
 export default function RowDataView({
   apiBaseUrl,
+  data: externalData = null,
   visibleKeys = [],
   labelMap = {},
   onActionButtonClick = null,
@@ -12,12 +13,15 @@ export default function RowDataView({
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (!apiBaseUrl) return;
-    fetch(apiBaseUrl)
-      .then(res => res.json())
-      .then(setData)
-      .catch(err => console.error('Veri çekme hatası:', err));
-  }, [apiBaseUrl]);
+    if (externalData) {
+      setData(externalData);  // Öncelikli olarak dışarıdan gelen veri kullanılacak
+    } else if (apiBaseUrl) {
+      fetch(apiBaseUrl)
+        .then(res => res.json())
+        .then(setData)
+        .catch(err => console.error('Veri çekme hatası:', err));
+    }
+  }, [apiBaseUrl, externalData]);
 
   return (
     <div className={styles.container}>
