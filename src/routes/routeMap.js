@@ -34,7 +34,9 @@ export const routeMap = {
   "Yeni Firma Oluştur": "firm-ops/create",
   "Bütün Firmaları Listele": "firm-ops/list",
   "Firma Bilgilerini Güncelle": "firm-ops/update",
+
   "Firmaya Bağlı Kullanıcıları Getir": "firm-ops/list-users",
+  
   "Yeni Sektör Oluştur": "firm-ops/create-sector",
   "Sektörleri Göster": "firm-ops/list-sectors",
   "Sektör Bilgilerini Güncelle": "firm-ops/update-sector",

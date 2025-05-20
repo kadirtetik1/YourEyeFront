@@ -28,7 +28,9 @@
   max-height: 70vh; 
 
   min-width: 30vw;
-  height: 75vh;
+  min-height: 20vh;
+  
+  /* height: 75vh; */
   overflow-y: auto;
   position: relative;
   display: flex;

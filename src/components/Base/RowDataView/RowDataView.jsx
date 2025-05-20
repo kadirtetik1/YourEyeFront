@@ -25,31 +25,38 @@ export default function RowDataView({
 
   return (
     <div className={styles.container}>
-      {data.length > 0 ? (
-        data.map((item, index) => (
-          <div key={index} className={styles.row}>
-            {Object.entries(item)
-              .filter(([key]) => visibleKeys.length === 0 || visibleKeys.includes(key))
-              .map(([key, value]) => (
-                <span key={key} className={styles.cell}>
-                  <span className={styles.cellTitle}>{labelMap?.[key] || key}:</span>
-                  <span className={styles.cellValue}>{value}</span>
-                </span>
-              ))
-            }
-            {showActionButton && onActionButtonClick && (
-              <button
-                className={styles.actionButton}
-                onClick={() => onActionButtonClick(item)}
-              >
-                {actionButtonLabel}
-              </button>
-            )}
-          </div>
-        ))
-      ) : (
-        <div className={styles.empty}>Liste boş.</div>
+{data.length > 0 ? (
+  data.map((item, index) => (
+    <div key={index} className={styles.row}>
+      <div className={styles.rowContent}>
+        {Object.entries(item)
+          .filter(([key]) => visibleKeys.length === 0 || visibleKeys.includes(key))
+          .map(([key, value]) => (
+            <span key={key} className={styles.cell}>
+              <span className={styles.cellTitle}>{labelMap?.[key] || key}:</span>
+              <span className={styles.cellValue}>
+                {Array.isArray(value) ? value.join(', ') : value}
+              </span>
+            </span>
+          ))
+        }
+      </div>
+
+      {showActionButton && onActionButtonClick && (
+        <div className={styles.actionContainer}>
+          <button
+            className={styles.actionButton}
+            onClick={() => onActionButtonClick(item)}
+          >
+            {actionButtonLabel}
+          </button>
+        </div>
       )}
+    </div>
+  ))
+) : (
+  <div className={styles.empty}>Liste boş.</div>
+)}
     </div>
   );
 }

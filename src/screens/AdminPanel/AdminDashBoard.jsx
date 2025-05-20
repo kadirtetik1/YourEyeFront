@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Topbar from '../../components/Base/Topbar/Topbar';
 import Sidebar from '../../components/Base/Sidebar/Sidebar';
-import WidgetCard from '../../components/Base/Widgets/WidgetCard';
 import UserInfoBar from '../../components/Base/UserInfoBar/UserInfoBar';
 import styles from './AdminDash.module.css';
 
@@ -107,7 +106,7 @@ const sideBarMenu = [
 
   { title: "Rol Ve Yetki İşlemleri", subItems: ["Yeni Rol Oluştur","Yeni Yetki Oluştur", "Role Yetki Ata", "Role Ait Yetkileri Getir", "Rol Bilgilerini Güncelle", "Yetki Bilgilerini Güncelle"]},
 
-  { title: "Firma İşlemleri", subItems: ["Yeni Firma Oluştur", "Bütün Firmaları Listele", "Firma Bilgilerini Güncelle", "Firmaya Bağlı Kullanıcıları Getir(Swaggerda Eksik)",
+  { title: "Firma İşlemleri", subItems: ["Yeni Firma Oluştur", "Bütün Firmaları Listele", "Firma Bilgilerini Güncelle", "Firmaya Bağlı Kullanıcıları Getir",
   "Yeni Sektör Oluştur","Sektörleri Göster","Sektör Bilgilerini Güncelle", "Firma Aktif/Pasif Durumunu Güncelle", "Firma Sil"] },
   
   { title: "Şube İşlemleri", subItems: ["Bütün Şubeleri Getir", "Firmaya Bağlı Şubeleri Getir", "Yeni Şube Oluştur", "Şube Bilgilerini Güncelle", "Şube Aktif/Pasif Durumunu Güncelle", "Şube Sil"] },
@@ -180,7 +179,9 @@ export default class AdminDashBoard extends Component {
              <Route path="firm-ops/" element={<FirmOperationsHome />} />
              <Route path="firm-ops/list" element={<ListFirms />} />
              <Route path="firm-ops/update" element={<UpdateFirm />} />
+
              <Route path="firm-ops/list-users" element={<ListFirmUsers />} />
+             
              <Route path="firm-ops/create-sector" element={<CreateSector />} />
              <Route path="firm-ops/list-sectors" element={<ListSectors />} />
              <Route path="firm-ops/update-sector" element={<UpdateSector />} />
