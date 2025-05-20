@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { AiOutlineApartment } from 'react-icons/ai';
+import { FaBuilding } from 'react-icons/fa';
 import styles from './BranchCard.module.css';
 
 export default function BranchCard({ branch, visibleKeys = [], labelMap = {}, logoPath = null }) {
@@ -13,7 +13,7 @@ export default function BranchCard({ branch, visibleKeys = [], labelMap = {}, lo
     if (isValidImagePath) {
       return <img src={logoPath} alt="Şube Logosu" className={styles.logo} />;
     }
-    return <AiOutlineApartment className={styles.iconFallback} />;
+    return <FaBuilding className={styles.iconFallback} />;
   };
 
   return (

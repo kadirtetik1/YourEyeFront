@@ -20,21 +20,23 @@ export default class ListFirmBranches extends Component {
     logoPath: "Logo Yolu"
   };
 
-  fetchBranches = (firm) => {
-    const branchIds = firm.branches;
+  showFunctionButton = true;
 
-    if (!branchIds || branchIds.length === 0) {
+
+ fetchBranches = (firm) => {
+  if (!firm.id) return;
+
+  fetch(`http://localhost:5059/api/Branches/by-company/${firm.id}`)
+    .then(res => res.ok ? res.json() : [])
+    .then(branches =>
+      this.setState({ selectedFirm: firm, branches, showModal: true })
+    )
+    .catch(() => {
       this.setState({ selectedFirm: firm, branches: [], showModal: true });
-      return;
-    }
+    });
+};
 
-    Promise.all(branchIds.map(id =>
-      fetch(`http://localhost:5059/api/Branches/${id}`)
-        .then(res => res.ok ? res.json() : null)
-        .catch(() => null)
-    ))
-      .then(branches => this.setState({ selectedFirm: firm, branches: branches.filter(Boolean), showModal: true }));
-  };
+  
 
   closeModal = () => {
     this.setState({ showModal: false, selectedFirm: null, branches: [] });
@@ -49,9 +51,9 @@ export default class ListFirmBranches extends Component {
           apiBaseUrl={this.apiBaseUrl}
           visibleKeys={['name']}
           labelMap={this.labelMap}
-          onActionButtonClick={this.fetchBranches}
+          onActionButtonClick={this.fetchBranches} // onActionda şubeleri çek
           actionButtonLabel="Şubeleri Göster"
-          showActionButton={true}
+          showActionButton={this.showFunctionButton} 
         />
 
         {showModal && (
