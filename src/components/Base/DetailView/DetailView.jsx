@@ -22,7 +22,7 @@ export default class DetailView extends Component {
   }
 
   render() {
-    const { labelMap = {}, visibleKeys = [] } = this.props;
+    const { labelMap = {}, visibleKeys = [], multivalueKeys = [] } = this.props;
     const { details, loading, error } = this.state;
 
     if (loading) return <div>Yükleniyor...</div>;
@@ -36,7 +36,18 @@ export default class DetailView extends Component {
           .map(([key, value], index) => (
             <div key={index} className={styles.detailRow}>
               <div className={styles.cellTitle}>{labelMap?.[key] || key}:</div>
-              <div className={styles.cellValue}>{value}</div>
+              
+              <div className={styles.cellValue}>
+                {Array.isArray(value) && multivalueKeys.includes(key) ? (
+                  <ul className={styles.multiList}>
+                    {value.map((item, i) => (
+                      <li key={i} className={styles.multiItem}>{item}</li>
+                    ))}
+                  </ul>
+                ) : (
+                   value
+                )}
+              </div>
             </div>
           ))
         }

@@ -1,0 +1,124 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 0.5rem;
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 0.85rem 1.2rem;
+    background: linear-gradient(to right, #202020, #1a1a1a);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  
+  .row:hover {
+    border-color: #ff7f27;
+    background-color: #2b2b2b;
+  }
+  
+  .selected {
+    border-color: #ff7f27;
+    background-color: #2a2a2a;
+  }
+  
+  .rowContent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .cell {
+    display: flex;
+    align-items: center;
+    color: #eaeaea;
+  }
+  
+  .cellTitle {
+    font-weight: 600;
+    color: #ffae6c;
+    font-size: 1rem;
+  }
+  
+  .cellValue {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    color: #ffffff;
+  }
+  
+  .actionContainer {
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .actionButton {
+    background-color: #ff7f27;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 1rem;
+  }
+  
+  .actionButton:hover {
+    background-color: #e5670f;
+  }
+  
+  .empty {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    padding: 16px;
+  }
+  
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #ff7f27; 
+    cursor: pointer;
+  }
+  
+  .footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center; 
+  }
+  
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+  
+    .rowContent {
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+  
+    .actionContainer {
+      justify-content: center;
+      width: 100%;
+    }
+  
+    .actionButton {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .footer {
+      justify-content: center;
+    }
+  }
+  

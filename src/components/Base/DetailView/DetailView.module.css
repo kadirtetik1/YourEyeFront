@@ -35,4 +35,20 @@
     color: #ffffff;
     margin-left: 10px;
   }
+
+  .multiList {
+    list-style-type: disc;
+    padding-left: 1.2rem;
+    margin: 0;
+    color: #ff7b00;
+  }
+  
+  .multiItem {
+    margin-bottom: 4px;
+    color: #ffffff;
+  }
+  
+  .multiItem::marker {
+    color: #ff7f27;
+  }
   

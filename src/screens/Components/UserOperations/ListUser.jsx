@@ -67,6 +67,7 @@ export default class ListUser extends Component {
                 'branchNames',
                 'permissions'
               ]}
+              multivalueKeys={['branchNames', 'permissions']}
             />
           </SlideUpModal>
         )}

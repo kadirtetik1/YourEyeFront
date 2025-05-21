@@ -3,7 +3,6 @@ import RowDataView from '../../../components/Base/RowDataView/RowDataView';
 import UpdateView from '../../../components/Base/UpdateView/UpdateView';
 import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import styles from '../ComponentDash.module.css';
-
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
