@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PostForm from '../../../components/Base/FormFields/PostForm';
 import styles from '../ComponentDash.module.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { apiBaseUrl } from '../../../utils/api'; // artık merkezi yapıdan geliyor
 
-export default class CreateAdmin extends Component {
-  apiBaseUrl = 'http://localhost:5059/api'; // ileride api.js'e taşınacak
-
-  initialData = {
+const CreateAdmin = () => {
+  const initialData = {
     name: { label: "Ad Soyad", value: "", type: "text" },
     username: { label: "Kullanıcı Adı", value: "", type: "text" },
     email: { label: "Email Adresi", value: "", type: "email" },
@@ -15,17 +14,17 @@ export default class CreateAdmin extends Component {
     password: { label: "Şifre", value: "", type: "password" }
   };
 
-  render() {
-    return (
-      <div className={styles.dashBoard}>
-        <PostForm
-          initialState={this.initialData}
-          apiEndpoint={`${this.apiBaseUrl}/AdminUser`}
-          successMessage="Admin başarıyla oluşturuldu."
-          reloadOnSuccess={true}
-        />
-        <ToastContainer />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.dashBoard}>
+      <PostForm
+        initialState={initialData}
+        apiEndpoint={`${apiBaseUrl}/AdminUser`}
+        successMessage="Admin başarıyla oluşturuldu."
+        reloadOnSuccess={true}
+      />
+      <ToastContainer />
+    </div>
+  );
+};
+
+export default CreateAdmin;

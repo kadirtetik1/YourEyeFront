@@ -3,13 +3,12 @@ import { FaUser, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
-import { getTokenStatus } from '../../../utils/tokenUtils';
 import { apiBaseUrl } from '../../../utils/api';
+import { getTokenStatus } from '../../../utils/tokenUtils';
+import GetUserInfos from './GetUserInfos';
 
 const UserInfoBar = () => {
-
-  // const apiBaseUrl = 'http://localhost:5059/api';
-
+  const [userId, setUserId] = useState(null);
   const [user, setUser] = useState({
     fullName: '',
     role: '',
@@ -26,6 +25,7 @@ const UserInfoBar = () => {
   });
 
   const [showBranches, setShowBranches] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('yourEyeToken');
@@ -39,10 +39,10 @@ const UserInfoBar = () => {
       return;
     }
 
-    const userId = decoded.userId;
+    const uid = decoded.userId;
     const isAdmin = decoded.isAdmin === true || decoded.isAdmin === 'True';
+    setUserId(uid);
 
-    // Süreyi hesapla
     const updateTokenStatus = () => {
       const now = Math.floor(Date.now() / 1000);
       const remaining = Math.max(0, decoded.exp - now);
@@ -56,10 +56,11 @@ const UserInfoBar = () => {
 
     updateTokenStatus();
     const interval = setInterval(updateTokenStatus, 1000);
+
     const fetchDetails = async () => {
       try {
         if (isAdmin) {
-          const res = await axios.get(`${apiBaseUrl}/AdminUser/${userId}`);
+          const res = await axios.get(`${apiBaseUrl}/AdminUser/${uid}`);
           const data = res.data;
           localStorage.setItem('companyName', 'Youreye');
           setUser({
@@ -70,7 +71,7 @@ const UserInfoBar = () => {
             isAdmin: true,
           });
         } else {
-          const res = await axios.get(`${apiBaseUrl}/Users/${userId}`);
+          const res = await axios.get(`${apiBaseUrl}/Users/${uid}`);
           const data = res.data;
           localStorage.setItem('companyName', data.companyName || '');
           setUser({
@@ -112,7 +113,6 @@ const UserInfoBar = () => {
                       | Şubeler: {user.branches.length} {' '}
                       {showBranches ? <FaChevronUp /> : <FaChevronDown />}
                     </button>
-
                     {showBranches && (
                       <ul className={styles.branchDropdown}>
                         {user.branches.map((branch, index) => (
@@ -132,11 +132,22 @@ const UserInfoBar = () => {
         <div className={styles.tokenStatus}>
           {tokenStatus.isExpired
             ? "Oturum süresi doldu"
-            : `Token geçerlilik süresi: ${tokenStatus.minutesLeft}dk ${tokenStatus.secondsLeft}s`}
+            : `Oturumun kapanmasına: ${tokenStatus.minutesLeft}dk ${tokenStatus.secondsLeft}s`}
         </div>
       </div>
 
-      <button className={styles.userActions}>Kullanıcı Bilgileri</button>
+      <button className={styles.userActions} onClick={() => setIsModalOpen(true)}>
+        Kullanıcı Bilgileri
+      </button>
+
+      {userId && (
+        <GetUserInfos
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          userId={userId}
+          isAdmin={user.isAdmin}
+        />
+      )}
     </div>
   );
 };
