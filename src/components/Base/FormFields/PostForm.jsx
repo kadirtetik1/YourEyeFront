@@ -40,27 +40,78 @@ export default class PostForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const {
+      onSubmit,
+      apiEndpoint,
+      successMessage = "İşlem başarılı.",
+      reloadOnSuccess = true
+    } = this.props;
 
-    const emptyFields = Object.entries(this.state).filter(([key, value]) => {
-      if (typeof value === 'string') {
-        return !value.trim();
-      }
-      return !value;
-    });
+    const formData = { ...this.state };
 
+    const emptyFields = Object.entries(formData).filter(([_, value]) =>
+      typeof value === 'string' ? !value.trim() : !value
+    );
     if (emptyFields.length > 0) {
       toast.error("Lütfen tüm alanları doldurunuz.", { position: toast.POSITION.BOTTOM_RIGHT });
       return;
     }
 
-    this.props.onSubmit(this.state);
+    if (onSubmit) {
+      return onSubmit(formData);
+    }
+
+    if (!apiEndpoint) {
+      toast.error("API adresi tanımlı değil.", { position: toast.POSITION.BOTTOM_RIGHT });
+      return;
+    }
+
+    fetch(apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(async res => {
+        const contentType = res.headers.get('content-type');
+        let message = '';
+    
+        if (contentType && contentType.includes('application/json')) {
+          const json = await res.json();
+    
+          // ✅ Eğer json içinde message varsa onu kullan, yoksa successMessage
+          message = typeof json.message === 'string'
+            ? json.message
+            : this.props.successMessage; // dışarıdan verilen mesaj
+        } else {
+          const text = await res.text();
+          message = text || this.props.successMessage;
+        }
+    
+        if (!res.ok) throw new Error(message);
+    
+        toast.success(message, { position: toast.POSITION.BOTTOM_RIGHT });
+    
+        if (this.props.reloadOnSuccess) {
+          setTimeout(() => window.location.reload(), 2000);
+        }
+      })
+      .catch(err => {
+        toast.error(err.message || "Beklenmedik bir hata oluştu", {
+          position: toast.POSITION.BOTTOM_RIGHT
+        });
+      });
   };
 
   render() {
+    const { initialState, buttonLabel = "Gönder" } = this.props;
+
     return (
       <div className={styles.container}>
         <form onSubmit={this.handleSubmit} className={styles.form}>
-          {Object.entries(this.props.initialState).map(([key, config]) => (
+          {Object.entries(initialState).map(([key, config]) => (
             <div key={key} className={styles.formGroup}>
               {config.type === 'tel' ? (
                 <div className={styles.phoneWrapper}>
@@ -90,7 +141,7 @@ export default class PostForm extends Component {
                       className={styles.dropdown}
                     >
                       <option value="" disabled hidden></option>
-                      {config.options.map((option) => (
+                      {config.options?.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -120,7 +171,7 @@ export default class PostForm extends Component {
             </div>
           ))}
           <div className={styles.buttonContainer}>
-            <button type="submit" className={styles.button}>Gönder</button>
+            <button type="submit" className={styles.button}>{buttonLabel}</button>
           </div>
         </form>
         <ToastContainer />

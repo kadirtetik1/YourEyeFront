@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import PostForm from '../../../components/Base/FormFields/PostForm';
 import styles from '../ComponentDash.module.css';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default class CreateBranch extends Component {
+  apiBaseUrl = 'http://localhost:5059/api';
+
   state = {
     companyOptions: []
   };
 
   componentDidMount() {
-    // Firmaları çek
-    fetch('http://localhost:5059/api/Companies')
+    fetch(`${this.apiBaseUrl}/Companies`)
       .then(res => res.json())
       .then(data => {
         const options = data.map(company => ({
@@ -32,46 +31,15 @@ export default class CreateBranch extends Component {
     companyId: { label: "Firma", value: "", type: "dropdown", options: this.state.companyOptions }
   });
 
-  handleSubmit = (data) => {
-    console.log("Gönderilen Data:", data);
-
-    const payload = {
-      name: data.name,
-      city: data.city,
-      town: data.town,
-      address: data.address,
-      cameraCount: parseInt(data.cameraCount, 10),  // Sayıya çevir
-      companyId: data.companyId  // Dropdown'dan sadece ID gelir
-    };
-
-    fetch('http://localhost:5059/api/Branches', {
-      method: 'POST',
-      headers: { 'Accept': '*/*', 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-      .then(async response => {
-        const responseText = await response.text();
-        if (!response.ok) {
-          console.error('Sunucu Yanıtı:', responseText);
-          throw new Error(responseText);
-        }
-
-        toast.success(responseText || "Şube başarıyla oluşturuldu.", { position: toast.POSITION.BOTTOM_RIGHT });
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 2500);
-      })
-      .catch(error => {
-        toast.error(`${error.message}`, { position: toast.POSITION.BOTTOM_RIGHT });
-      });
-  };
-
   render() {
     return (
       <div className={styles.dashBoard}>
-        <PostForm initialState={this.getInitialData()} onSubmit={this.handleSubmit} />
-        <ToastContainer />
+        <PostForm
+          initialState={this.getInitialData()}
+          apiEndpoint={`${this.apiBaseUrl}/Branches`}
+          successMessage="Şube başarıyla oluşturuldu."
+          reloadOnSuccess={true}
+        />
       </div>
     );
   }

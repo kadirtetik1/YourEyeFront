@@ -11,7 +11,7 @@ export default class ListFirmBranches extends Component {
     showModal: false
   };
 
-  apiBaseUrl = 'http://localhost:5059/api'; // ✅ sadece API’ye kadar olan sabit adres
+  apiBaseUrl = 'http://localhost:5059/api';
 
   labelMap = {
     id: "Firma Id",
