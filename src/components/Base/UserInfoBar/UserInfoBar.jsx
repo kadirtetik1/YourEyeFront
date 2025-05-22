@@ -4,8 +4,12 @@ import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import { getTokenStatus } from '../../../utils/tokenUtils';
+import { apiBaseUrl } from '../../../utils/api';
 
 const UserInfoBar = () => {
+
+  // const apiBaseUrl = 'http://localhost:5059/api';
+
   const [user, setUser] = useState({
     fullName: '',
     role: '',
@@ -25,22 +29,39 @@ const UserInfoBar = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('yourEyeToken');
-    const decoded = token ? jwtDecode(token) : null;
-    const status = getTokenStatus(token);
-    setTokenStatus(status);
+    if (!token) return;
 
-    if (!decoded) return;
+    let decoded;
+    try {
+      decoded = jwtDecode(token);
+    } catch (err) {
+      console.error('Token çözümlenemedi:', err);
+      return;
+    }
 
-    const isAdmin = decoded.isAdmin === true || decoded.isAdmin === 'True';
     const userId = decoded.userId;
+    const isAdmin = decoded.isAdmin === true || decoded.isAdmin === 'True';
 
-    if (isAdmin) {
-      const fetchAdminDetails = async () => {
-        try {
-          const response = await axios.get(`http://localhost:5059/api/AdminUser/${userId}`);
-          const data = response.data;
+    // Süreyi hesapla
+    const updateTokenStatus = () => {
+      const now = Math.floor(Date.now() / 1000);
+      const remaining = Math.max(0, decoded.exp - now);
+      setTokenStatus({
+        isExpired: remaining === 0,
+        minutesLeft: Math.floor(remaining / 60),
+        secondsLeft: remaining % 60,
+        decoded
+      });
+    };
+
+    updateTokenStatus();
+    const interval = setInterval(updateTokenStatus, 1000);
+    const fetchDetails = async () => {
+      try {
+        if (isAdmin) {
+          const res = await axios.get(`${apiBaseUrl}/AdminUser/${userId}`);
+          const data = res.data;
           localStorage.setItem('companyName', 'Youreye');
-
           setUser({
             fullName: data.name,
             role: 'YourEye Teknik Birim',
@@ -48,19 +69,10 @@ const UserInfoBar = () => {
             branches: [],
             isAdmin: true,
           });
-        } catch (err) {
-          console.error('Admin bilgileri alınamadı:', err);
-        }
-      };
-
-      fetchAdminDetails();
-    } else {
-      const fetchUserDetails = async () => {
-        try {
-          const response = await axios.get(`http://localhost:5059/api/Users/${userId}`);
-          const data = response.data;
+        } else {
+          const res = await axios.get(`${apiBaseUrl}/Users/${userId}`);
+          const data = res.data;
           localStorage.setItem('companyName', data.companyName || '');
-
           setUser({
             fullName: `${data.name} ${data.lastName}`,
             role: data.roleName || '',
@@ -68,26 +80,13 @@ const UserInfoBar = () => {
             branches: data.branchNames || [],
             isAdmin: false,
           });
-        } catch (err) {
-          console.error('Kullanıcı bilgileri alınamadı:', err);
         }
-      };
+      } catch (err) {
+        console.error('Kullanıcı bilgileri alınamadı:', err);
+      }
+    };
 
-      fetchUserDetails();
-    }
-
-    const interval = setInterval(() => {
-      setTokenStatus((prev) => {
-        const total = prev.minutesLeft * 60 + prev.secondsLeft - 1;
-        return {
-          ...prev,
-          minutesLeft: Math.floor(total / 60),
-          secondsLeft: total % 60,
-          isExpired: total <= 0
-        };
-      });
-    }, 1000);
-
+    fetchDetails();
     return () => clearInterval(interval);
   }, []);
 

@@ -75,12 +75,6 @@
   animation: pulse 1.5s infinite;
 }
 
-@keyframes pulse {
-  0% { box-shadow: 0 0 4px rgba(255, 123, 0, 0.3); }
-  50% { box-shadow: 0 0 12px rgba(255, 123, 0, 0.6); }
-  100% { box-shadow: 0 0 4px rgba(255, 123, 0, 0.3); }
-}
-
 .branchListWrapper {
   display: inline-block;
   margin-left: 8px;
@@ -129,4 +123,10 @@
 
 .multiItem::marker {
   color: #ff7b00; /* ✅ sadece madde işareti turuncu */
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 4px rgba(255, 123, 0, 0.3); }
+  50% { box-shadow: 0 0 12px rgba(255, 123, 0, 0.6); }
+  100% { box-shadow: 0 0 4px rgba(255, 123, 0, 0.3); }
 }
