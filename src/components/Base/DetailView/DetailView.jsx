@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styles from './DetailView.module.css';
 
+import { TailSpin } from 'react-loader-spinner';
+
+
 export default class DetailView extends Component {
   state = {
     details: null,

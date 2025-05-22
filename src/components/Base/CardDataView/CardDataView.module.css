@@ -23,4 +23,11 @@
     color: #bbb;
     text-align: center;
   }
+
+  .loadingSpinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
   

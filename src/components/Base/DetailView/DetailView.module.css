@@ -52,3 +52,9 @@
     color: #ff7f27;
   }
   
+  .loadingSpinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }

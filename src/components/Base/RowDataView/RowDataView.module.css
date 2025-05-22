@@ -78,6 +78,13 @@
   text-align: center;
 }
 
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
 
 @media (max-width: 768px) {
   .row {
@@ -103,3 +110,4 @@
     text-align: center;
   }
 }
+
