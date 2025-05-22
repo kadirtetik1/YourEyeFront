@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './CardDataView.module.css';
-import { TailSpin } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function CardDataView({ title, apiEndpoint = '', renderItem }) {
   const [items, setItems] = useState([]);
@@ -28,7 +28,7 @@ export default function CardDataView({ title, apiEndpoint = '', renderItem }) {
 
       {loading ? (
         <div className={styles.loadingSpinner}>
-          <TailSpin height={40} width={40} color="#ff7f27" />
+          <ThreeDots height={50} width={60} color="#ff7f27" />
         </div>
       ) : items.length > 0 ? (
         <div className={styles.list}>

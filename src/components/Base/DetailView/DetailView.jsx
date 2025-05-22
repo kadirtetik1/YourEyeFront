@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './DetailView.module.css';
 
-import { TailSpin } from 'react-loader-spinner';
+import { ThreeDots  } from 'react-loader-spinner';
 
 
 export default class DetailView extends Component {
@@ -28,7 +28,14 @@ export default class DetailView extends Component {
     const { labelMap = {}, visibleKeys = [], multivalueKeys = [] } = this.props;
     const { details, loading, error } = this.state;
 
-    if (loading) return <div>Yükleniyor...</div>;
+    if (loading) {
+      return (
+        <div className={styles.loadingSpinner}>
+          <ThreeDots height={50} width={60} color="#ff7f27" />
+        </div>
+      );
+    }
+    
     if (error) return <div>Hata: {error}</div>;
     if (!details) return <div>Veri bulunamadı</div>;
 
