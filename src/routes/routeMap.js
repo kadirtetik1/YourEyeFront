@@ -15,8 +15,8 @@ export const routeMap = {
   "Yeni Kullanıcı Oluştur": "user-ops/create",
   "Kullanıcıları Listele": "user-ops/list",
   "Kullanıcı Bilgilerini Güncelle": "user-ops/update",
-  "Kullanıcıya Şube Ata": "user-ops/assign-branch",
-  "Kullanıcı Şube Bilgilerini Güncelle": "user-ops/update-branch",
+  "Kullanıcıya Şube Yetkisi Ekle/Çıkar": "user-ops/assign-branch",
+  // "Kullanıcı Şube Bilgilerini Güncelle": "user-ops/update-branch",
   "Kullanıcıya Yeni Rol Ata": "user-ops/assign-role",
   "Kullanıcı Rol Bilgilerini Güncelle": "user-ops/update-role",
 

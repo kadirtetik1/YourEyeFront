@@ -52,19 +52,6 @@ import CameraManagementHome from '../screens/Components/CameraManagement/CameraM
 import LogReportsHome from '../screens/Components/LogReports/LogReportsHome';
 import SystemSettingsHome from '../screens/Components/SystemSettings/SystemSettingsHome';
 
-export const sideBarMenu = [
-  { title: "Anasayfa", subItems: [] },
-  { title: "Admin İşlemleri", subItems: ["Yeni Admin Ekle", "Adminleri Göster", "Admin Bilgileri Güncelle", "Admin Sil"] },
-  { title: "Kullanıcı İşlemleri", subItems: ["Yeni Kullanıcı Oluştur", "Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", "Kullanıcıya Şube Ata", "Kullanıcı Şube Bilgilerini Güncelle", "Kullanıcıya Yeni Rol Ata", "Kullanıcı Rol Bilgilerini Güncelle"] },
-  { title: "Rol Ve Yetki İşlemleri", subItems: ["Yeni Rol Oluştur", "Yeni Yetki Oluştur", "Role Yetki Ata", "Role Ait Yetkileri Getir", "Rol Bilgilerini Güncelle", "Yetki Bilgilerini Güncelle"] },
-  { title: "Firma İşlemleri", subItems: ["Yeni Firma Oluştur", "Bütün Firmaları Listele", "Firma Bilgilerini Güncelle", "Firmaya Bağlı Kullanıcıları Getir", "Yeni Sektör Oluştur", "Sektörleri Göster", "Sektör Bilgilerini Güncelle", "Firma Aktif/Pasif Durumunu Güncelle", "Firma Sil"] },
-  { title: "Şube İşlemleri", subItems: ["Bütün Şubeleri Getir", "Firmaya Bağlı Şubeleri Getir", "Yeni Şube Oluştur", "Şube Bilgilerini Güncelle", "Şube Aktif/Pasif Durumunu Güncelle", "Şube Sil"] },
-  { title: "Modüller", subItems: ["Modülleri Listele", "Yeni Modül Ekle", "Modül İçeriğini Güncelle", "Modülü Sil"] },
-  { title: "Analizler", subItems: ["Genel Analizler", "Anlık Analizler", "Gün Sonu Raporları"] },
-  { title: "Kamera Yönetimi", subItems: ["Kameraları Listele", "Yeni Kamera Ekle", "Kamera Bilgilerini Güncelle"] },
-  { title: "Log Raporları", subItems: ["Firmaya Ait Raporları Getir", "Şubeye Ait Raporları Getir", "Kullanıcıya Ait Raporları Getir"] },
-  { title: "Sistem Ayarları", subItems: ["Genel Ayarlar", "Kullanıcı Ayarları"] }
-];
 
 export const adminRoutes = [
   { path: "", element: <AdminHome /> },
@@ -80,7 +67,7 @@ export const adminRoutes = [
   { path: "user-ops/assign-role", element: <AssignRole /> },
   { path: "user-ops/assign-branch", element: <AssignBranch /> },
   { path: "user-ops/update-role", element: <UpdateUserRole /> },
-  { path: "user-ops/update-branch", element: <UpdateUserBranch /> },
+  // { path: "user-ops/update-branch", element: <UpdateUserBranch /> },
   { path: "role-permissions/", element: <RoleAndPermissionsHome /> },
   { path: "role-permissions/create-role", element: <CreateRole /> },
   { path: "role-permissions/create-permission", element: <CreatePermission /> },
@@ -111,3 +98,20 @@ export const adminRoutes = [
   { path: "log-reports/", element: <LogReportsHome /> },
   { path: "system-settings/", element: <SystemSettingsHome /> }
 ];
+
+
+ export const AdminSideBarMenu = [
+   { title: "Anasayfa", subItems: [] },
+   { title: "Admin İşlemleri", subItems: ["Yeni Admin Ekle", "Adminleri Göster", "Admin Bilgileri Güncelle", "Admin Sil"] },
+   { title: "Kullanıcı İşlemleri", 
+   subItems: ["Yeni Kullanıcı Oluştur", "Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", "Kullanıcıya Şube Yetkisi Ekle/Çıkar", "Kullanıcıya Yeni Rol Ata", "Kullanıcı Rol Bilgilerini Güncelle"] },
+  //  , "Kullanıcı Şube Bilgilerini Güncelle" kaldırıldı.
+   { title: "Rol Ve Yetki İşlemleri", subItems: ["Yeni Rol Oluştur", "Yeni Yetki Oluştur", "Role Yetki Ata", "Role Ait Yetkileri Getir", "Rol Bilgilerini Güncelle", "Yetki Bilgilerini Güncelle"] },
+   { title: "Firma İşlemleri", subItems: ["Yeni Firma Oluştur", "Bütün Firmaları Listele", "Firma Bilgilerini Güncelle", "Firmaya Bağlı Kullanıcıları Getir", "Yeni Sektör Oluştur", "Sektörleri Göster", "Sektör Bilgilerini Güncelle", "Firma Aktif/Pasif Durumunu Güncelle", "Firma Sil"] },
+   { title: "Şube İşlemleri", subItems: ["Bütün Şubeleri Getir", "Firmaya Bağlı Şubeleri Getir", "Yeni Şube Oluştur", "Şube Bilgilerini Güncelle", "Şube Aktif/Pasif Durumunu Güncelle", "Şube Sil"] },
+   { title: "Modüller", subItems: ["Modülleri Listele", "Yeni Modül Ekle", "Modül İçeriğini Güncelle", "Modülü Sil"] },
+   { title: "Analizler", subItems: ["Genel Analizler", "Anlık Analizler", "Gün Sonu Raporları"] },
+   { title: "Kamera Yönetimi", subItems: ["Kameraları Listele", "Yeni Kamera Ekle", "Kamera Bilgilerini Güncelle"] },
+   { title: "Log Raporları", subItems: ["Firmaya Ait Raporları Getir", "Şubeye Ait Raporları Getir", "Kullanıcıya Ait Raporları Getir"] },
+   { title: "Sistem Ayarları", subItems: ["Genel Ayarlar", "Kullanıcı Ayarları"] }
+ ];

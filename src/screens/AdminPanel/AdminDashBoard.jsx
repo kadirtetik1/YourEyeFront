@@ -4,6 +4,8 @@ import Sidebar from '../../components/Base/Sidebar/Sidebar';
 import UserInfoBar from '../../components/Base/UserInfoBar/UserInfoBar';
 import styles from './AdminDash.module.css';
 
+import { AdminSideBarMenu } from '../../routes/adminRoutes';
+
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -96,31 +98,31 @@ import SystemSettingsHome from '../Components/SystemSettings/SystemSettingsHome'
 
 
 
-const sideBarMenu = [
-  { title: "Anasayfa", subItems: [] },
+// const sideBarMenu = [
+//   { title: "Anasayfa", subItems: [] },
 
-  { title: "Admin İşlemleri", subItems: ["Yeni Admin Ekle","Adminleri Göster", "Admin Bilgileri Güncelle", "Admin Sil"] },
+//   { title: "Admin İşlemleri", subItems: ["Yeni Admin Ekle","Adminleri Göster", "Admin Bilgileri Güncelle", "Admin Sil"] },
 
-  { title: "Kullanıcı İşlemleri", subItems: ["Yeni Kullanıcı Oluştur","Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", 
-  "Kullanıcıya Şube Ata", "Kullanıcı Şube Bilgilerini Güncelle", "Kullanıcıya Yeni Rol Ata", "Kullanıcı Rol Bilgilerini Güncelle",] },
+//   { title: "Kullanıcı İşlemleri", subItems: ["Yeni Kullanıcı Oluştur","Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", 
+//   "Kullanıcıya Şube Yetkisi Ekle/Çıkar", "Kullanıcı Şube Bilgilerini Güncelle", "Kullanıcıya Yeni Rol Ata", "Kullanıcı Rol Bilgilerini Güncelle",] },
 
-  { title: "Rol Ve Yetki İşlemleri", subItems: ["Yeni Rol Oluştur","Yeni Yetki Oluştur", "Role Yetki Ata", "Role Ait Yetkileri Getir", "Rol Bilgilerini Güncelle", "Yetki Bilgilerini Güncelle"]},
+//   { title: "Rol Ve Yetki İşlemleri", subItems: ["Yeni Rol Oluştur","Yeni Yetki Oluştur", "Role Yetki Ata", "Role Ait Yetkileri Getir", "Rol Bilgilerini Güncelle", "Yetki Bilgilerini Güncelle"]},
 
-  { title: "Firma İşlemleri", subItems: ["Yeni Firma Oluştur", "Bütün Firmaları Listele", "Firma Bilgilerini Güncelle", "Firmaya Bağlı Kullanıcıları Getir",
-  "Yeni Sektör Oluştur","Sektörleri Göster","Sektör Bilgilerini Güncelle", "Firma Aktif/Pasif Durumunu Güncelle", "Firma Sil"] },
+//   { title: "Firma İşlemleri", subItems: ["Yeni Firma Oluştur", "Bütün Firmaları Listele", "Firma Bilgilerini Güncelle", "Firmaya Bağlı Kullanıcıları Getir",
+//   "Yeni Sektör Oluştur","Sektörleri Göster","Sektör Bilgilerini Güncelle", "Firma Aktif/Pasif Durumunu Güncelle", "Firma Sil"] },
   
-  { title: "Şube İşlemleri", subItems: ["Bütün Şubeleri Getir", "Firmaya Bağlı Şubeleri Getir", "Yeni Şube Oluştur", "Şube Bilgilerini Güncelle", "Şube Aktif/Pasif Durumunu Güncelle", "Şube Sil"] },
+//   { title: "Şube İşlemleri", subItems: ["Bütün Şubeleri Getir", "Firmaya Bağlı Şubeleri Getir", "Yeni Şube Oluştur", "Şube Bilgilerini Güncelle", "Şube Aktif/Pasif Durumunu Güncelle", "Şube Sil"] },
 
-  { title: "Modüller", subItems: ["Modülleri Listele", "Yeni Modül Ekle", "Modül İçeriğini Güncelle", "Modülü Sil"] }, // EKSİK
+//   { title: "Modüller", subItems: ["Modülleri Listele", "Yeni Modül Ekle", "Modül İçeriğini Güncelle", "Modülü Sil"] }, // EKSİK
 
-  { title: "Analizler", subItems: ["Genel Analizler", "Anlık Analizler", "Gün Sonu Raporları"] }, //EKSİK
+//   { title: "Analizler", subItems: ["Genel Analizler", "Anlık Analizler", "Gün Sonu Raporları"] }, //EKSİK
 
-  { title: "Kamera Yönetimi", subItems: ["Kameraları Listele", "Yeni Kamera Ekle", "Kamera Bilgilerini Güncelle"] }, //EKSİK
+//   { title: "Kamera Yönetimi", subItems: ["Kameraları Listele", "Yeni Kamera Ekle", "Kamera Bilgilerini Güncelle"] }, //EKSİK
 
-  { title: "Log Raporları", subItems: ["Firmaya Ait Raporları Getir","Şubeye Ait Raporları Getir", "Kullanıcıya Ait Raporları Getir"]},
+//   { title: "Log Raporları", subItems: ["Firmaya Ait Raporları Getir","Şubeye Ait Raporları Getir", "Kullanıcıya Ait Raporları Getir"]},
 
-  { title: "Sistem Ayarları", subItems: ["Genel Ayarlar","Kullanıcı Ayarları"] }
-];
+//   { title: "Sistem Ayarları", subItems: ["Genel Ayarlar","Kullanıcı Ayarları"] }
+// ];
 
 
 
@@ -131,7 +133,7 @@ export default class AdminDashBoard extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <Sidebar panelName="Admin Paneli" menuItems={sideBarMenu} />
+        <Sidebar panelName="Admin Paneli" menuItems={AdminSideBarMenu} />
         <div className={styles.main}>
 
           <div className={styles.TopContainer}>

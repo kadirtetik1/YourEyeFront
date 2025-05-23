@@ -23,7 +23,7 @@ export const iconMap = {
   "Sistem Ayarları": FaTools
 };
 
-const Sidebar = ({ panelName, menuItems }) => {
+  const Sidebar = ({ panelName, menuItems }) => {
   const [isOpen, setIsOpen] = useState(false);
   // const [openDropdown, setOpenDropdown] = useState(null);
   const navigate = useNavigate();
