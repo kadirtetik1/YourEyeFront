@@ -53,7 +53,10 @@ import LogReportsHome from '../screens/Components/LogReports/LogReportsHome';
 import SystemSettingsHome from '../screens/Components/SystemSettings/SystemSettingsHome';
 
 
-export const adminRoutes = [
+
+
+// yeni component oluştukça burda tanımla
+export const adminRoutes = [ 
   { path: "", element: <AdminHome /> },
   { path: "admin-ops/", element: <AdminOpsHome /> },
   { path: "admin-ops/create", element: <CreateAdmin /> },
@@ -102,10 +105,11 @@ export const adminRoutes = [
 
  export const AdminSideBarMenu = [
    { title: "Anasayfa", subItems: [] },
-   { title: "Admin İşlemleri", subItems: ["Yeni Admin Ekle", "Adminleri Göster", "Admin Bilgileri Güncelle", "Admin Sil"] },
+   { title: "Admin İşlemleri", subItems: ["Yeni Admin Ekle", "Adminleri Göster", "Admin Bilgilerini Güncelle", "Admin Sil"] },
    { title: "Kullanıcı İşlemleri", 
-   subItems: ["Yeni Kullanıcı Oluştur", "Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", "Kullanıcıya Şube Yetkisi Ekle/Çıkar", "Kullanıcıya Yeni Rol Ata", "Kullanıcı Rol Bilgilerini Güncelle"] },
-  //  , "Kullanıcı Şube Bilgilerini Güncelle" kaldırıldı.
+   subItems: ["Yeni Kullanıcı Oluştur", "Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", "Kullanıcıya Şube Ata/Güncelle", "Kullanıcıya Rol Ata/Güncelle", "Kullanıcı Aktif/Pasif Durumunu Güncelle","Kullanıcı Sil"] },
+  // "Kullanıcı Rol Bilgilerini Güncelle" kaldırıldı.
+  // "Kullanıcı Şube Bilgilerini Güncelle" kaldırıldı.
    { title: "Rol Ve Yetki İşlemleri", subItems: ["Yeni Rol Oluştur", "Yeni Yetki Oluştur", "Role Yetki Ata", "Role Ait Yetkileri Getir", "Rol Bilgilerini Güncelle", "Yetki Bilgilerini Güncelle"] },
    { title: "Firma İşlemleri", subItems: ["Yeni Firma Oluştur", "Bütün Firmaları Listele", "Firma Bilgilerini Güncelle", "Firmaya Bağlı Kullanıcıları Getir", "Yeni Sektör Oluştur", "Sektörleri Göster", "Sektör Bilgilerini Güncelle", "Firma Aktif/Pasif Durumunu Güncelle", "Firma Sil"] },
    { title: "Şube İşlemleri", subItems: ["Bütün Şubeleri Getir", "Firmaya Bağlı Şubeleri Getir", "Yeni Şube Oluştur", "Şube Bilgilerini Güncelle", "Şube Aktif/Pasif Durumunu Güncelle", "Şube Sil"] },

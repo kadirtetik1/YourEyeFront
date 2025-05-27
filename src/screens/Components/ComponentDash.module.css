@@ -23,4 +23,5 @@
   padding: 24px;
   max-width: calc(4 * 220px + 4 * 24px); /* 4 kart ve 3 boşluk kadar */
   margin: 0 auto;
+  color: white;
 }

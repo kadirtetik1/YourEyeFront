@@ -18,7 +18,7 @@ export default function RoleAndPermissionsHome() {
   const [selectedPath, setSelectedPath] = useState(null);
 
   const openModal = (subItem) => {
-    const routePath = `/admin/${routeMap[subItem] || ''}`;
+    const routePath = `/admin/${routeMap[subItem] || ''}`; //userpanelde user route olarak değiştir
     setSelectedPath(routePath);
   };
 
@@ -26,7 +26,7 @@ export default function RoleAndPermissionsHome() {
     setSelectedPath(null);
   };
 
-  const ActiveRouteComponent = adminRoutes.find(r => `/admin/${r.path}` === selectedPath)?.element; //userpanelde user route oalrak değiştir
+  const ActiveRouteComponent = adminRoutes.find(r => `/admin/${r.path}` === selectedPath)?.element; //userpanelde user route olarak değiştir
 
   return (
     <div className={styles.cardsContainer}>

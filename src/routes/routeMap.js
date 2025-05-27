@@ -7,7 +7,7 @@ export const routeMap = {
   "Admin İşlemleri": "admin-ops",
   "Yeni Admin Ekle": "admin-ops/create",
   "Adminleri Göster": "admin-ops/list",
-  "Admin Bilgileri Güncelle": "admin-ops/update",
+  "Admin Bilgilerini Güncelle": "admin-ops/update",
   "Admin Sil": "admin-ops/delete",
 
   // Kullanıcı İşlemleri
@@ -15,10 +15,12 @@ export const routeMap = {
   "Yeni Kullanıcı Oluştur": "user-ops/create",
   "Kullanıcıları Listele": "user-ops/list",
   "Kullanıcı Bilgilerini Güncelle": "user-ops/update",
-  "Kullanıcıya Şube Yetkisi Ekle/Çıkar": "user-ops/assign-branch",
+  "Kullanıcıya Şube Ata/Güncelle": "user-ops/assign-branch",
   // "Kullanıcı Şube Bilgilerini Güncelle": "user-ops/update-branch",
-  "Kullanıcıya Yeni Rol Ata": "user-ops/assign-role",
-  "Kullanıcı Rol Bilgilerini Güncelle": "user-ops/update-role",
+  "Kullanıcıya Rol Ata/Güncelle": "user-ops/assign-role",
+  // "Kullanıcı Rol Bilgilerini Güncelle": "user-ops/update-role",
+  "Kullanıcı Aktif/Pasif Durumunu Güncelle": "user-ops/toggle-status",
+  "Kullanıcı Sil": "user-ops/delete",
 
   // Rol Ve Yetki İşlemleri
   "Rol Ve Yetki İşlemleri": "role-permissions",
@@ -34,9 +36,7 @@ export const routeMap = {
   "Yeni Firma Oluştur": "firm-ops/create",
   "Bütün Firmaları Listele": "firm-ops/list",
   "Firma Bilgilerini Güncelle": "firm-ops/update",
-
   "Firmaya Bağlı Kullanıcıları Getir": "firm-ops/list-users",
-  
   "Yeni Sektör Oluştur": "firm-ops/create-sector",
   "Sektörleri Göster": "firm-ops/list-sectors",
   "Sektör Bilgilerini Güncelle": "firm-ops/update-sector",

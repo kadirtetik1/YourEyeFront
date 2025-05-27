@@ -56,12 +56,12 @@ export default function SelectableRowList({
         <>
           {data.map((item, index) => {
             const isSelected = selectedIds.includes(item.id);
-            const isDisabled = singleSelect && selectedIds.length === 1 && isSelected;
+            const isDisabled = singleSelect && selectedIds.length === 0 && isSelected;
 
             return (
               <div
                 key={index}
-                className={`${styles.row} ${isSelected ? styles.selected : ''} ${isDisabled ? styles.disabled : ''}`}
+                className={`${styles.row} ${isSelected ? styles.selected : ''}`}
               >
                 <div className={styles.rowContent}>
                   {Object.entries(item)

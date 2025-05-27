@@ -4,6 +4,8 @@ import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import SelectableRowList from '../../../components/Base/SelectableRowList/SelectableRowList';
 import { toast, ToastContainer } from 'react-toastify';
 import styles from '../ComponentDash.module.css';
+import { apiBaseUrl } from '../../../utils/api'; 
+
 
 export default class AssignRole extends Component {
   apiBaseUrl = 'http://localhost:5059/api';
@@ -29,8 +31,8 @@ export default class AssignRole extends Component {
   handleAssignClick = async (user) => {
     try {
       const [assignedRes, rolesRes] = await Promise.all([
-        fetch(`${this.apiBaseUrl}/Users/${user.id}/role`),
-        fetch(`${this.apiBaseUrl}/Roles`),
+        fetch(`${apiBaseUrl}/Users/${user.id}/role`),
+        fetch(`${apiBaseUrl}/Roles`),
       ]);
 
       const assignedRole = await assignedRes.json(); // Tek bir rol olacak

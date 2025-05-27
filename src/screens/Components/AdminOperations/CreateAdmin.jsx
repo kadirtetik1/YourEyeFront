@@ -3,7 +3,7 @@ import PostForm from '../../../components/Base/FormFields/PostForm';
 import styles from '../ComponentDash.module.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { apiBaseUrl } from '../../../utils/api'; // artık merkezi yapıdan geliyor
+import { apiBaseUrl } from '../../../utils/api'; 
 
 const CreateAdmin = () => {
   const initialData = {
