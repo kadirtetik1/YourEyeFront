@@ -12,17 +12,16 @@ import { jwtDecode } from 'jwt-decode';
 import robotwoman from '../../assets/ai-robot-woman.png';
 import aicamera from '../../assets/ai-cam.png';
 import youreyelogo from '../../assets/youreye-logo.png';
+import ForgotPassword from './ForgotPassword';
 
 const Login = () => {
-
-
-  
-
-
 
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  const [showForgotPassModal, setShowForgotPassModal] = useState(false);
+
 
   useEffect(() => {
     localStorage.clear(); // login sayfasına gelen kullanıcı sıfırlanır
@@ -33,12 +32,7 @@ const Login = () => {
   };
 
   const handleForgotPass = (e) => {
-    const showToastMessage = () => {
-      toast.info("Şifre Yenileme", {
-          position: toast.POSITION.BOTTOM_RIGHT
-      });
-    };
-    showToastMessage();
+    setShowForgotPassModal(true);
   };
 
 
@@ -147,6 +141,10 @@ const handleSubmit = async (e) => {
             >
               Şifremi Unuttum
             </div>
+            <ForgotPassword
+             isVisible={showForgotPassModal}
+             onClose={() => setShowForgotPassModal(false)}
+           />
           </div>
   
           <button type="submit" className={styles.button}>
