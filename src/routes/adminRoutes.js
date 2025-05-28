@@ -119,3 +119,4 @@ export const adminRoutes = [
    { title: "Log Raporları", subItems: ["Firmaya Ait Raporları Getir", "Şubeye Ait Raporları Getir", "Kullanıcıya Ait Raporları Getir"] },
    { title: "Sistem Ayarları", subItems: ["Genel Ayarlar", "Kullanıcı Ayarları"] }
  ];
+ 

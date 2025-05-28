@@ -13,7 +13,13 @@ export default class ListAdmins extends Component {
   };
 
   
-  canShowActionButton = true; // detay, sil vs
+  showActionButton = true; // detay, sil vs
+
+  // backendden gelen permissionda aşağıdaki gibi bir yapı entegre edilebilir.
+  // this.showActionButton = permissions.includes("Kullanıcı Detayını Görebilir"); 
+
+  // veya 
+  // this.showActionButton = getPermissionByKey("showFunctionButton")?.isActive ?? false;
 
   labelMap = {
     id: "Id",
@@ -42,7 +48,7 @@ export default class ListAdmins extends Component {
           labelMap={this.labelMap}
           onActionButtonClick={this.handleDetailClick}
           actionButtonLabel="Detay"
-          showActionButton={this.canShowActionButton}  // değişken üzerinden kontrol
+          showActionButton={this.showActionButton}  // değişken üzerinden kontrol
         />
 
         {selectedItem && (
