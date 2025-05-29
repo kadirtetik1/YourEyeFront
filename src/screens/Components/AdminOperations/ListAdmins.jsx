@@ -18,8 +18,7 @@ export default class ListAdmins extends Component {
   // backendden gelen permissionda aşağıdaki gibi bir yapı entegre edilebilir.
   // this.showActionButton = permissions.includes("Kullanıcı Detayını Görebilir"); 
 
-  // veya 
-  // this.showActionButton = getPermissionByKey("showFunctionButton")?.isActive ?? false;
+  
 
   labelMap = {
     id: "Id",

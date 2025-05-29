@@ -22,10 +22,11 @@ const GetUserInfos = ({ isOpen, onClose, userId, isAdmin }) => {
             phoneNumber: "Telefon",
             companyName: "Firma",
             roleName: "Rol",
+            permissions:"Yetkiler",
             branchNames: "Şubeler"
           }}
-          visibleKeys={["name", "lastName", "username", "email", "phoneNumber", "companyName", "roleName", "branchNames"]}
-          multivalueKeys={["branchNames"]}
+          visibleKeys={["name", "lastName", "username", "email", "phoneNumber", "companyName", "roleName","permissions", "branchNames"]}
+          multivalueKeys={["branchNames","permissions"]}
         />
       </div>
     </SlideUpModal>

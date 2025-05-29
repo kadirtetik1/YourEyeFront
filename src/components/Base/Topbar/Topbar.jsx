@@ -33,25 +33,33 @@ const Topbar = ({ notificationCount = 0, isAdmin = false }) => {
 
     const userId = decoded.userId;
 
-    const fetchCompanyName = async () => {
-      try {
-        if (isAdmin) {
-          setLogoPath('/assets/logos/youreye_logo.png');
-        } else {
-          const response = await axios.get(`http://localhost:5059/api/Users/${userId}`);
-          const companyName = response.data.companyName || '';
-          const normalizedName = companyName.toLowerCase().replace(/\s+/g, '');
-          const path = `/assets/logos/${normalizedName}_logo.png`;
-          setLogoPath(path);
-        }
-      } catch (err) {
-        console.error('Firma bilgisi alınamadı:', err);
-        setLogoPath('');
-      }
-    };
 
-    fetchCompanyName();
-  }, [isAdmin]);
+
+    const fetchCompanyLogo = async () => {
+    try {
+      if (isAdmin) {
+        setLogoPath('/assets/logos/youreye_logo.png');
+      } 
+      else {
+        const userResponse = await axios.get(`http://localhost:5059/api/Users/${userId}`);
+        // const companyName = userResponse.data.companyName || '';
+        const companyId = userResponse.data.companyId;
+
+        const companyResponse = await axios.get(`http://localhost:5059/api/Companies/${companyId}`);
+        const logoFromApi = companyResponse.data.logoPath;
+
+          setLogoPath(logoFromApi);
+        
+      }
+    } catch (err) {
+      console.error('Firma logosu alınamadı:', err);
+      setLogoPath('');
+    }
+  };
+
+  fetchCompanyLogo();
+}, [isAdmin]);
+
 
   // Zaman Güncelleme
   useEffect(() => {
