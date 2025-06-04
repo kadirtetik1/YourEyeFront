@@ -58,7 +58,7 @@ export default class ListAdmins extends Component {
               labelMap={this.labelMap}
               visibleKeys={['id','name','username', 'email','phoneNumber']} // detayda gelenlerden gösterilecek satırlar
             />
-          </SlideUpModal>
+          </SlideUpModal> // DENEME
         )}
       </div>
     );
