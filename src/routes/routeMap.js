@@ -16,9 +16,7 @@ export const routeMap = {
   "Kullanıcıları Listele": "user-ops/list",
   "Kullanıcı Bilgilerini Güncelle": "user-ops/update",
   "Kullanıcıya Şube Ata/Güncelle": "user-ops/assign-branch",
-  // "Kullanıcı Şube Bilgilerini Güncelle": "user-ops/update-branch",
   "Kullanıcıya Rol Ata/Güncelle": "user-ops/assign-role",
-  // "Kullanıcı Rol Bilgilerini Güncelle": "user-ops/update-role",
   "Kullanıcı Aktif/Pasif Durumunu Güncelle": "user-ops/toggle-status",
   "Kullanıcı Sil": "user-ops/delete",
 

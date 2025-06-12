@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import { apiBaseUrl } from '../../../utils/api'; 
 
-export default class DeleteAdmin extends Component {
+export default class DeleteUser extends Component {
 
   state = {
     selectedItem: null,
@@ -18,7 +18,8 @@ export default class DeleteAdmin extends Component {
 
   labelMap = {
     id: "Id",
-    name: "Ad Soyad",
+    name: "Ad",
+    lastname:'Soyad',
     username: "Kullanıcı Adı",
     email: "Email",
     phoneNumber: "Telefon Numarası"
@@ -33,15 +34,15 @@ export default class DeleteAdmin extends Component {
   };
 
 
-  handleConfirmDelete = () => { // delete admin
+  handleConfirmDelete = () => { 
     const { selectedItem } = this.state;
 
-  fetch(`${apiBaseUrl}/AdminUser/${selectedItem.id}`, { method: 'DELETE' })
+  fetch(`${apiBaseUrl}/Users/${selectedItem.id}`, { method: 'DELETE' })
     .then((response) => {
       if (!response.ok) {
         throw new Error('Silme işlemi başarısız oldu.');
       }
-      toast.success(`${selectedItem.name} adlı admin başarıyla silindi!`, {
+      toast.success(`${selectedItem.name} adlı kullanıcı başarıyla silindi!`, {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
       this.setState({ showModal: false, selectedItem: null });
@@ -52,7 +53,7 @@ export default class DeleteAdmin extends Component {
     })
     .catch((error) => {
       console.error('Silme hatası:', error);
-      toast.error(`${selectedItem.name} adlı admin silinirken bir hata ile karşılaşıldı!`, {
+      toast.error(`${selectedItem.name} adlı kullanıcı silinirken bir hata ile karşılaşıldı!`, {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
       this.setState({ showModal: false, selectedItem: null });
@@ -69,8 +70,8 @@ export default class DeleteAdmin extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={`${apiBaseUrl}/AdminUser`}
-          visibleKeys={['name','username']}
+          apiBaseUrl={`${apiBaseUrl}/Users`}
+          visibleKeys={['name','lastname','username']}
           labelMap={this.labelMap}
           onActionButtonClick={this.handleDetailClick}
           actionButtonLabel="Sil"
@@ -82,8 +83,8 @@ export default class DeleteAdmin extends Component {
           <ConfirmModal
           isVisible={showModal}
           onClose={this.closeModal}
-          title="Admini silmek istediğinize emin misiniz?"
-          subtitle={`${selectedItem.name} adlı admin silinecek.`}
+          title="Kullanıcıyı silmek istediğinize emin misiniz?"
+          subtitle={`${selectedItem.name} adlı kullanıcı silinecek.`}
           confirmLabel="Onayla"
           cancelLabel="Vazgeç"
           onConfirm={this.handleConfirmDelete} // onayla butonunda yapılacak aktivite

@@ -22,8 +22,7 @@ import ListUser from '../Components/UserOperations/ListUser';
 import UpdateUser from '../Components/UserOperations/UpdateUser';
 import AssignBranch from '../Components/UserOperations/AssignBranch';
 import AssignRole from '../Components/UserOperations/AssignRole';
-import UpdateUserRole from '../Components/UserOperations/UpdateUserRole';
-import UpdateUserBranch from '../Components/UserOperations/UpdateUserBranch';
+
 
 
 // Rol ve Yetki İşlemleri
@@ -67,6 +66,7 @@ import ModulesHome from '../Components/Modules/ModulesHome';
 import CameraManagementHome from '../Components/CameraManagement/CameraManagementHome';
 import LogReportsHome from '../Components/LogReports/LogReportsHome';
 import SystemSettingsHome from '../Components/SystemSettings/SystemSettingsHome';
+import DeleteUser from '../Components/UserOperations/DeleteUser';
 
 
 export default class AdminDashBoard extends Component {
@@ -105,8 +105,8 @@ export default class AdminDashBoard extends Component {
              <Route path="user-ops/update" element={<UpdateUser />} />
              <Route path="user-ops/assign-role" element={<AssignRole />} />
              <Route path="user-ops/assign-branch" element={<AssignBranch />} />
-             <Route path="user-ops/update-role" element={<UpdateUserRole />} />
-             <Route path="user-ops/update-branch" element={<UpdateUserBranch />} />
+             <Route path="user-ops/delete" element={<DeleteUser />} />
+             
            
              {/* Rol ve Yetki İşlemleri */}
              <Route path="role-permissions/" element={<RoleAndPermissionsHome/>} />

@@ -10,8 +10,7 @@ import ListUser from '../screens/Components/UserOperations/ListUser';
 import UpdateUser from '../screens/Components/UserOperations/UpdateUser';
 import AssignBranch from '../screens/Components/UserOperations/AssignBranch';
 import AssignRole from '../screens/Components/UserOperations/AssignRole';
-import UpdateUserRole from '../screens/Components/UserOperations/UpdateUserRole';
-import UpdateUserBranch from '../screens/Components/UserOperations/UpdateUserBranch';
+import DeleteUser from '../screens/Components/UserOperations/DeleteUser';
 
 import RoleAndPermissionsHome from '../screens/Components/RoleAndPermissions/RoleAndPermissionsHome';
 import CreateRole from '../screens/Components/RoleAndPermissions/CreateRole';
@@ -63,14 +62,16 @@ export const adminRoutes = [
   { path: "admin-ops/list", element: <ListAdmins /> },
   { path: "admin-ops/update", element: <UpdateAdmin /> },
   { path: "admin-ops/delete", element: <DeleteAdmin /> },
+
   { path: "user-ops/", element: <UserOperationsHome /> },
   { path: "user-ops/create", element: <CreateUser /> },
   { path: "user-ops/list", element: <ListUser /> },
   { path: "user-ops/update", element: <UpdateUser /> },
   { path: "user-ops/assign-role", element: <AssignRole /> },
   { path: "user-ops/assign-branch", element: <AssignBranch /> },
-  { path: "user-ops/update-role", element: <UpdateUserRole /> },
-  // { path: "user-ops/update-branch", element: <UpdateUserBranch /> },
+  { path: "user-ops/delete", element: <DeleteUser /> },
+  
+ 
   { path: "role-permissions/", element: <RoleAndPermissionsHome /> },
   { path: "role-permissions/create-role", element: <CreateRole /> },
   { path: "role-permissions/create-permission", element: <CreatePermission /> },
@@ -78,6 +79,7 @@ export const adminRoutes = [
   { path: "role-permissions/list-role-permissions", element: <ListRolePermissions /> },
   { path: "role-permissions/update-role", element: <UpdateRole /> },
   { path: "role-permissions/update-permission", element: <UpdatePermission /> },
+
   { path: "firm-ops/", element: <FirmOperationsHome /> },
   { path: "firm-ops/create", element: <CreateFirm /> },
   { path: "firm-ops/list", element: <ListFirms /> },
@@ -88,6 +90,7 @@ export const adminRoutes = [
   { path: "firm-ops/update-sector", element: <UpdateSector /> },
   { path: "firm-ops/toggle-status", element: <ToggleFirmStatus /> },
   { path: "firm-ops/delete", element: <DeleteFirm /> },
+
   { path: "branch-ops/", element: <BranchOperationsHome /> },
   { path: "branch-ops/list-all", element: <ListAllBranches /> },
   { path: "branch-ops/list-by-firm", element: <ListFirmBranches /> },
@@ -95,6 +98,7 @@ export const adminRoutes = [
   { path: "branch-ops/update", element: <UpdateBranch /> },
   { path: "branch-ops/toggle-status", element: <ToggleBranchStatus /> },
   { path: "branch-ops/delete", element: <DeleteBranch /> },
+
   { path: "modules/", element: <ModulesHome /> },
   { path: "analysis/", element: <AnalysisHome /> },
   { path: "camera-management/", element: <CameraManagementHome /> },
