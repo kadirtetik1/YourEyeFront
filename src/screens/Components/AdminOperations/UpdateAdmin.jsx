@@ -5,9 +5,9 @@ import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import styles from '../ComponentDash.module.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { apiBaseUrl } from '../../../utils/api'; 
 
 export default class UpdateAdmin extends Component {
-  apiBaseUrl = 'http://localhost:5059/api/AdminUser';
 
   state = {
     selectedItem: null,
@@ -33,7 +33,8 @@ export default class UpdateAdmin extends Component {
   };
 
   handleUpdateSubmit = (updatedData) => {
-    const apiUrl = `${this.apiBaseUrl}`;
+    // const apiUrl = `${this.apiBaseUrl}`;
+    const apiUrl = `${apiBaseUrl}/AdminUser`;
 
   fetch(apiUrl, {
     method: 'PUT',
@@ -76,7 +77,7 @@ export default class UpdateAdmin extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={this.apiBaseUrl}
+          apiBaseUrl={`${apiBaseUrl}/AdminUser`}
           visibleKeys={['name']}
           labelMap={this.labelMap}
           onActionButtonClick={this.handleDetailClick}

@@ -3,9 +3,9 @@ import RowDataView from '../../../components/Base/RowDataView/RowDataView';
 import DetailView from '../../../components/Base/DetailView/DetailView';
 import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import styles from '../ComponentDash.module.css';
+import { apiBaseUrl } from '../../../utils/api'; 
 
 export default class ListAdmins extends Component {
-  apiBaseUrl = 'http://localhost:5059/api/AdminUser';
 
   state = {
     selectedItem: null,
@@ -15,17 +15,12 @@ export default class ListAdmins extends Component {
   
   showActionButton = true; // detay, sil vs
 
-  // backendden gelen permissionda aşağıdaki gibi bir yapı entegre edilebilir.
-  // this.showActionButton = permissions.includes("Kullanıcı Detayını Görebilir"); 
-
-  
-
   labelMap = {
     id: "Id",
     name: "Ad Soyad",
     username: "Kullanıcı Adı",
     email: "Email",
-    phoneNumber: "Telefon Numarası"
+    phoneNumber: "Telefon Numarası",
   };
 
   handleDetailClick = (item) => {
@@ -42,8 +37,8 @@ export default class ListAdmins extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={this.apiBaseUrl}
-          visibleKeys={['name']}
+          apiBaseUrl={`${apiBaseUrl}/AdminUser`}
+          visibleKeys={['name',]}
           labelMap={this.labelMap}
           onActionButtonClick={this.handleDetailClick}
           actionButtonLabel="Detay"
@@ -54,7 +49,7 @@ export default class ListAdmins extends Component {
           <SlideUpModal isVisible={showModal} onClose={this.closeModal}>
             <DetailView
               id={selectedItem.id}
-              apiBaseUrl={this.apiBaseUrl}
+              apiBaseUrl={`${apiBaseUrl}/AdminUser`}
               labelMap={this.labelMap}
               visibleKeys={['id','name','username', 'email','phoneNumber']} // detayda gelenlerden gösterilecek satırlar
             />

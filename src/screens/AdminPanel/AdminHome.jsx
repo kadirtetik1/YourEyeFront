@@ -8,11 +8,12 @@ import { PiSecurityCameraFill } from "react-icons/pi";
 import { AiOutlineApartment } from "react-icons/ai";
 
 const generalStats = [
-  { title: "Toplam Firma", value: 245, subtitle1: "Aktif", subtitle1Value: 190, subtitle2: "Pasif", subtitle2Value: 55, lastUpdated:"5 dk önce", icon: <FaBuilding /> },
+  { title: "Toplam Firma", value: 245, subtitle1: "Aktif", subtitle1Value: 190, subtitle2: "Pasif", subtitle2Value: 55, lastUpdated:"2 dk önce", icon: <FaBuilding /> },
   { title: "Toplam Şube", value: 847, subtitle1: "Aktif", subtitle1Value: 635, subtitle2: "Pasif", subtitle2Value: 212, lastUpdated:"5 dk önce", icon: <AiOutlineApartment /> },
-  { title: "Toplam Kullanıcı", value: 1220, subtitle1: "Aktif", subtitle1Value: 980, subtitle2: "Pasif", subtitle2Value: 240, lastUpdated:"5 dk önce", icon: <FaUsers /> },
-  { title: "Toplam Kamera", value: 45, subtitle1: "Aktif", subtitle1Value: 39, subtitle2: "Pasif", subtitle2Value: 6, lastUpdated:"5 dk önce", icon: <PiSecurityCameraFill /> },
-  { title: "Toplam Modül", value: 78, subtitle1: "Kullanımda", subtitle1Value: 57, lastUpdated:"5 dakika önce", icon: <FaComputer /> },
+  { title: "Toplam Kullanıcı", value: 1220, subtitle1: "Aktif", subtitle1Value: 980, subtitle2: "Pasif", subtitle2Value: 240, lastUpdated:"3 dk önce", icon: <FaUsers /> },
+  { title: "Toplam Kamera", value: 45, subtitle1: "Aktif", subtitle1Value: 39, subtitle2: "Pasif", subtitle2Value: 6, lastUpdated:"1 dk önce", icon: <PiSecurityCameraFill /> },
+  { title: "Toplam Modül", value: 78, subtitle1: "Aktif", subtitle1Value: 70, subtitle2: "Pasif",subtitle2Value: 8, lastUpdated:"5 dakika önce", icon: <FaComputer /> },
+  { title: "Toplam Sunucu", value: 237, subtitle1: "Aktif", subtitle1Value: 197, subtitle2: "Pasif", subtitle2Value: 40, lastUpdated:"7 dakika önce", icon: <FaComputer /> },
   
   
 ];

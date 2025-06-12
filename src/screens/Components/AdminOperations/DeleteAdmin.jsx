@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import RowDataView from '../../../components/Base/RowDataView/RowDataView';
-import DetailView from '../../../components/Base/DetailView/DetailView';
 import ConfirmModal from '../../../components/Base/ConfirmModal/ConfirmModal';
 import styles from '../ComponentDash.module.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
+import { apiBaseUrl } from '../../../utils/api'; 
 
 export default class DeleteAdmin extends Component {
-  apiBaseUrl = 'http://localhost:5059/api/AdminUser';
 
   state = {
     selectedItem: null,
@@ -34,12 +33,8 @@ export default class DeleteAdmin extends Component {
   };
 
 
-
-
-
-
   fetchAdmins = () => { // delete admindeki fonksiyon için yazıldı, listelemede gerek yok.
-    fetch(this.apiBaseUrl)
+    fetch(`${apiBaseUrl}/AdminUser`)
       .then(res => res.json())
       .then(data => this.setState({ admins: data }))
       .catch(err => console.error('Veri çekme hatası:', err));
@@ -49,7 +44,7 @@ export default class DeleteAdmin extends Component {
   handleConfirmDelete = () => { // delete admin
     const { selectedItem } = this.state;
 
-  fetch(`${this.apiBaseUrl}/${selectedItem.id}`, { method: 'DELETE' })
+  fetch(`${apiBaseUrl}/AdminUser/${selectedItem.id}`, { method: 'DELETE' })
     .then((response) => {
       if (!response.ok) {
         throw new Error('Silme işlemi başarısız oldu.');
@@ -82,7 +77,7 @@ export default class DeleteAdmin extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={this.apiBaseUrl}
+          apiBaseUrl={`${apiBaseUrl}/AdminUser`}
           visibleKeys={['name','username']}
           labelMap={this.labelMap}
           onActionButtonClick={this.handleDetailClick}
