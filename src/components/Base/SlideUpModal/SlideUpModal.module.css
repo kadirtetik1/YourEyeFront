@@ -1,5 +1,7 @@
-/* Sayfa Karartan Alan */
-.backdrop {
+
+/* Arka Plan */
+
+.backdrop { 
   position: fixed;
   top: 0;
   left: 0;
@@ -13,6 +15,7 @@
 }
 
 /* Modal Kutusu */
+
 .modal {
   display: flex;
   align-items: center;
@@ -21,8 +24,6 @@
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid #dfdfdf;
-  /* max-height: 75vh;
-  max-width: 90vw; */
 
   max-width: 70vw;  
   max-height: 70vh; 
