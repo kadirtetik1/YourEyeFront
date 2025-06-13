@@ -37,6 +37,8 @@ export const iconMap = {
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
+  const basePath = location.pathname.includes('/admin') ? 'admin' : 'user';
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -62,31 +64,31 @@ export const iconMap = {
 
       <div className={styles.navWrapper}>
         
-      <nav className={styles.nav}>
-        {menuItems.map((menu, idx) => {
-          const IconComponent = iconMap[menu.title] || FaHome;
-          const path = `/admin/${routeMap[menu.title] || ''}`;
-          const isActive = location.pathname.startsWith(path);
+             <nav className={styles.nav}>
+         {menuItems.map((menu, idx) => {
+           const IconComponent = iconMap[menu.title] || FaHome;
+           const path = `/${basePath}/${routeMap[menu.title] || ''}`;
+           const isActive = location.pathname.startsWith(path);
+       
+           return (
+             <div key={idx} className={`${styles.dropdown} ${isActive ? styles.activeMenu : ''}`}>
+               <div
+                 onClick={() => {
+                   navigate(path, { state: { subItems: menu.subItems, menuTitle: menu.title } });
+                 }}
+                 className={styles.dropdownToggle}
+               >
+                 <IconComponent className={styles.icon} />
+                 <span className={`${styles.linkText} ${isOpen ? styles.show : styles.hide}`}>
+                   {menu.title}
+                 </span>
+               </div>
+             </div>
+           );
+         })}
+       </nav>
 
-          return (
-            <div key={idx} className={`${styles.dropdown} ${isActive ? styles.activeMenu : ''}`}>
-              <div
-                onClick={() => {
-                  navigate(path, { state: { subItems: menu.subItems, menuTitle: menu.title } });
-                }}
-                className={styles.dropdownToggle}
-              >
-                <IconComponent className={styles.icon} />
-                <span className={`${styles.linkText} ${isOpen ? styles.show : styles.hide}`}>
-                  {menu.title}
-                </span>
 
-              </div>
-
-            </div>
-          );
-        })}
-      </nav>
       </div>
 
     </div>

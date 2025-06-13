@@ -1,8 +1,3 @@
-import AdminHome from '../screens/AdminPanel/AdminHome';
-import CreateAdmin from '../screens/Components/AdminOperations/CreateAdmin';
-import ListAdmins from '../screens/Components/AdminOperations/ListAdmins';
-import UpdateAdmin from '../screens/Components/AdminOperations/UpdateAdmin';
-import DeleteAdmin from '../screens/Components/AdminOperations/DeleteAdmin';
 
 
 import CreateUser from '../screens/Components/UserOperations/CreateUser';
@@ -42,7 +37,6 @@ import ToggleBranchStatus from '../screens/Components/BranchOperations/ToggleBra
 import DeleteBranch from '../screens/Components/BranchOperations/DeleteBranch';
 
 
-import AdminOpsHome from '../screens/Components/AdminOperations/AdminOpsHome';
 import UserOperationsHome from '../screens/Components/UserOperations/UserOperationsHome';
 
 import ModulesHome from '../screens/Components/Modules/ModulesHome';
@@ -52,18 +46,15 @@ import CameraManagementHome from '../screens/Components/CameraManagement/CameraM
 import LogReportsHome from '../screens/Components/LogReports/LogReportsHome';
 import SystemSettingsHome from '../screens/Components/SystemSettings/SystemSettingsHome';
 import AlarmsHome from '../screens/Components/Alarms/AlarmsHome';
+import UserHome from '../screens/UserPanel/UserHome';
 
 
 
 
 
-export const adminRoutes = [ 
-  { path: "", element: <AdminHome /> },
-  { path: "admin-ops/", element: <AdminOpsHome /> },
-  { path: "admin-ops/create", element: <CreateAdmin /> },
-  { path: "admin-ops/list", element: <ListAdmins /> },
-  { path: "admin-ops/update", element: <UpdateAdmin /> },
-  { path: "admin-ops/delete", element: <DeleteAdmin /> },
+export const userRoutes = [ 
+  { path: "", element: <UserHome/> },
+  
 
   { path: "user-ops/", element: <UserOperationsHome /> },
   { path: "user-ops/create", element: <CreateUser /> },
@@ -114,9 +105,8 @@ export const adminRoutes = [
 ];
 
 
- export const AdminSideBarMenu = [
+ export const UserSideBarMenu = [
    { title: "Anasayfa", subItems: [] },
-   { title: "Admin İşlemleri", subItems: ["Yeni Admin Ekle", "Adminleri Göster", "Admin Bilgilerini Güncelle", "Admin Sil"] },
    { title: "Kullanıcı İşlemleri", subItems: ["Yeni Kullanıcı Oluştur", "Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", "Kullanıcıya Şube Ata/Güncelle", "Kullanıcıya Rol Ata/Güncelle", "Kullanıcı Aktif/Pasif Durumunu Güncelle","Kullanıcı Sil"] },
    { title: "Rol Ve Yetki İşlemleri", subItems: ["Yeni Rol Oluştur", "Yeni Yetki Oluştur", "Role Yetki Ata", "Role Ait Yetkileri Getir", "Rol Bilgilerini Güncelle", "Yetki Bilgilerini Güncelle"] },
    { title: "Firma İşlemleri", subItems: ["Yeni Firma Oluştur", "Bütün Firmaları Listele", "Firma Bilgilerini Güncelle", "Firmaya Bağlı Kullanıcıları Getir", "Yeni Sektör Oluştur", "Sektörleri Göster", "Sektör Bilgilerini Güncelle", "Firma Aktif/Pasif Durumunu Güncelle", "Firma Sil"] },
