@@ -45,4 +45,8 @@ body, html {
   scrollbar-color: #ff7b00 #1e1e1e;
 }
 
+.leaflet-control-attribution {
+  display: none !important;
+}
+
 

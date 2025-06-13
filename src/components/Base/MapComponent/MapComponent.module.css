@@ -1,0 +1,109 @@
+.mapContainer {
+  width: 100%;
+  padding-left: 1rem;
+  margin-top: 2rem;
+}
+
+.mapTitle {
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.mapWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.map {
+  width: 70vw;
+  height: 50vh;
+  border-radius: 12px;
+  border: 2px solid #2e2e2e;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.blinkingMarkerWrapper {
+  background: transparent;
+}
+
+.radarPulse {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.4s ease;
+}
+
+.radarPulseHover {
+  transform: scale(1.3);
+  z-index: 999;
+}
+
+.innerCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #ff9100;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  /* box-shadow: 0 0 6px #2bff00; */
+}
+
+.pulseRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ff9100;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  animation: pulseRingAnim 2.5s ease-out infinite;
+}
+
+.ring1 {
+  animation-delay: 0s;
+}
+.ring2 {
+  animation-delay: 0.5s;
+}
+.ring3 {
+  animation-delay: 1s;
+}
+.ring4 {
+  animation-delay: 1.5s;
+}
+
+@keyframes pulseRingAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.8;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.7);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.7);
+  }
+}
+
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #00ff00;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+  border: 1px solid #00ff00;
+}
+
+.leaflet-control-attribution {
+  display: none !important;
+}
