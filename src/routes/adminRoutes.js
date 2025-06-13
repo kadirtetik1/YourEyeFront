@@ -47,9 +47,11 @@ import UserOperationsHome from '../screens/Components/UserOperations/UserOperati
 
 import ModulesHome from '../screens/Components/Modules/ModulesHome';
 import AnalysisHome from '../screens/Components/Analysis/AnalysisHome';
+import ServersHome from '../screens/Components/Servers/ServersHome';
 import CameraManagementHome from '../screens/Components/CameraManagement/CameraManagementHome';
 import LogReportsHome from '../screens/Components/LogReports/LogReportsHome';
 import SystemSettingsHome from '../screens/Components/SystemSettings/SystemSettingsHome';
+import AlarmsHome from '../screens/Components/Alarms/AlarmsHome';
 
 
 
@@ -99,6 +101,11 @@ export const adminRoutes = [
   { path: "branch-ops/toggle-status", element: <ToggleBranchStatus /> },
   { path: "branch-ops/delete", element: <DeleteBranch /> },
 
+
+  /*Alt Başlıklarının Componentleri Henüz Oluşturulmamış Başlıklar*/
+
+  { path: "alarms/", element: <AlarmsHome/>},
+  { path: "servers/", element: <ServersHome/>},
   { path: "modules/", element: <ModulesHome /> },
   { path: "analysis/", element: <AnalysisHome /> },
   { path: "camera-management/", element: <CameraManagementHome /> },
@@ -110,15 +117,14 @@ export const adminRoutes = [
  export const AdminSideBarMenu = [
    { title: "Anasayfa", subItems: [] },
    { title: "Admin İşlemleri", subItems: ["Yeni Admin Ekle", "Adminleri Göster", "Admin Bilgilerini Güncelle", "Admin Sil"] },
-   { title: "Kullanıcı İşlemleri", 
-   subItems: ["Yeni Kullanıcı Oluştur", "Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", "Kullanıcıya Şube Ata/Güncelle", "Kullanıcıya Rol Ata/Güncelle", "Kullanıcı Aktif/Pasif Durumunu Güncelle","Kullanıcı Sil"] },
-  // "Kullanıcı Rol Bilgilerini Güncelle" kaldırıldı.
-  // "Kullanıcı Şube Bilgilerini Güncelle" kaldırıldı.
+   { title: "Kullanıcı İşlemleri", subItems: ["Yeni Kullanıcı Oluştur", "Kullanıcıları Listele", "Kullanıcı Bilgilerini Güncelle", "Kullanıcıya Şube Ata/Güncelle", "Kullanıcıya Rol Ata/Güncelle", "Kullanıcı Aktif/Pasif Durumunu Güncelle","Kullanıcı Sil"] },
    { title: "Rol Ve Yetki İşlemleri", subItems: ["Yeni Rol Oluştur", "Yeni Yetki Oluştur", "Role Yetki Ata", "Role Ait Yetkileri Getir", "Rol Bilgilerini Güncelle", "Yetki Bilgilerini Güncelle"] },
    { title: "Firma İşlemleri", subItems: ["Yeni Firma Oluştur", "Bütün Firmaları Listele", "Firma Bilgilerini Güncelle", "Firmaya Bağlı Kullanıcıları Getir", "Yeni Sektör Oluştur", "Sektörleri Göster", "Sektör Bilgilerini Güncelle", "Firma Aktif/Pasif Durumunu Güncelle", "Firma Sil"] },
    { title: "Şube İşlemleri", subItems: ["Bütün Şubeleri Getir", "Firmaya Bağlı Şubeleri Getir", "Yeni Şube Oluştur", "Şube Bilgilerini Güncelle", "Şube Aktif/Pasif Durumunu Güncelle", "Şube Sil"] },
-   { title: "Modüller", subItems: ["Modülleri Listele", "Yeni Modül Ekle", "Modül İçeriğini Güncelle", "Modülü Sil"] },
-   { title: "Analizler", subItems: ["Genel Analizler", "Anlık Analizler", "Gün Sonu Raporları"] },
+   { title: "Üretilen Alarmlar", subItems: ["Firma Alarmları","Şube Alarmları"] },
+   { title: "Analizler Ve Raporlar", subItems: ["Genel Analizler", "Anlık Analizler", "Gün Sonu Raporları"] },
+   { title: "Sunucu İşlemleri", subItems: ["Yeni Sunucu Ekle","Yeni Sunucu Ekle","Sunucu Bilgilerini Getir","Sunucu Aktif/Pasif Durumunu Güncelle","Sunucu Sil"] },
+   { title: "Modül İşlemleri", subItems: ["Modülleri Listele", "Yeni Modül Ekle", "Modül İçeriğini Güncelle", "Modülü Sil"] },
    { title: "Kamera Yönetimi", subItems: ["Kameraları Listele", "Yeni Kamera Ekle", "Kamera Bilgilerini Güncelle"] },
    { title: "Log Raporları", subItems: ["Firmaya Ait Raporları Getir", "Şubeye Ait Raporları Getir", "Kullanıcıya Ait Raporları Getir"] },
    { title: "Sistem Ayarları", subItems: ["Genel Ayarlar", "Kullanıcı Ayarları"] }

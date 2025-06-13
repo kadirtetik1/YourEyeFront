@@ -20,10 +20,8 @@ export default class AssignPermission extends Component {
   };
 
   permissionLabelMap = {
-    name: 'Yetki',
     title: 'Başlık',
-    subTitle: 'Alt Başlık',
-    type: 'Tip'
+    name: 'Yetki Adı'
   };
 
   handleAssignClick = async (role) => {
@@ -106,7 +104,7 @@ export default class AssignPermission extends Component {
 
             <SelectableRowList
               data={allPermissions}
-              visibleKeys={['name', 'title', 'subTitle', 'type']}
+              visibleKeys={['title', 'name']}
               labelMap={this.permissionLabelMap}
               selectedIds={rolePermissionIds}
               onSelectionChange={this.handleSelectionChange}

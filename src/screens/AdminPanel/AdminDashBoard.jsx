@@ -67,6 +67,8 @@ import CameraManagementHome from '../Components/CameraManagement/CameraManagemen
 import LogReportsHome from '../Components/LogReports/LogReportsHome';
 import SystemSettingsHome from '../Components/SystemSettings/SystemSettingsHome';
 import DeleteUser from '../Components/UserOperations/DeleteUser';
+import AlarmsHome from '../Components/Alarms/AlarmsHome';
+import ServersHome from '../Components/Servers/ServersHome';
 
 
 export default class AdminDashBoard extends Component {
@@ -154,6 +156,16 @@ export default class AdminDashBoard extends Component {
              {/* <Route path="analysis/general" element={<GeneralAnalysis />} />
              <Route path="analysis/realtime" element={<RealtimeAnalysis />} />
              <Route path="analysis/end-of-day" element={<EndOfDayReports />} /> */}
+
+
+              {/* Alarmlar */}
+              <Route path="alarms/" element={<AlarmsHome/>} />
+
+
+              {/* Sunucular */}
+              <Route path="server-ops/" element={<ServersHome/>} />
+            
+
            
              {/* Kamera Yönetimi */}
 

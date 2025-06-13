@@ -50,8 +50,22 @@ export const routeMap = {
   "Şube Aktif/Pasif Durumunu Güncelle": "branch-ops/toggle-status",
   "Şube Sil": "branch-ops/delete",
 
+  // Alarmlar
+  "Üretilen Alarmlar": "alarms",
+  "Firma Alarmları": "alarms/company-list",
+  "Şube Alarmları": "alarms/branch-list",
+
+  // Sunucular
+  "Sunucu İşlemleri":"server-ops",
+  "Yeni Sunucu Ekle":"server-ops/create",
+  "Sunucu Bilgilerini Getir":"server-ops/list",
+  "Sunucu Bilgilerini Güncelle":"server-ops/update",
+  "Sunucu Aktif/Pasif Durumunu Güncelle":"server-ops/toggle-status",
+  "Sunucu Sil":"server-ops/delete",
+  
+
   // Modüller
-  "Modüller": "modules",
+  "Modül İşlemleri": "modules",
   "Modülleri Listele": "modules/list",
   "Yeni Modül Ekle": "modules/create",
   "Modül İçeriğini Güncelle": "modules/update",
@@ -59,7 +73,7 @@ export const routeMap = {
   
 
   // Analizler
-  "Analizler": "analysis",
+  "Analizler Ve Raporlar": "analysis",
   "Genel Analizler": "analysis/general",
   "Anlık Analizler": "analysis/realtime",
   "Gün Sonu Raporları": "analysis/end-of-day",

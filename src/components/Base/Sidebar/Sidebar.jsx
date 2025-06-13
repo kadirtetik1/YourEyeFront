@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import styles from './Sidebar.module.css';
 import { FaBars, FaChevronDown, FaChevronUp, FaHome, FaBuilding, FaUsers, FaTools, FaUserShield } from 'react-icons/fa';
+import { HiMiniBellAlert } from "react-icons/hi2";
 import { FaComputer } from "react-icons/fa6";
 import { PiPresentationChart, PiSecurityCameraFill } from "react-icons/pi";
 import { AiOutlineApartment } from "react-icons/ai";
 import { TbReportSearch } from "react-icons/tb";
 import { FaChalkboardUser } from "react-icons/fa6";
+import { GrAndroid } from "react-icons/gr";
+
+
 import { useNavigate, useLocation } from 'react-router-dom';
 import { routeMap } from '../../../routes/routeMap';
 
@@ -16,11 +20,13 @@ export const iconMap = {
   "Firma İşlemleri": FaBuilding,
   "Şube İşlemleri": AiOutlineApartment,
   "Kullanıcı İşlemleri": FaUsers,
-  "Modüller": FaComputer,
-  "Analizler": PiPresentationChart,
+  "Modül İşlemleri": GrAndroid,
+  "Analizler Ve Raporlar": PiPresentationChart,
   "Kamera Yönetimi": PiSecurityCameraFill,
   "Log Raporları": TbReportSearch,
-  "Sistem Ayarları": FaTools
+  "Sistem Ayarları": FaTools,
+  "Üretilen Alarmlar": HiMiniBellAlert,
+  "Sunucu İşlemleri": FaComputer,
 };
 
   const Sidebar = ({ panelName, menuItems }) => {
@@ -31,11 +37,6 @@ export const iconMap = {
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
-  /*
-  const handleDropdownToggle = (title) => {
-    setOpenDropdown(openDropdown === title ? null : title);
-  };
-  */
 
   useEffect(() => {
     const handleResize = () => {
@@ -52,7 +53,8 @@ export const iconMap = {
         <button onClick={toggleSidebar} className={styles.toggleBtn}>
           <FaBars />
         </button>
-        <div className={styles.logoContainer}>
+        
+        <div className={styles.TopContainer}>
           <div className={styles.logo}>YourEye</div>
           {isOpen && <div className={styles.subtext}>{panelName}</div>}
         </div>
@@ -77,35 +79,8 @@ export const iconMap = {
                   {menu.title}
                 </span>
 
-                {/* Chevron'ları devre dışı bıraktım
-                {isOpen && menu.subItems.length > 0 && (
-                  openDropdown === menu.title
-                    ? <FaChevronUp className={styles.chevron} />
-                    : <FaChevronDown className={styles.chevron} />
-                )}
-                */}
               </div>
 
-              {/* Dropdown Menüsü devre dışı bırakıldı
-              {menu.subItems.length > 0 && openDropdown === menu.title && isOpen && (
-                <div className={styles.dropdownMenu}>
-                  {menu.subItems.map((subItem, subIdx) => {
-                    const subPath = `/admin/${routeMap[subItem] || ''}`;
-                    const isSubActive = location.pathname === subPath;
-
-                    return (
-                      <a
-                        key={subIdx}
-                        onClick={() => navigate(subPath)}
-                        className={isSubActive ? styles.activeSubMenu : ''}
-                      >
-                        {subItem}
-                      </a>
-                    );
-                  })}
-                </div>
-              )}
-              */}
             </div>
           );
         })}
