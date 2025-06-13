@@ -25,7 +25,7 @@ export const iconMap = {
   "Kamera Yönetimi": PiSecurityCameraFill,
   "Log Raporları": TbReportSearch,
   "Sistem Ayarları": FaTools,
-  "Üretilen Alarmlar": HiMiniBellAlert,
+  "Alarmlar": HiMiniBellAlert,
   "Sunucu İşlemleri": FaComputer,
 };
 
@@ -53,13 +53,15 @@ export const iconMap = {
         <button onClick={toggleSidebar} className={styles.toggleBtn}>
           <FaBars />
         </button>
-        
+
         <div className={styles.TopContainer}>
           <div className={styles.logo}>YourEye</div>
           {isOpen && <div className={styles.subtext}>{panelName}</div>}
         </div>
       </div>
 
+      <div className={styles.navWrapper}>
+        
       <nav className={styles.nav}>
         {menuItems.map((menu, idx) => {
           const IconComponent = iconMap[menu.title] || FaHome;
@@ -85,6 +87,8 @@ export const iconMap = {
           );
         })}
       </nav>
+      </div>
+
     </div>
   );
 };

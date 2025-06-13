@@ -108,6 +108,10 @@ export default class ListFirmUsers extends Component {
                 'branchNames',
                 'permissions'
               ]}
+              multivalueKeys={[
+                'permissions',
+                'branchNames'
+              ]}
             />
           </SlideUpModal>
         )}

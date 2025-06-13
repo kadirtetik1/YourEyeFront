@@ -51,7 +51,7 @@ export const routeMap = {
   "Şube Sil": "branch-ops/delete",
 
   // Alarmlar
-  "Üretilen Alarmlar": "alarms",
+  "Alarmlar": "alarms",
   "Firma Alarmları": "alarms/company-list",
   "Şube Alarmları": "alarms/branch-list",
 
