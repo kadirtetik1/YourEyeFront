@@ -46,38 +46,49 @@
   left: 50%;
   width: 10px;
   height: 10px;
-  background-color: #ff9100;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  /* box-shadow: 0 0 6px #2bff00; */
 }
 
+/* Yeşil ve kırmızı merkez nokta renkleri */
+.green {
+  background-color: #00ff00;
+  border: 1px solid #00ff00;
+}
+
+.red {
+  background-color: #ff0000;
+  border: 1px solid #ff0000;
+}
+
+/* Halka yapısı */
 .pulseRing {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 40px;
   height: 40px;
-  border: 2px solid #ff9100;
   border-radius: 50%;
   transform: translate(-50%, -50%) scale(0.3);
   opacity: 0;
   animation: pulseRingAnim 2.5s ease-out infinite;
+  background-color: transparent;
 }
 
-.ring1 {
-  animation-delay: 0s;
+/* Halka kenar çizgileri */
+.pulseRing.green {
+  border: 3px solid #00ff00;
 }
-.ring2 {
-  animation-delay: 0.5s;
+
+.pulseRing.red {
+  border: 3px solid #ff0000;
 }
-.ring3 {
-  animation-delay: 1s;
-}
-.ring4 {
-  animation-delay: 1.5s;
-}
+
+.ring1 { animation-delay: 0s; }
+.ring2 { animation-delay: 0.5s; }
+.ring3 { animation-delay: 1s; }
+.ring4 { animation-delay: 1.5s; }
 
 @keyframes pulseRingAnim {
   0% {
@@ -89,12 +100,12 @@
     opacity: 0;
   }
   100% {
-    opacity: 0;
     transform: translate(-50%, -50%) scale(1.7);
+    opacity: 0;
   }
 }
 
-.tooltip {
+/* .tooltip {
   background-color: rgba(0, 0, 0, 0.8);
   color: #00ff00;
   font-size: 13px;
@@ -102,8 +113,23 @@
   border-radius: 6px;
   box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
   border: 1px solid #00ff00;
-}
+} */
 
 .leaflet-control-attribution {
   display: none !important;
+}
+
+
+.greenTooltip {
+  background-color: rgba(0, 128, 0, 0.8) !important;
+  color: #00ff00 !important;
+  border: 1px solid #00ff00 !important;
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.5) !important;
+}
+
+.redTooltip {
+  background-color: rgba(128, 0, 0, 0.8) !important;
+  color: #ff0000 !important;
+  border: 1px solid #ff4444 !important;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.5) !important;
 }

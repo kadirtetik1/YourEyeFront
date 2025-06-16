@@ -31,7 +31,6 @@ export const iconMap = {
 
   const Sidebar = ({ panelName, menuItems }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // const [openDropdown, setOpenDropdown] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 

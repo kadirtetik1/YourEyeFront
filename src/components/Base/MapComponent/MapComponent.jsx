@@ -25,16 +25,16 @@ const MapComponent = ({ addresses = [] }) => {
     });
   };
 
-  const createBlinkingIcon = (isActive) =>
+  const createBlinkingIcon = (isActive, isOffline) =>
     L.divIcon({
       className: styles.blinkingMarkerWrapper,
       html: `
         <div class="${styles.radarPulse} ${isActive ? styles.radarPulseHover : ''}">
-          <div class="${styles.innerCircle}"></div>
-          <div class="${styles.pulseRing} ${styles.ring1}"></div>
-          <div class="${styles.pulseRing} ${styles.ring2}"></div>
-          <div class="${styles.pulseRing} ${styles.ring3}"></div>
-          <div class="${styles.pulseRing} ${styles.ring4}"></div>
+          <div class="${styles.innerCircle} ${isOffline ? styles.red : styles.green}"></div>
+          <div class="${styles.pulseRing} ${styles.ring1} ${isOffline ? styles.red : styles.green}"></div>
+          <div class="${styles.pulseRing} ${styles.ring2} ${isOffline ? styles.red : styles.green}"></div>
+          <div class="${styles.pulseRing} ${styles.ring3} ${isOffline ? styles.red : styles.green}"></div>
+          <div class="${styles.pulseRing} ${styles.ring4} ${isOffline ? styles.red : styles.green}"></div>
         </div>
       `,
       iconSize: [40, 40],
@@ -51,40 +51,49 @@ const MapComponent = ({ addresses = [] }) => {
 
   return (
     <div className={styles.mapContainer}>
-      <h2 className={styles.mapTitle}>Aktif Şube Ve Sunucu Bilgileri</h2>
+      <h2 className={styles.mapTitle}>Aktif Sunucu Bilgileri</h2>
       <div className={styles.mapWrapper}>
         <MapContainer
           center={[39.92077, 32.85411]}
           zoom={6}
           scrollWheelZoom={true}
           className={styles.map}
+          attributionControl={false}
         >
           <MapRefConnector />
           <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
-          {addresses.map((branch, index) => (
-            <Marker
-              key={index}
-              position={[branch.lat, branch.lng]}
-              icon={createBlinkingIcon(selectedBranchId === branch.branchId)}
-              eventHandlers={{
-                click: () => handleClick(branch),
-                mouseover: () => setHoveredBranchId(branch.branchId),
-                mouseout: () => setHoveredBranchId(null),
-              }}
-            >
-              {(hoveredBranchId === branch.branchId || selectedBranchId === branch.branchId) && (
-                <Tooltip
-                  direction="top"
-                  offset={[0, -15]}
-                  permanent
-                  className={styles.tooltip}
-                >
-                  <strong>{branch.name}</strong><br />
-                  ID: {branch.branchId}
-                </Tooltip>
-              )}
-            </Marker>
-          ))}
+          {addresses.map((branch, index) => {
+            const lastPingDate = new Date(branch.lastPing);
+            const now = new Date();
+            const diffMinutes = (now - lastPingDate) / 1000 / 60;
+            const isOffline = diffMinutes > 10;
+
+            return (
+              <Marker
+                key={index}
+                position={[branch.lat, branch.lng]}
+                icon={createBlinkingIcon(selectedBranchId === branch.branchId, isOffline)}
+                eventHandlers={{
+                  click: () => handleClick(branch),
+                  mouseover: () => setHoveredBranchId(branch.branchId),
+                  mouseout: () => setHoveredBranchId(null),
+                }}
+              >
+                {(hoveredBranchId === branch.branchId || selectedBranchId === branch.branchId) && (
+                  <Tooltip
+                    direction="top"
+                    offset={[0, -15]}
+                    permanent
+                    className={`${styles.tooltip} ${isOffline ? styles.redTooltip : styles.greenTooltip}`}
+                  >
+                    <strong>Bağlı Şube: </strong> {branch.name}<br />
+                    <strong>ID: </strong> {branch.branchId}<br />
+                    <strong>Last Ping: </strong>{lastPingDate.toLocaleTimeString()}
+                  </Tooltip>
+                )}
+              </Marker>
+            );
+          })}
         </MapContainer>
       </div>
     </div>
