@@ -7,6 +7,7 @@ import { FaComputer } from "react-icons/fa6";
 import { PiSecurityCameraFill } from "react-icons/pi";
 import { AiOutlineApartment } from "react-icons/ai";
 import MapComponent from '../../components/Base/MapComponent/MapComponent';
+import CameraView from '../../components/Base/CameraView/CameraView';
 
 const generalStats = [
   { title: "Toplam Firma", value: 245, subtitle1: "Aktif", subtitle1Value: 190, subtitle2: "Pasif", subtitle2Value: 55, lastUpdated:"2 dk önce", icon: <FaBuilding /> },
@@ -145,6 +146,18 @@ export default class UserHome extends Component {
     return (
       <div className={styles.container}>
         <MapComponent addresses={dummyBranches} />
+
+        <CameraView
+        cameraName="Giriş Kapısı - Kamera 1"
+        streamUrl="http://localhost:5000/video_feed"
+        isOffline={false} // örnek olarak dışarıdan hesapla
+      />
+
+       <CameraView
+        cameraName="Müzayede Alanı - Kamera 1"
+        streamUrl="http://localhost:5000/video_feed2"
+        isOffline={false} // örnek olarak dışarıdan hesapla
+      />
 
 
 
