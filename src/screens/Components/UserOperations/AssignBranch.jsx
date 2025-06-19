@@ -4,10 +4,9 @@ import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import SelectableRowList from '../../../components/Base/SelectableRowList/SelectableRowList';
 import { toast, ToastContainer } from 'react-toastify';
 import styles from '../ComponentDash.module.css';
+import { apiBaseUrl } from '../../../utils/api';
 
 export default class AssignBranch extends Component {
-  apiBaseUrl = 'http://localhost:5059/api';
-
   state = {
     selectedUser: null,
     userBranchIds: [],
@@ -29,17 +28,15 @@ export default class AssignBranch extends Component {
 
   handleAssignClick = async (user) => {
     const companyId = user.companyId;
-  
+
     try {
-      // 1. Kullanıcının atanmış şubeleri
-      const assignedBranchesRes = await fetch(`${this.apiBaseUrl}/Users/${user.id}/branches`);
+      const assignedBranchesRes = await fetch(`${apiBaseUrl}/Users/${user.id}/branches`);
       const assignedBranches = await assignedBranchesRes.json();
       const userBranchIds = assignedBranches.branches.map(branch => branch.branchId);
-  
-      // 2. Firmaya ait tüm şubeler
-      const companyBranchesRes = await fetch(`${this.apiBaseUrl}/Branches/by-company/${companyId}`);
+
+      const companyBranchesRes = await fetch(`${apiBaseUrl}/Branches/by-company/${companyId}`);
       const companyBranchList = await companyBranchesRes.json();
-  
+
       this.setState({
         selectedUser: user,
         userBranchIds,
@@ -66,10 +63,10 @@ export default class AssignBranch extends Component {
 
     const body = {
       userId: selectedUser.id,
-      branchIds: userBranchIds 
+      branchIds: userBranchIds
     };
 
-    fetch(`${this.apiBaseUrl}/Users/assign-branches`, {
+    fetch(`${apiBaseUrl}/Users/assign-branches`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -84,7 +81,6 @@ export default class AssignBranch extends Component {
         setTimeout(() => {
           window.location.reload();
         }, 2500);
-
       })
       .catch(err => {
         console.error(err);
@@ -98,7 +94,7 @@ export default class AssignBranch extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={`${this.apiBaseUrl}/Users`}
+          apiBaseUrl={`${apiBaseUrl}/Users`}
           visibleKeys={['name', 'lastName', 'companyName']}
           labelMap={this.userLabelMap}
           onActionButtonClick={this.handleAssignClick}
@@ -111,15 +107,14 @@ export default class AssignBranch extends Component {
             <h3>{selectedUser.name} {selectedUser.lastName} - Şube Atama</h3>
 
             <SelectableRowList
-             data={companyBranchList}
-             visibleKeys={['name', 'city', 'town']}
-             labelMap={this.branchLabelMap}
-             selectedIds={userBranchIds}
-             onSelectionChange={this.handleSelectionChange}
-             onSubmit={this.handleAssignBranch}
-             actionButtonLabel="Şubeleri Kaydet"
-           />
-
+              data={companyBranchList}
+              visibleKeys={['name', 'city', 'town']}
+              labelMap={this.branchLabelMap}
+              selectedIds={userBranchIds}
+              onSelectionChange={this.handleSelectionChange}
+              onSubmit={this.handleAssignBranch}
+              actionButtonLabel="Şubeleri Kaydet"
+            />
           </SlideUpModal>
         )}
 

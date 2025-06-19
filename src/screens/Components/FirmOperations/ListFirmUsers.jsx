@@ -3,10 +3,9 @@ import RowDataView from '../../../components/Base/RowDataView/RowDataView';
 import DetailView from '../../../components/Base/DetailView/DetailView';
 import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import styles from '../ComponentDash.module.css';
+import { apiBaseUrl } from '../../../utils/api';
 
 export default class ListFirmUsers extends Component {
-  apiBaseUrl = 'http://localhost:5059/api/Companies';
-
   state = {
     selectedFirm: null,
     users: [],
@@ -35,11 +34,10 @@ export default class ListFirmUsers extends Component {
     permissions: "Yetkiler"
   };
 
-  // Firma seçilince kullanıcıları getir ve modalı aç
   fetchUsers = (firm) => {
     if (!firm.id) return;
 
-    fetch(`http://localhost:5059/api/Users/by-company/${firm.id}`)
+    fetch(`${apiBaseUrl}/Users/by-company/${firm.id}`)
       .then(res => res.ok ? res.json() : [])
       .then(users =>
         this.setState({ selectedFirm: firm, users, showUserListModal: true })
@@ -67,7 +65,7 @@ export default class ListFirmUsers extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={this.apiBaseUrl}
+          apiBaseUrl={`${apiBaseUrl}/Companies`}
           visibleKeys={['name']}
           labelMap={this.firmLabelMap}
           onActionButtonClick={this.fetchUsers}
@@ -95,7 +93,7 @@ export default class ListFirmUsers extends Component {
           <SlideUpModal isVisible={showDetailModal} onClose={this.closeDetailModal}>
             <DetailView
               id={selectedUser.id}
-              apiBaseUrl="http://localhost:5059/api/Users"
+              apiBaseUrl={`${apiBaseUrl}/Users`}
               labelMap={this.userLabelMap}
               visibleKeys={[
                 'id',

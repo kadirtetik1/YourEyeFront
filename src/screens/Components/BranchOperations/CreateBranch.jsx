@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import PostForm from '../../../components/Base/FormFields/PostForm';
 import styles from '../ComponentDash.module.css';
+import { apiBaseUrl } from '../../../utils/api';
 
 export default class CreateBranch extends Component {
-  apiBaseUrl = 'http://localhost:5059/api';
-
   state = {
     companyOptions: []
   };
 
   componentDidMount() {
-    fetch(`${this.apiBaseUrl}/Companies`)
+    fetch(`${apiBaseUrl}/Companies`)
       .then(res => res.json())
       .then(data => {
         const options = data.map(company => ({
@@ -36,7 +35,7 @@ export default class CreateBranch extends Component {
       <div className={styles.dashBoard}>
         <PostForm
           initialState={this.getInitialData()}
-          apiEndpoint={`${this.apiBaseUrl}/Branches`}
+          apiEndpoint={`${apiBaseUrl}/Branches`}
           successMessage="Şube başarıyla oluşturuldu."
           reloadOnSuccess={true}
         />

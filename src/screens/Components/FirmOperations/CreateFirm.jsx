@@ -4,8 +4,8 @@ import NewCompanyModal from '../../../components/Base/NewCompanyModal/NewCompany
 import styles from '../ComponentDash.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { apiBaseUrl } from '../../../utils/api';
 
-// ✅ LOGO YOLU BURADAN KONTROL EDİLİYOR
 const LOGO_BASE_PATH = '/assets/logos/';
 
 export default class CreateFirm extends Component {
@@ -17,7 +17,7 @@ export default class CreateFirm extends Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:5059/api/Sectors')
+    fetch(`${apiBaseUrl}/Sectors`)
       .then(res => res.json())
       .then(data => {
         const options = data.map(sector => ({
@@ -36,8 +36,6 @@ export default class CreateFirm extends Component {
   });
 
   handleSubmit = (data) => {
-    console.log("Gönderilen Data:", data);
-
     const fullLogoPath = `${LOGO_BASE_PATH}${data.logoPath}`;
 
     const payload = {
@@ -46,7 +44,7 @@ export default class CreateFirm extends Component {
       sectorId: data.sectorId
     };
 
-    fetch('http://localhost:5059/api/Companies', {
+    fetch(`${apiBaseUrl}/Companies`, {
       method: 'POST',
       headers: { 'Accept': '*/*', 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)

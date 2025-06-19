@@ -4,12 +4,9 @@ import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import SelectableRowList from '../../../components/Base/SelectableRowList/SelectableRowList';
 import { toast, ToastContainer } from 'react-toastify';
 import styles from '../ComponentDash.module.css';
-import { apiBaseUrl } from '../../../utils/api'; 
-
+import { apiBaseUrl } from '../../../utils/api';
 
 export default class AssignRole extends Component {
-  apiBaseUrl = 'http://localhost:5059/api';
-
   state = {
     selectedUser: null,
     selectedRoleId: null,
@@ -35,7 +32,7 @@ export default class AssignRole extends Component {
         fetch(`${apiBaseUrl}/Roles`),
       ]);
 
-      const assignedRole = await assignedRes.json(); // Tek bir rol olacak
+      const assignedRole = await assignedRes.json();
       const roles = await rolesRes.json();
 
       this.setState({
@@ -64,7 +61,7 @@ export default class AssignRole extends Component {
     }
 
     try {
-      const res = await fetch(`${this.apiBaseUrl}/Users/assign-role`, {
+      const res = await fetch(`${apiBaseUrl}/Users/assign-role`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: selectedUser.id, roleId: selectedRoleId }),
@@ -89,7 +86,7 @@ export default class AssignRole extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={`${this.apiBaseUrl}/Users`}
+          apiBaseUrl={`${apiBaseUrl}/Users`}
           visibleKeys={['name', 'lastName', 'companyName']}
           labelMap={this.userLabelMap}
           onActionButtonClick={this.handleAssignClick}
@@ -109,7 +106,7 @@ export default class AssignRole extends Component {
               onSelectionChange={this.handleSelectionChange}
               onSubmit={this.handleAssignRole}
               actionButtonLabel="Rolü Kaydet"
-              singleSelect={true}  // yeni prop, true => sadece tek bir tane seçilebilir. 1-1 ilişkilerde uygun. 
+              singleSelect={true}
             />
           </SlideUpModal>
         )}

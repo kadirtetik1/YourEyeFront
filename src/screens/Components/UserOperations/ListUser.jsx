@@ -3,10 +3,9 @@ import RowDataView from '../../../components/Base/RowDataView/RowDataView';
 import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import DetailView from '../../../components/Base/DetailView/DetailView';
 import styles from '../ComponentDash.module.css';
+import { apiBaseUrl } from '../../../utils/api';
 
 export default class ListUser extends Component {
-  apiBaseUrl = 'http://localhost:5059/api/Users'; // Tüm kullanıcılar için API
-
   state = {
     selectedUser: null,
     showModal: false
@@ -41,8 +40,8 @@ export default class ListUser extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={this.apiBaseUrl}
-          visibleKeys={['name', 'lastName','companyName']}
+          apiBaseUrl={`${apiBaseUrl}/Users`}
+          visibleKeys={['name', 'lastName', 'companyName']}
           labelMap={this.labelMap}
           onActionButtonClick={this.handleDetailClick}
           actionButtonLabel="Detay"
@@ -53,7 +52,7 @@ export default class ListUser extends Component {
           <SlideUpModal isVisible={showModal} onClose={this.closeModal}>
             <DetailView
               id={selectedUser.id}
-              apiBaseUrl={this.apiBaseUrl}
+              apiBaseUrl={`${apiBaseUrl}/Users`}
               labelMap={this.labelMap}
               visibleKeys={[
                 'id',

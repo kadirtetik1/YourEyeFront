@@ -5,10 +5,9 @@ import UpdateView from '../../../components/Base/UpdateView/UpdateView';
 import styles from '../ComponentDash.module.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { apiBaseUrl } from '../../../utils/api';
 
 export default class UpdateUser extends Component {
-  apiBaseUrl = 'http://localhost:5059/api'; 
-
   state = {
     selectedUser: null,
     showModal: false
@@ -37,51 +36,41 @@ export default class UpdateUser extends Component {
     this.setState({ selectedUser: null, showModal: false });
   };
 
-
-
-
-
   handleUpdateSubmit = (updatedData) => {
-    const apiUrl = `${this.apiBaseUrl}/Users/update-infos`;
+    const apiUrl = `${apiBaseUrl}/Users/update-infos`;
 
-  fetch(apiUrl, {
-    method: 'PUT',
-    headers: {
-      'Accept': '*/*',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updatedData)
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Güncelleme başarısız oldu.');
-      }
-      toast.success(`${updatedData.name || 'Kayıt'} başarıyla güncellendi!`, {
-        position: toast.POSITION.BOTTOM_RIGHT
-      });
-      this.setState({ showModal: false, selectedUser: null });
-
-      // Sayfa yenileme
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+    fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedData)
     })
-    .catch((error) => {
-      console.error('Güncelleme hatası:', error);
-      toast.error('Güncelleme işlemi sırasında bir hata oluştu!', {
-        position: toast.POSITION.BOTTOM_RIGHT
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Güncelleme başarısız oldu.');
+        }
+        toast.success(`${updatedData.name || 'Kayıt'} başarıyla güncellendi!`, {
+          position: toast.POSITION.BOTTOM_RIGHT
+        });
+        this.setState({ showModal: false, selectedUser: null });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error('Güncelleme hatası:', error);
+        toast.error('Güncelleme işlemi sırasında bir hata oluştu!', {
+          position: toast.POSITION.BOTTOM_RIGHT
+        });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       });
-
-      // Sayfa yenileme
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    });
   };
-
-
-
-
 
   render() {
     const { selectedUser, showModal } = this.state;
@@ -89,8 +78,8 @@ export default class UpdateUser extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={`${this.apiBaseUrl}/Users`}
-          visibleKeys={['name', 'lastName','companyName']}
+          apiBaseUrl={`${apiBaseUrl}/Users`}
+          visibleKeys={['name', 'lastName', 'companyName']}
           labelMap={this.labelMap}
           onActionButtonClick={this.handleDetailClick}
           actionButtonLabel="Güncelle"
@@ -102,7 +91,7 @@ export default class UpdateUser extends Component {
             <UpdateView
               details={selectedUser}
               labelMap={this.labelMap}
-              disabledKeys={['id','username',]}
+              disabledKeys={['id', 'username']}
               phoneFields={['phoneNumber']}
               onUpdate={this.handleUpdateSubmit}
               visibleKeys={[
@@ -116,7 +105,7 @@ export default class UpdateUser extends Component {
             />
           </SlideUpModal>
         )}
-         <ToastContainer />
+        <ToastContainer />
       </div>
     );
   }

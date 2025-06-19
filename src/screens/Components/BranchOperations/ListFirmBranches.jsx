@@ -4,14 +4,13 @@ import SlideUpModal from '../../../components/Base/SlideUpModal/SlideUpModal';
 import CardDataView from '../../../components/Base/CardDataView/CardDataView';
 import BranchCard from '../../../components/Base/BranchCard/BranchCard';
 import styles from '../ComponentDash.module.css';
+import { apiBaseUrl } from '../../../utils/api';
 
 export default class ListFirmBranches extends Component {
   state = {
     selectedFirm: null,
     showModal: false
   };
-
-  apiBaseUrl = 'http://localhost:5059/api';
 
   labelMap = {
     id: "Firma Id",
@@ -35,7 +34,7 @@ export default class ListFirmBranches extends Component {
     return (
       <div className={styles.dashBoard}>
         <RowDataView
-          apiBaseUrl={`${this.apiBaseUrl}/Companies`} // dışarıdan endpoint veriyoruz
+          apiBaseUrl={`${apiBaseUrl}/Companies`}
           visibleKeys={['name']}
           labelMap={this.labelMap}
           onActionButtonClick={this.openBranchModal}
@@ -47,7 +46,7 @@ export default class ListFirmBranches extends Component {
           <SlideUpModal isVisible={showModal} onClose={this.closeModal}>
             <CardDataView
               title={`${selectedFirm.name} - Şubeler`}
-              apiEndpoint={`${this.apiBaseUrl}/Branches/by-company/${selectedFirm.id}`} // ✅ endpoint birleşimi burada
+              apiEndpoint={`${apiBaseUrl}/Branches/by-company/${selectedFirm.id}`}
               renderItem={(branch) => (
                 <BranchCard
                   branch={branch}
