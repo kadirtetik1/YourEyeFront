@@ -155,7 +155,7 @@ export default class UserHome extends Component {
 
        <CameraView
         cameraName="Müzayede Alanı - Kamera 1"
-        streamUrl="http://localhost:5000/video_feed2"
+        streamUrl="http://localhost:5001/video_feed2"
         isOffline={false} // örnek olarak dışarıdan hesapla
       />
 

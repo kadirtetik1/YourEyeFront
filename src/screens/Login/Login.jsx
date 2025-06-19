@@ -4,9 +4,8 @@ import axios from 'axios';
 import styles from './Login.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import { jwtDecode } from 'jwt-decode';
-
+import { apiBaseUrl } from '../../utils/api';
 
 
 import robotwoman from '../../assets/ai-robot-woman.png';
@@ -36,55 +35,42 @@ const Login = () => {
   };
 
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
-
-  try {
-    const response = await axios.post('http://localhost:5059/api/login', form);
-    const { accessToken, message, isAdmin } = response.data;
-
-    if (accessToken) {
-      // JWT'yi decode et
-      const decoded = jwtDecode(accessToken);
-
-      console.log("Decoded JWT:", decoded);
-
-      // localStorage'a kaydet
-      localStorage.setItem('yourEyeToken', accessToken);
-      localStorage.setItem('yourEyeUser', JSON.stringify(decoded));
-    }
-
-    const showToastMessage = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+  
+    try {
+      const response = await axios.post(`${apiBaseUrl}/login`, form);
+      const { accessToken, message, isAdmin } = response.data;
+  
+      if (accessToken) {
+        const decoded = jwtDecode(accessToken);
+        localStorage.setItem('yourEyeToken', accessToken);
+        localStorage.setItem('yourEyeUser', JSON.stringify(decoded));
+      }
+  
       toast.success(message, {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-    };
-    showToastMessage();
-
-    // Yönlendirme
-    if (isAdmin === true) {
-      setTimeout(() => navigate("/admin"), 3000);
-    } 
-    else if (isAdmin === false) {
-      setTimeout(() => navigate("/user"), 3000);
-    } 
-    else {
-      toast.error(message || 'Giriş başarısız.', {
+  
+      if (isAdmin === true) {
+        setTimeout(() => navigate("/admin"), 3000);
+      } else if (isAdmin === false) {
+        setTimeout(() => navigate("/user"), 3000);
+      } else {
+        toast.error(message || 'Giriş başarısız.', {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+        setError(message || 'Giriş başarısız.');
+      }
+    } catch (err) {
+      const errorMessage = err.response?.data || err.message;
+      toast.error(errorMessage, {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-      setError(message || 'Giriş başarısız.');
+      setError(errorMessage);
     }
-  } catch (err) {
-    const errorMessage = err.response?.data || err.message;
-
-    toast.error(errorMessage, {
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
-
-    setError(errorMessage);
-  }
-};
+  };
 
 
   return (
