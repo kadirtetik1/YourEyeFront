@@ -6,7 +6,7 @@ import axios from 'axios';
 import styles from './Topbar.module.css';
 import { routeMap } from '../../../routes/routeMap';
 
-
+import { apiBaseUrl } from '../../../utils/api'; // ✅ API yolu buradan alınıyor
 import ConfirmLogoutModal from './ConfirmLogout';
 
 const Topbar = ({ notificationCount = 0, isAdmin = false }) => {
@@ -17,14 +17,13 @@ const Topbar = ({ notificationCount = 0, isAdmin = false }) => {
   const [logoPath, setLogoPath] = useState('');
   const [frameShape, setFrameShape] = useState('square');
   const logoRef = useRef(null);
-
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
-  // Dinamik Sayfa Başlığı
+  // Sayfa başlığı
   const path = location.pathname.replace(/^\/admin\//, '');
   const pageTitle = Object.keys(routeMap).find(key => routeMap[key] === path) || 'Anasayfa';
 
-  // Firma Logosu Getirme
+  // Firma logosunu API'den alma
   useEffect(() => {
     const token = localStorage.getItem('yourEyeToken');
     const decoded = token ? jwtDecode(token) : null;
@@ -33,41 +32,37 @@ const Topbar = ({ notificationCount = 0, isAdmin = false }) => {
 
     const userId = decoded.userId;
 
-
-
     const fetchCompanyLogo = async () => {
-    try {
-      if (isAdmin) {
-        setLogoPath('/assets/logos/youreye_logo.png');
-      } 
-      else {
-        const userResponse = await axios.get(`http://localhost:5059/api/Users/${userId}`);
-        // const companyName = userResponse.data.companyName || '';
-        const companyId = userResponse.data.companyId;
+      try {
+        if (isAdmin) {
+          setLogoPath('/assets/logos/youreye_logo.png');
+        } else {
+          const userResponse = await axios.get(`${apiBaseUrl}/Users/${userId}`);
+          const companyId = userResponse.data.companyId;
 
-        const companyResponse = await axios.get(`http://localhost:5059/api/Companies/${companyId}`);
-        const logoFromApi = companyResponse.data.logoPath;
+          const companyResponse = await axios.get(`${apiBaseUrl}/Companies/${companyId}`);
+          const logoFromApi = companyResponse.data.logoPath;
 
-          setLogoPath(logoFromApi);
-        
+          
+          setLogoPath(`${logoFromApi}`);
+          
+        }
+      } catch (err) {
+        console.error('Firma logosu alınamadı:', err);
+        setLogoPath('');
       }
-    } catch (err) {
-      console.error('Firma logosu alınamadı:', err);
-      setLogoPath('');
-    }
-  };
+    };
 
-  fetchCompanyLogo();
-}, [isAdmin]);
+    fetchCompanyLogo();
+  }, [isAdmin]);
 
-
-  // Zaman Güncelleme
+  // Zamanı her saniye güncelle
   useEffect(() => {
     const interval = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
 
-  // Logout Süreci
+  // Logout süreci
   const handleLogout = () => setShowLogoutConfirm(true);
   const confirmLogout = () => {
     localStorage.clear();
@@ -75,7 +70,7 @@ const Topbar = ({ notificationCount = 0, isAdmin = false }) => {
   };
   const cancelLogout = () => setShowLogoutConfirm(false);
 
-  // Logo Ölçüsüne Göre Şekil Belirleme
+  // Logo oranına göre şekil
   const handleImageLoad = () => {
     const img = logoRef.current;
     if (!img) return;

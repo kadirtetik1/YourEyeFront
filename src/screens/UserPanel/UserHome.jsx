@@ -8,6 +8,7 @@ import { PiSecurityCameraFill } from "react-icons/pi";
 import { AiOutlineApartment } from "react-icons/ai";
 import MapComponent from '../../components/Base/MapComponent/MapComponent';
 import CameraView from '../../components/Base/CameraView/CameraView';
+import CameraViewSlider from '../../components/Base/CameraSlider/CameraViewSlider';
 
 const generalStats = [
   { title: "Toplam Firma", value: 245, subtitle1: "Aktif", subtitle1Value: 190, subtitle2: "Pasif", subtitle2Value: 55, lastUpdated:"2 dk önce", icon: <FaBuilding /> },
@@ -140,6 +141,16 @@ const dummyBranches = [
   { branchId: 'BR010', name: 'Afyon Merkez', lat: 38.763, lng: 30.540, lastPing: minutesAgo(9) },
 ];
 
+const cameras1=[
+  { cameraName: "Ofis Giriş", streamUrl: "http://10.11.37.10:5001/video_feed", snapshotUrl:"http://10.11.37.10:5001/snapshot", isOffline: false },
+  { cameraName: "Depo 2", streamUrl: "http://10.11.37.10:5001/video_feed", snapshotUrl:"http://10.11.37.10:5001/snapshot", isOffline: false },
+  { cameraName: "Bahçe 1", streamUrl: "http://10.11.37.10:5001/video_feed", snapshotUrl:"http://10.11.37.10:5001/snapshot", isOffline: false },
+  { cameraName: "Bahçe 2", streamUrl: "http://10.11.37.10:5001/video_feed", snapshotUrl:"http://10.11.37.10:5001/snapshot", isOffline: false },
+  { cameraName: "Bahçe 3", streamUrl: "http://10.11.37.10:5001/video_feed", snapshotUrl:"http://10.11.37.10:5001/snapshot", isOffline: false },
+]
+
+// 10.11.13.102 10.11.13.111 10.11.37.100 - 107 arası 8 kamera
+
 
 export default class UserHome extends Component {
   render() {
@@ -147,18 +158,10 @@ export default class UserHome extends Component {
       <div className={styles.container}>
         <MapComponent addresses={dummyBranches} />
 
-        <CameraView
-        cameraName="Giriş Kapısı - Kamera 1"
-        streamUrl="http://localhost:5000/video_feed"
-        isOffline={false} // örnek olarak dışarıdan hesapla
+      <CameraViewSlider
+        title="Bahçe-Depo Kameralar"
+        cameras={cameras1}
       />
-
-       <CameraView
-        cameraName="Müzayede Alanı - Kamera 1"
-        streamUrl="http://localhost:5001/video_feed2"
-        isOffline={false} // örnek olarak dışarıdan hesapla
-      />
-
 
 
         <CardSlider title="Genel Durum" items={generalStats} /> 

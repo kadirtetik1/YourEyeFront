@@ -1,0 +1,62 @@
+.sliderContainer {
+  padding-left: 1rem;
+}
+
+.sliderTitle {
+  color: #ffffff;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cardRow {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  height: 350px; /* Kamera kartlarının yüksekliğine göre optimize edildi */
+}
+
+.cardRow > * {
+  flex: 0 0 auto;
+}
+
+.cardRow::-webkit-scrollbar {
+  display: none;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgb(182, 182, 182);
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+.wrapper:hover .navButton {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cardRow.active {
+  cursor: grabbing;
+}
